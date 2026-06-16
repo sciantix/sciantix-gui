@@ -16,3 +16,11 @@ Version: 1.0.0
 Year: 2026
 Authors: G. Léandre
 """
+
+
+class InputFIle:
+    def __init__(self, name: str):
+        __name = name 
+
+    def getName(self) -> str:
+        return __name
