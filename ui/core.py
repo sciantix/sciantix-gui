@@ -10,11 +10,11 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
-Originally developed by G. Léandre
+    Originally developed by G. Léandre
 
-Version: 1.0.0
-Year: 2026
-Authors: G. Léandre
+    Version : 1.0.0
+    Year :    2026
+    Authors : G. Léandre
 """
 
 
