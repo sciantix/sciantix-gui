@@ -17,10 +17,25 @@ Year: 2026
 Authors: G. Léandre
 """
 
+import abc
 
-class InputFIle:
+
+class InputFIle(abc.ABC):
     def __init__(self, name: str):
-        __name = name 
+        __options = dict()
+        __name    = name
 
     def getName(self) -> str:
         return __name
+    
+    def getOptionsNames(self) -> list[str]:
+        return list(__options.keys())
+
+    def getValueByName(self, name: str):
+        if name not in __options.keys():
+            raise KeyError
+
+        return __options[name]
+
+    def setValueByName(self, new_value):
+        pass        # TODO
