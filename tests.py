@@ -19,3 +19,7 @@
 
 
 import classes
+
+
+A = classes.InputFile("A")
+B = classes.InputField(0)
