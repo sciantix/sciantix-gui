@@ -37,7 +37,7 @@ class InputFile(abc.ABC):
         if name not in self.__options.keys():
             raise KeyError
 
-        return self.__options[name]
+        return self.__options[name].getValue()
 
-    def setValueByName(self, new_value):
-        pass        # TODO
+    def setValueByName(self, name: str, new_value):
+        self.__options[name].setValue(new_value)
