@@ -21,6 +21,11 @@
 from . import InputFile
 
 
+# For this class, the options names (which serves as keys) are precede by the line index
+# For Exemple :
+#       0time
+# Is the time value for the 1st line
+
 class InputHistory(InputFile):
     def __init__(self, nbr_lines: int, has_steam_pressure: bool = False):
         super().__init__("input_history")
@@ -32,22 +37,64 @@ class InputHistory(InputFile):
     def getNbrLines(self) -> int:
         return self.__nbr_lines
     
-    def getLineByNbr(self, index: int):
+    def getLineByNbr(self, index: int) -> tuple:
+        """
+        Return the lines values as a tuple of 4 or 5 elements depending on the has_steam_pressure flag
+
+        The order is :
+            (time, temperature, fission rate, hydrostatic stress)
+                                    or
+            (time, temperature, fission rate, hydrostatic stress, steam pressure)
+        """
         if not (0 <= index < self.__nbr_lines):
             raise IndexError
+        
+        if self.__has_steam_pressure:
+            line = (
+                self.getValueByName(f"{index}time"),
+                self.getValueByName(f"{index}temperature"),
+                self.getValueByName(f"{index}fission_rate"),
+                self.getValueByName(f"{index}hydrostatic_stress"),
+                self.getValueByName(f"{index}steam_pressure"),
+            )
+        else:
+            line = (
+                self.getValueByName(f"{index}time"),
+                self.getValueByName(f"{index}temperature"),
+                self.getValueByName(f"{index}fission_rate"),
+                self.getValueByName(f"{index}hydrostatic_stress"),
+            )
 
-        pass        # TODO
+        return line
     
-    def addLine(self):
+    def addLine(self, time: int, temperature: int, fission_rate: int, hydrostatic_stress: int, steam_pressure: int | None = None):
+        if steam_pressure is None and self.__has_steam_pressure:
+            raise TypeError
+
+        self.setValueByName(f"{self.__nbr_lines}time", time)
+        self.setValueByName(f"{self.__nbr_lines}temperature", temperature)
+        self.setValueByName(f"{self.__nbr_lines}fission_rate", fission_rate)
+        self.setValueByName(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress)
+
+        if steam_pressure is not None:
+            self.setValueByName(f"{self.__nbr_lines}steam_pressure", steam_pressure)
+
         self.__nbr_lines += 1
 
-        # TODO
-    
-    def deleteLine(self, index: int):
-        if not (0 <= index < self.__nbr_lines):
-            raise IndexError
 
-        self.__nbr_lines -= 1
+# Maybe on a future version, but would require to modify the InputFile base class
 
-        # TODO
+#    def deleteLine(self, index: int):
+#        if not (0 <= index < self.__nbr_lines):
+#            raise IndexError
+#        
+#        self.setValueByName(f"{self.__nbr_lines}time", time)
+#        self.setValueByName(f"{self.__nbr_lines}temperature", temperature)
+#        self.setValueByName(f"{self.__nbr_lines}fission_rate", fission_rate)
+#        self.setValueByName(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress)
+#
+#        if steam_pressure is not None:
+#            self.setValueByName(f"{self.__nbr_lines}steam_pressure", steam_pressure)
+#
+#        self.__nbr_lines -= 1
 
