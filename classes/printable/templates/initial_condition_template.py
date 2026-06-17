@@ -18,5 +18,16 @@
 """
 
 
-def template():
-    pass
+def template(input_file_class):
+    file_content = str()
+    index        = 0
+    data         = input_file_class.getOptionsNames()
+    
+    for amount in input_file_class.getLayout():
+        for _ in range(amount):
+            file_content += f"{input_file_class.getValueByName(data[i])} "
+            i += 1
+
+        file_content += '\n'
+
+    return file_content
