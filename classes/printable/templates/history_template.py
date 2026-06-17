@@ -18,5 +18,13 @@
 """
 
 
-def template():
-    pass
+def template(input_file_class):
+    file_content = str()
+    
+    for i in range(input_file_class.getNbrLines()):
+        for elt in input_file_class.getLineByNbr(i):
+            file_content += f"{elt}\t"
+
+        file_content += '\n'
+
+    return file_content
