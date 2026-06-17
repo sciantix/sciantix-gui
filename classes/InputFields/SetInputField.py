@@ -22,8 +22,10 @@ from . import InputField
 
 
 class SetInputField(InputField.InputField):
-    def __init__(self):
-        pass
+    def __init__(self, value: int | float, valueSet: set[int|float] | list[int|float] | tuple[int|float]):
+        super().__init__(value)
+
+        __valueSet = set(valueSet)
     
     def __checkValue(self) -> bool:
-        return True
+        return self.getValue() in __valueSet

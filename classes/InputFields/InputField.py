@@ -22,7 +22,7 @@ import abc
 
 
 class InputField(abc.ABC):
-    def __init__(self, value:int | float):
+    def __init__(self, value: int | float):
         __value = value
 
     @abc.abstractmethod
