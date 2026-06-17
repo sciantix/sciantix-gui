@@ -22,5 +22,19 @@ import abc
 
 
 class Printable(abc.ABC):
-    def __init__(self):
-        pass
+    def __init__(self, template):
+        self.__template = template
+        self.__path     = ""
+    
+    
+    def print(self, input_file_class):
+        with open(f"{}input_{input_file_class.getName()}.txt", 'w') as file:
+            file.write(template(input_file_class))
+    
+    def getPath(self) -> str:
+        return self.__path
+
+    def getPath(self, new_path: str):
+        self.__path = new_path
+        if len(self.__path) != 0 and self.__path[-1] != '/':
+            self.__path += '/'
