@@ -22,7 +22,7 @@ import abc
 
 
 class InputFile(abc.ABC):
-    def __init__(self, name: str):
+    def __init__(self, name: str, ):
         self.__options = dict()
         self.__name    = name
 
@@ -40,4 +40,8 @@ class InputFile(abc.ABC):
         return self.__options[name].getValue()
 
     def setValueByName(self, name: str, new_value):
-        self.__options[name].setValue(new_value)
+        if name not in self.__options.keys():
+            # To add a new option, also used to setup the base options
+            self.__options[name] = setValue(new_value)
+        else:
+            self.__options[name].setValue(new_value)

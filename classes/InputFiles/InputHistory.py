@@ -27,11 +27,20 @@ from . import InputFile
 # Is the time value for the 1st line
 
 class InputHistory(InputFile):
-    def __init__(self, nbr_lines: int, has_steam_pressure: bool = False):
+    def __init__(self, has_steam_pressure: bool = False):
         super().__init__("input_history")
 
-        self.__nbr_lines          = nbr_lines
+        self.__nbr_lines          = 1
         self.__has_steam_pressure = has_steam_pressure
+
+        # Base setup : seting up the first line
+        self.setValueByName("0time", 0)
+        self.setValueByName("0temperature", 1273)
+        self.setValueByName("0fission_rate", 1e19)
+        self.setValueByName("0hydrostatic_stress", 0)
+
+        if steam_pressure is not None:
+            self.setValueByName("0steam_pressure", 0)
 
     
     def getNbrLines(self) -> int:

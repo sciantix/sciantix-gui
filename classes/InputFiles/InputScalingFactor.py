@@ -24,3 +24,14 @@ from . import InputFile
 class InputScalingFactor(InputFile):
     def __init__(self):
         super().__init__("input_scaling_factor")
+
+        # Base setup
+        self.setValueByName("resolution_rate",        1.0)
+        self.setValueByName("trapping_rate",          1.0)
+        self.setValueByName("nucleation_rate",        1.0)
+        self.setValueByName("diffusivity",            1.0)
+        self.setValueByName("screw_parameter",        1.0)
+        self.setValueByName("span_parameter",         1.0)
+        self.setValueByName("cent_parameter",         1.0)
+        self.setValueByName("helium_production_rate", 1.0)
+        self.setValueByName("dummy",                  1.0)
