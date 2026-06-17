@@ -21,9 +21,6 @@
 import classes
 
 
-# A = classes.InputFile("A")
-
-
 print("\n+-------------------------------------+")
 print("|   Testing the SetInputField class   |")
 print("+-------------------------------------+\n")
@@ -64,6 +61,9 @@ try:
 except ValueError:
     print("\t\tValueError...")
 print(f"\tThe class has the value : {B_int.getValue()}")
+
+
+# A = classes.InputFile("A")
 
 
 print()

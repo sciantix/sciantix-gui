@@ -17,26 +17,9 @@
     Authors : G. Léandre
 """
 
-import abc
+from . import InputFile
 
 
-class InputFile(abc.ABC):
-    def __init__(self, name: str):
-        self.__options = dict()
-        self.__name    = name
-
-
-    def getName(self) -> str:
-        return self.__name
-    
-    def getOptionsNames(self) -> list[str]:
-        return list(self.__options.keys())
-
-    def getValueByName(self, name: str):
-        if name not in self.__options.keys():
-            raise KeyError
-
-        return self.__options[name]
-
-    def setValueByName(self, new_value):
-        pass        # TODO
+class InputInitialCondition(InputFile):
+    def __init__(self):
+        super().__init__("input_initial_condition")
