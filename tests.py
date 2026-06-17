@@ -21,6 +21,10 @@
 import classes
 
 
+print("\n+----------------------------------------+")
+print("|   Testing the InputFields sub-module   |")
+print("+----------------------------------------+\n")
+
 print("\n+-------------------------------------+")
 print("|   Testing the SetInputField class   |")
 print("+-------------------------------------+\n")
@@ -63,7 +67,36 @@ except ValueError:
 print(f"\tThe class has the value : {B_int.getValue()}")
 
 
-# A = classes.InputFile("A")
+print("\n\n+---------------------------------------+")
+print("|   Testing the InputFiles sub-module   |")
+print("+---------------------------------------+\n")
+
+print("\n+------------------------------------+")
+print("|   Testing the InputHistory class   |")
+print("+------------------------------------+\n")
+
+print("\tInstanciating the class...")
+A_hist  = classes.InputHistory()
+
+print(f"\tThe nbr of line is : {A_hist.getNbrLines()}")
+
+print(f"\tThe first line is : {A_hist.getLineByNbr(0)}")
+
+print("Adding a line...")
+A_hist.addLine(5500, 1273, 1e19, 0)
+print(f"\tThe ne nbr of line is : {A_hist.getNbrLines()}")
+print(f"\tThe new line is : {A_hist.getLineByNbr(1)}")
+
+print("\tasking for a line that doen't exist (6)...")
+try:
+    A_hist.getLineByNbr(6)
+except IndexError:
+    print("\t\tIndexError...")
+
+
+A_init  = classes.InputInitialCondition()
+A_scale = classes.InputScalingFactor()
+A_set   = classes.InputSettings()
 
 
 print()

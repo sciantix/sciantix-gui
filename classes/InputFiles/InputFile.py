@@ -20,6 +20,8 @@
 
 import abc
 
+from ..InputFields import SetInputField, IntervalInputField
+
 
 class InputFile(abc.ABC):
     def __init__(self, name: str, ):
@@ -32,6 +34,18 @@ class InputFile(abc.ABC):
     
     def getOptionsNames(self) -> list[str]:
         return list(self.__options.keys())
+    
+    def addOptionSet(self, name: str, value: int | float, value_set: set[int|float] | list[int|float] | tuple[int|float]):
+        if name in self.__options.keys():
+            raise KeyError
+        
+        self.__options[name] = SetInputField.SetInputField(value, value_set)
+    
+    def addOptionInterval(self, name: str, value: int | float, value_min: int | float, value_max: int | float):
+        if name in self.__options.keys():
+            raise KeyError
+        
+        self.__options[name] = IntervalInputField.IntervalInputField(value, value_min, value_max)
 
     def getValueByName(self, name: str):
         if name not in self.__options.keys():
@@ -41,7 +55,6 @@ class InputFile(abc.ABC):
 
     def setValueByName(self, name: str, new_value):
         if name not in self.__options.keys():
-            # To add a new option, also used to setup the base options
-            self.__options[name] = setValue(new_value)
-        else:
-            self.__options[name].setValue(new_value)
+            raise KeyError
+
+        self.__options[name].setValue(new_value)

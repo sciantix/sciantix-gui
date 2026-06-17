@@ -22,17 +22,17 @@ from . import InputField
 
 
 class SetInputField(InputField.InputField):
-    def __init__(self, value: int | float, valueSet: set[int|float] | list[int|float] | tuple[int|float]):
+    def __init__(self, value: int | float, value_set: set[int|float] | list[int|float] | tuple[int|float]):
         super().__init__(value)
         
-        self.__valueSet = set(valueSet)
+        self.__value_set = set(value_set)
 
         if not self.__checkValue(value):
             raise ValueError
         
 
     def __checkValue(self, new_value: int | float) -> bool:
-        return new_value in self.__valueSet
+        return new_value in self.__value_set
 
     # We have to re-implement it for it to use the SetInputField __checkValue and not the InputField one
     def setValue(self, new_value: int | float):

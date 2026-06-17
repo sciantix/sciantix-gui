@@ -26,7 +26,7 @@ from . import InputFile
 #       0time
 # Is the time value for the 1st line
 
-class InputHistory(InputFile):
+class InputHistory(InputFile.InputFile):
     def __init__(self, has_steam_pressure: bool = False):
         super().__init__("input_history")
 
@@ -34,13 +34,13 @@ class InputHistory(InputFile):
         self.__has_steam_pressure = has_steam_pressure
 
         # Base setup : seting up the first line
-        self.setValueByName("0time", 0)
-        self.setValueByName("0temperature", 1273)
-        self.setValueByName("0fission_rate", 1e19)
-        self.setValueByName("0hydrostatic_stress", 0)
+        self.addOptionInterval("0time",               0,    0, 1e20)
+        self.addOptionInterval("0temperature",        1273, 0, 1e20)
+        self.addOptionInterval("0fission_rate",       1e19, 0, 1e20)
+        self.addOptionInterval("0hydrostatic_stress", 0,    0, 1e20)
 
-        if steam_pressure is not None:
-            self.setValueByName("0steam_pressure", 0)
+        if has_steam_pressure is not None:
+            self.addOptionInterval("0steam_pressure", 0, 0, 1e20)
 
     
     def getNbrLines(self) -> int:
@@ -80,13 +80,13 @@ class InputHistory(InputFile):
         if steam_pressure is None and self.__has_steam_pressure:
             raise TypeError
 
-        self.setValueByName(f"{self.__nbr_lines}time", time)
-        self.setValueByName(f"{self.__nbr_lines}temperature", temperature)
-        self.setValueByName(f"{self.__nbr_lines}fission_rate", fission_rate)
-        self.setValueByName(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress)
+        self.addOptionInterval(f"{self.__nbr_lines}time", time,                             0, 1e20)
+        self.addOptionInterval(f"{self.__nbr_lines}temperature", temperature,               0, 1e20)
+        self.addOptionInterval(f"{self.__nbr_lines}fission_rate", fission_rate,             0, 1e20)
+        self.addOptionInterval(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress, 0, 1e20)
 
         if steam_pressure is not None:
-            self.setValueByName(f"{self.__nbr_lines}steam_pressure", steam_pressure)
+            self.addOptionInterval(f"{self.__nbr_lines}steam_pressure", steam_pressure, 0, 1e20)
 
         self.__nbr_lines += 1
 
