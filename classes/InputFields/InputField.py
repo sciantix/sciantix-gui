@@ -23,15 +23,18 @@ import abc
 
 class InputField(abc.ABC):
     def __init__(self, value: int | float):
-        __value = value
+        self.__value = value
 
-    @abc.abstractmethod
+
+    # @abc.abstractmethod
     def __checkValue(self, new_value: int | float) -> bool:
         return True
     
     def getValue(self) -> int | float:
-        return __value
+        return self.__value
 
     def setValue(self, new_value: int | float):
-        if __checkValue(new_value):
-            __value = new_value
+        if not self.__checkValue(new_value):
+            raise ValueError
+
+        self.__value = new_value

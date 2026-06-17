@@ -5,4 +5,6 @@ __all__ = [
 ]
 
 from .InputFiles.InputFile import InputFile
-from .InputFields.InputField import InputField
+
+from .InputFields.SetInputField      import SetInputField
+from .InputFields.IntervalInputField import IntervalInputField

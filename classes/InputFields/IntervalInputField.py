@@ -21,13 +21,23 @@
 from . import InputField
 
 
-class SetInputField(InputField.InputField):
+class IntervalInputField(InputField.InputField):
     def __init__(self, value: int | float, value_min: int | float, value_max: int | float):
         super().__init__(value)
-
-        __value_min = value_min
-        __value_max = value_max
+        
+        self.__value_min = value_min
+        self.__value_max = value_max
+        
+        if not self.__checkValue(value):
+            raise ValueError
     
     
     def __checkValue(self, new_value: int | float) -> bool:
-        return __value_min <= new_value <= __value_max
+        return self.__value_min <= new_value <= self.__value_max
+
+    # We have to re-implement it for it to use the IntervalInputField __checkValue and not the InputField one
+    def setValue(self, new_value: int | float):
+        if not self.__checkValue(new_value):
+            raise ValueError
+
+        super().setValue(new_value)
