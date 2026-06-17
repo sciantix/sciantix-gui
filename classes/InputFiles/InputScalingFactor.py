@@ -21,17 +21,17 @@
 from . import InputFile
 
 
-class InputScalingFactor(InputFile):
+class InputScalingFactor(InputFile.InputFile):
     def __init__(self):
         super().__init__("input_scaling_factor")
 
         # Base setup
-        self.setValueByName("resolution_rate",        1.0)
-        self.setValueByName("trapping_rate",          1.0)
-        self.setValueByName("nucleation_rate",        1.0)
-        self.setValueByName("diffusivity",            1.0)
-        self.setValueByName("screw_parameter",        1.0)
-        self.setValueByName("span_parameter",         1.0)
-        self.setValueByName("cent_parameter",         1.0)
-        self.setValueByName("helium_production_rate", 1.0)
-        self.setValueByName("dummy",                  1.0)
+        self.addOptionInterval("resolution_rate",        1.0, 0, 1e10)
+        self.addOptionInterval("trapping_rate",          1.0, 0, 1e10)
+        self.addOptionInterval("nucleation_rate",        1.0, 0, 1e10)
+        self.addOptionInterval("diffusivity",            1.0, 0, 1e10)
+        self.addOptionInterval("screw_parameter",        1.0, 0, 1e10)
+        self.addOptionInterval("span_parameter",         1.0, 0, 1e10)
+        self.addOptionInterval("cent_parameter",         1.0, 0, 1e10)
+        self.addOptionInterval("helium_production_rate", 1.0, 0, 1e10)
+        self.addOptionInterval("dummy",                  1.0, 0, 1e10)
