@@ -27,5 +27,5 @@ class SetInputField(InputField.InputField):
 
         __valueSet = set(valueSet)
     
-    def __checkValue(self) -> bool:
-        return self.getValue() in __valueSet
+    def __checkValue(self, new_value: int | float) -> bool:
+        return new_value in __valueSet

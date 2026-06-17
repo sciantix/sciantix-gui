@@ -26,11 +26,12 @@ class InputField(abc.ABC):
         __value = value
 
     @abc.abstractmethod
-    def __checkValue(self) -> bool:
-        pass
+    def __checkValue(self, new_value: int | float) -> bool:
+        return True
     
     def getValue(self) -> int | float:
         return __value
 
     def setValue(self, new_value: int | float):
-        __value = new_value
+        if __checkValue(new_value):
+            __value = new_value
