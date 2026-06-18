@@ -18,7 +18,19 @@
 """
 
 
+import os
+
 import classes
+
+
+print("Setup...")
+
+test_path = "test_templates/"
+
+
+print(f"Emptying the test directory ({test_path})...")
+for elt in os.listdir(f"./{test_path}"):
+    os.remove(f"./{test_path}{elt}")
 
 
 print("\n+----------------------------------------+")
@@ -67,6 +79,7 @@ except ValueError:
 print(f"\tThe class has the value : {B_int.getValue()}")
 
 
+
 print("\n\n+---------------------------------------+")
 print("|   Testing the InputFiles sub-module   |")
 print("+---------------------------------------+\n")
@@ -104,6 +117,10 @@ try:
 except KeyError:
     print("\t\tKeyError...")
 
+print(f"\tPrinting to {test_path}...")
+A_hist.setPath(test_path)
+A_hist.print()
+
 print("\n+---------------------------------------------+")
 print("|   Testing the InputInitialCondition class   |")
 print("+---------------------------------------------+\n")
@@ -125,6 +142,10 @@ try:
 except KeyError:
     print("\t\tKeyError...")
 
+print(f"\tPrinting to {test_path}...")
+A_init.setPath(test_path)
+A_init.print()
+
 print("\n+------------------------------------------+")
 print("|   Testing the InputScalingFactor class   |")
 print("+------------------------------------------+\n")
@@ -144,6 +165,10 @@ try:
 except KeyError:
     print("\t\tKeyError...")
 
+print(f"\tPrinting to {test_path}...")
+A_scale.setPath(test_path)
+A_scale.print()
+
 print("\n+-------------------------------------+")
 print("|   Testing the InputSettings class   |")
 print("+-------------------------------------+\n")
@@ -162,6 +187,10 @@ try:
     A_set.getValueByName("scale")
 except KeyError:
     print("\t\tKeyError...")
+
+print(f"\tPrinting to {test_path}...")
+A_set.setPath(test_path)
+A_set.print()
 
 
 print()

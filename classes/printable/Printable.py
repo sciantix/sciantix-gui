@@ -23,13 +23,15 @@ import abc
 
 class Printable(abc.ABC):
     def __init__(self, template):
+        # Here template is a module, not the function
         self.__template = template
         self.__path     = ""
     
     
-    def print(self, input_file_class):
-        with open(f"{self.path}input_{input_file_class.getName()}.txt", 'w') as file:
-            file.write(template(input_file_class))
+    def print(self):
+        with open(f"{self.__path}input_{self.getName()}.txt", 'w') as file:
+            # Here template is a module, not the function, so we have to call the .template function
+            file.write(self.__template.template(self))
     
     def getPath(self) -> str:
         return self.__path
