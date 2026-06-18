@@ -24,8 +24,8 @@ from .. import printable
 
 class InputSettings(InputFile.InputFile, printable.Printable):
     def __init__(self):
-        InputFile.InputFile.__init__("input_settings")
-        printable.Printable.__init__(printable.settings_template)
+        InputFile.InputFile.__init__(self, "input_settings")
+        printable.Printable.__init__(self, printable.settings_template)
 
         # Base setup
         self.addOptionSet("GrainGrowth",                     1, (0, 1, 2))

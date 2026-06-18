@@ -24,8 +24,8 @@ from .. import printable
 
 class InputScalingFactor(InputFile.InputFile, printable.Printable):
     def __init__(self):
-        InputFile.InputFile.__init__("input_scaling_factor")
-        printable.Printable.__init__(printable.caling_factor_template)
+        InputFile.InputFile.__init__(self, "input_scaling_factor")
+        printable.Printable.__init__(self, printable.scaling_factor_template)
 
         # Base setup
         self.addOptionInterval("resolution_rate",        1.0, 0, 1e10)

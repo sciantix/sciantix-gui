@@ -29,8 +29,8 @@ from .. import printable
 
 class InputHistory(InputFile.InputFile, printable.Printable):
     def __init__(self, has_steam_pressure: bool = False):
-        InputFile.InputFile.__init__("input_history")
-        printable.Printable.__init__(printable.history_template)
+        InputFile.InputFile.__init__(self, "input_history")
+        printable.Printable.__init__(self, printable.history_template)
 
         self.__nbr_lines          = 1
         self.__has_steam_pressure = has_steam_pressure
