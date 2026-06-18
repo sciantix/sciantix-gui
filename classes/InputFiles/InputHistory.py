@@ -19,7 +19,7 @@
 
 
 from . import InputFile
-from . import printable
+from .. import printable
 
 
 # For this class, the options names (which serves as keys) are precede by the line index

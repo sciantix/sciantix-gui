@@ -1,4 +1,4 @@
 
 from .Printable import Printable
 
-from .template import *
+from .templates import *

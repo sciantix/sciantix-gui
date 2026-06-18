@@ -28,7 +28,7 @@ class Printable(abc.ABC):
     
     
     def print(self, input_file_class):
-        with open(f"{}input_{input_file_class.getName()}.txt", 'w') as file:
+        with open(f"{self.path}input_{input_file_class.getName()}.txt", 'w') as file:
             file.write(template(input_file_class))
     
     def getPath(self) -> str:

@@ -19,7 +19,7 @@
 
 
 from . import InputFile
-from . import printable
+from .. import printable
 
 
 class InputInitialCondition(InputFile.InputFile, printable.Printable):

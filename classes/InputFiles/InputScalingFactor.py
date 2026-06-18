@@ -19,7 +19,7 @@
 
 
 from . import InputFile
-from . import printable
+from .. import printable
 
 
 class InputScalingFactor(InputFile.InputFile, printable.Printable):
