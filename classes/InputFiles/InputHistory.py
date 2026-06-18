@@ -19,6 +19,7 @@
 
 
 from . import InputFile
+from . import printable
 
 
 # For this class, the options names (which serves as keys) are precede by the line index
@@ -26,9 +27,10 @@ from . import InputFile
 #       0time
 # Is the time value for the 1st line
 
-class InputHistory(InputFile.InputFile):
+class InputHistory(InputFile.InputFile, printable.Printable):
     def __init__(self, has_steam_pressure: bool = False):
-        super().__init__("input_history")
+        InputFile.InputFile.__init__("input_history")
+        printable.Printable.__init__(printable.history_template)
 
         self.__nbr_lines          = 1
         self.__has_steam_pressure = has_steam_pressure

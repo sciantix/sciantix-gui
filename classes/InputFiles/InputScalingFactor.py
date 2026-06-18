@@ -19,11 +19,13 @@
 
 
 from . import InputFile
+from . import printable
 
 
-class InputScalingFactor(InputFile.InputFile):
+class InputScalingFactor(InputFile.InputFile, printable.Printable):
     def __init__(self):
-        super().__init__("input_scaling_factor")
+        InputFile.InputFile.__init__("input_scaling_factor")
+        printable.Printable.__init__(printable.caling_factor_template)
 
         # Base setup
         self.addOptionInterval("resolution_rate",        1.0, 0, 1e10)

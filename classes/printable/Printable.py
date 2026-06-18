@@ -34,7 +34,7 @@ class Printable(abc.ABC):
     def getPath(self) -> str:
         return self.__path
 
-    def getPath(self, new_path: str):
+    def setPath(self, new_path: str):
         self.__path = new_path
         if len(self.__path) != 0 and self.__path[-1] != '/':
             self.__path += '/'

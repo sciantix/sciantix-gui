@@ -19,11 +19,13 @@
 
 
 from . import InputFile
+from . import printable
 
 
-class InputInitialCondition(InputFile.InputFile):
+class InputInitialCondition(InputFile.InputFile, printable.Printable):
     def __init__(self):
-        super().__init__("input_initial_condition")
+        InputFile.InputFile.__init__("input_initial_condition")
+        printable.Printable.__init__(printable.initial_condition_template)
 
         # Variable to represent the layout of data from the input_initial_condition.txt input file
         # Each element of the array represent the number of factor on each lines of input_initial_condition.txt
