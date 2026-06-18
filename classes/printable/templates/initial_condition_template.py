@@ -20,14 +20,32 @@
 
 def template(input_file_class):
     file_content = str()
-    index        = 0
+    i, j         = 0, 0
     data         = input_file_class.getOptionsNames()
+
+    comments = [
+        r"initial grain radius (m)",
+        r"initial Xe (at/m3) produced, intragranular, intragranular in solution, intragranular in bubbles, grain boundary, released",
+        r"initial Kr (at/m3) produced, intragranular, intragranular in solution, intragranular in bubbles, grain boundary, released",
+        r"initial He (at/m3) produced, intragranular, intragranular in solution, intragranular in bubbles, grain boundary, released",
+        r"initial intragranular bubble concentration (at/m3), radius (m)",
+        r"initial fuel burn-up (MWd/kgUO2)",
+        r"initial fuel effective burn-up (MWd/kgUO2)",
+        r"initial irradiation time (h)",
+        r"initial fuel density (kg/m3)",
+        r"initial U234 U235 U236 U237 U238 (% of heavy atoms) content",
+        r"initial Xe133 (at/m3) produced, intragranular, intragranular in solution, intragranular in bubbles, decayed, grain boundary, released",
+        r"initial Kr85m (at/m3) produced, intragranular, intragranular in solution, intragranular in bubbles, decayed, grain boundary, released",
+        r"initial fuel stoichiometry deviation (\)",
+    ]
+
     
     for amount in input_file_class.getLayout():
         for _ in range(amount):
             file_content += f"{input_file_class.getValueByName(data[i])} "
             i += 1
 
-        file_content += '\n'
+        file_content += f"\n\t{comments[]}\n"
+        j += 1
 
     return file_content
