@@ -28,3 +28,4 @@ def template(input_file_class):
         file_content += '\n'
 
     return file_content
+    

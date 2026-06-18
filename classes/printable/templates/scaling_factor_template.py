@@ -18,5 +18,25 @@
 """
 
 
-def template():
-    pass
+def template(input_file_class):
+    file_content = str()
+    i            = 0
+
+    comments = [
+        r"scaling factor - resolution rate",
+        r"scaling factor - trapping rate",
+        r"scaling factor - nucleation rate",
+        r"scaling factor - diffusivity",
+        r"scaling factor - screw parameter",
+        r"scaling factor - span parameter",
+        r"scaling factor - cent parameter",
+        r"scaling factor - helium production rate",
+        r"scaling factor - dummy",
+    ]
+
+
+    for name in input_file_class.getOptionsNames():
+        file_content += f"{input_file_class.getValueByName(name)}\n# {comments[i]}\n"
+        i += 1
+
+    return file_content

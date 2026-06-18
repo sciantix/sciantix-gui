@@ -45,7 +45,7 @@ def template(input_file_class):
             file_content += f"{input_file_class.getValueByName(data[i])} "
             i += 1
 
-        file_content += f"\n\t{comments[]}\n"
+        file_content += f"\n#\t{comments[]}\n"
         j += 1
 
     return file_content
