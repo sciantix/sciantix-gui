@@ -23,6 +23,6 @@
 # +---------------------------+
 WINDOW_TITLE  = "Sciantix Input Builder"
 # WINDOW_TITLE  = "Sciantix Input Wizzard"        # Alternative title ?
-WINDOW_WIDTH  = 400
-WINDOW_HEIGHT = 300
+WINDOW_WIDTH  = 800
+WINDOW_HEIGHT = 600
 

@@ -18,20 +18,34 @@
 """
 
 
-import PyQt6.QtCore as QtCore
+import PyQt6.QtCore    as QtCore
 import PyQt6.QtWidgets as QtWidgets
 
 from . import config
+from . import tabs
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, classes):
         super().__init__()
+
+        self.__tab_list = QtWidgets.QTabWidget()
         
         self.setWindowTitle(config.WINDOW_TITLE)
         self.setFixedSize(QtCore.QSize(config.WINDOW_WIDTH, config.WINDOW_HEIGHT))
 
-        button = QtWidgets.QPushButton("press")
-       
-        self.setCentralWidget(button)
+        # Passing the business logic to the Tabs
+        self.__createTabs(classes)
 
+
+    def __createTabs(self, classes):
+        # Passing the business logic classes to the corresponding Tabs
+        tabs.SettingsTab(classes.InputSettings()).addToTabList(self.__tab_list)
+        tabs.InitialConditionTab(classes.InputInitialCondition()).addToTabList(self.__tab_list)
+        tabs.HistoryTab(classes.InputHistory()).addToTabList(self.__tab_list)
+        tabs.ScalingFactorTab(classes.InputScalingFactor()).addToTabList(self.__tab_list)
+        
+        # No logic needed to be passed to this one
+        tabs.FinalTab(None).addToTabList(self.__tab_list)
+       
+        self.setCentralWidget(self.__tab_list)

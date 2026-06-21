@@ -17,3 +17,11 @@
     Authors : G. Léandre
 """
 
+
+from . import Tab
+
+
+class InitialConditionTab(Tab.Tab):
+    def __init__(self, classes):
+        super().__init__("Input Initial Condition", classes)
+        

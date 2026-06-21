@@ -17,3 +17,28 @@
     Authors : G. Léandre
 """
 
+
+import PyQt6.QtWidgets as QtWidgets
+
+
+class Tab(QtWidgets.QWidget):
+    def __init__(self, name: str, classe):
+        super().__init__()
+
+        self.__name   = name
+        # To have access to the business logic since we cannot import from outside the ui module
+        self._class  = classe
+        self.__layout = QtWidgets.QGridLayout()
+
+        self.setLayout(self.__layout)
+    
+
+    def getName(self) -> str:
+        return self.__name 
+    
+    def addItemToLayout(self, new_item, row: int, column: int):
+        self.__layout.addWidget(new_item, row, column)
+        self.setLayout(self.__layout)
+    
+    def addToTabList(self, tab_list: list):
+        tab_list.addTab(self, self.__name)

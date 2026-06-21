@@ -21,13 +21,16 @@
 import sys
 import PyQt6.QtWidgets as QtWidgets
 
-import ui.core as uiCore
+import classes
+from ui import MainWindow
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
-    window = uiCore.MainWindow()
+    # We give the MainWindow class the module in parameter to give it access to the classes module 
+    #   which contains thhe business logic and data structure for the program
+    window = MainWindow.MainWindow(classes)
     window.show()
 
     app.exec()
