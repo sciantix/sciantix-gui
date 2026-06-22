@@ -19,7 +19,7 @@
 
 
 from . import InputFile
-fomr .. import config
+from .. import config
 from .. import printable
 
 

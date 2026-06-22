@@ -35,7 +35,7 @@ class HistoryTab(Tab.Tab):
         button.clicked.connect(self.__addSteamPressure)
         self.addItemToLayout(button, 0, 3)
 
-        for i in enumerate(self._class.getLineNames()):
+        for i, name in enumerate(self._class.getLineNames()):
             self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
 
         self.__makeLine()
