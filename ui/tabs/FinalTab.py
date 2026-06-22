@@ -29,15 +29,15 @@ class FinalTab(Tab.Tab):
 
         self.__classes = classes
 
-        self.addItemToLayout(QtWidgets.QLabel("path"), 2, 0)
+        self.addItemToLayout(QtWidgets.QLabel("Path"), 0, 0)
 
         path_input = QtWidgets.QLineEdit()
         path_input.textChanged.connect(self.__setPath)
-        self.addItemToLayout(path_input, 2, 1)
+        self.addItemToLayout(path_input, 0, 1)
 
         button = QtWidgets.QPushButton("Finalize")
         button.clicked.connect(self.__submit)
-        self.addItemToLayout(button, 0, 1)
+        self.addItemToLayout(button, 1, 1)
     
 
     def __setPath(self, text):

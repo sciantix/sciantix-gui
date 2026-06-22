@@ -25,4 +25,3 @@ WINDOW_TITLE  = "Sciantix Input Builder"
 # WINDOW_TITLE  = "Sciantix Input Wizzard"        # Alternative title ?
 WINDOW_WIDTH  = 1000
 WINDOW_HEIGHT = 700
-

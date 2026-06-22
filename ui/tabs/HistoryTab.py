@@ -35,10 +35,8 @@ class HistoryTab(Tab.Tab):
         button.clicked.connect(self.__addSteamPressure)
         self.addItemToLayout(button, 0, 3)
 
-        self.addItemToLayout(QtWidgets.QLabel("time"),               1, 0)
-        self.addItemToLayout(QtWidgets.QLabel("temperature"),        1, 1)
-        self.addItemToLayout(QtWidgets.QLabel("fission_rate"),       1, 2)
-        self.addItemToLayout(QtWidgets.QLabel("hydrostatic_stress"), 1, 3)
+        for i in enumerate(self._class.getLineNames()):
+            self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
 
         self.__makeLine()
 
