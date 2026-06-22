@@ -42,12 +42,15 @@ class HistoryTab(Tab.Tab):
     def __makeLine(self):
         index = self._class.getNbrLines()
 
-        time, temp, fission, stress = self._class.getLineByNbr(index-1)
+        names  = self._class.getLineNames()
+        values = self._class.getLineByNbr(index-1)
 
-        self.addItemToLayout(QtWidgets.QLineEdit(str(time)),    index+1, 0)
-        self.addItemToLayout(QtWidgets.QLineEdit(str(temp)),    index+1, 1)
-        self.addItemToLayout(QtWidgets.QLineEdit(str(fission)), index+1, 2)
-        self.addItemToLayout(QtWidgets.QLineEdit(str(stress)),  index+1, 3)
+        for i in range(4):
+            current_input = QtWidgets.QLineEdit(str(values[i]))
+            current_input.textChanged.connect(
+                lambda text: self._class.setValueByName(f"{index-1}{names[i]}", int(text) if (len(text) != 0) else 0)
+            )
+            self.addItemToLayout(current_input, index+1, i)
     
     def __addLine(self):
         self._class.addLine(0, 0, 0, 0)

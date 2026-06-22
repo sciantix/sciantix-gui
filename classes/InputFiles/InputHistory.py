@@ -47,6 +47,25 @@ class InputHistory(InputFile.InputFile, printable.Printable):
     
     def getNbrLines(self) -> int:
         return self.__nbr_lines
+
+    def getLineNames(self):
+        if self.__has_steam_pressure:
+            line = (
+                "time",
+                "temperature",
+                "fission_rate",
+                "hydrostatic_stress",
+                "steam_pressure",
+            )
+        else:
+            line = (
+                "time",
+                "temperature",
+                "fission_rate",
+                "hydrostatic_stress",
+            )
+
+        return line
     
     def getLineByNbr(self, index: int) -> tuple:
         """

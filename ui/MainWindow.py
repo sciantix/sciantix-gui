@@ -40,18 +40,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __createTabs(self, classes):
         class_list = [
-            classes.InputSettings(),
-            classes.InputInitialCondition(),
-            classes.InputHistory(),
-            classes.InputScalingFactor()
+            # Passing the business logic classes to the corresponding Tabs
+            tabs.SettingsTab(classes.InputSettings()),
+            tabs.InitialConditionTab(classes.InputInitialCondition()),
+            tabs.HistoryTab(classes.InputHistory()),
+            tabs.ScalingFactorTab(classes.InputScalingFactor()),
         ]
 
-        # Passing the business logic classes to the corresponding Tabs
-        tabs.SettingsTab(class_list[0]).addToTabList(self.__tab_list)
-        tabs.InitialConditionTab(class_list[1]).addToTabList(self.__tab_list)
-        tabs.HistoryTab(class_list[2]).addToTabList(self.__tab_list)
-        tabs.ScalingFactorTab(class_list[3]).addToTabList(self.__tab_list)
-        
+        for cla in class_list:
+            cla.addToTabList(self.__tab_list)
+
         # No logic needed to be passed to this one
         tabs.FinalTab(class_list).addToTabList(self.__tab_list)
        

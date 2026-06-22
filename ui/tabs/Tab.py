@@ -46,3 +46,9 @@ class Tab(QtWidgets.QWidget):
     
     def addToTabList(self, tab_list: list):
         tab_list.addTab(self, self.__name)
+        
+    def setPath(self, path):
+        self._class.setPath(path)
+        
+    def print(self):
+        self._class.print()
