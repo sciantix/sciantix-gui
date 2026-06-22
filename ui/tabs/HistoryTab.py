@@ -28,9 +28,9 @@ class HistoryTab(Tab.Tab):
         super().__init__("Input History", history_class)
 
         button = QtWidgets.QPushButton("Add Line")
-        button.clicked.connect(self.addLine)
-
+        button.clicked.connect(self.__addLine)
         self.addItemToLayout(button, 0, 3)
+
         self.addItemToLayout(QtWidgets.QLabel("time"),               1, 0)
         self.addItemToLayout(QtWidgets.QLabel("temperature"),        1, 1)
         self.addItemToLayout(QtWidgets.QLabel("fission_rate"),       1, 2)
@@ -49,6 +49,6 @@ class HistoryTab(Tab.Tab):
         self.addItemToLayout(QtWidgets.QLineEdit(str(fission)), index+1, 2)
         self.addItemToLayout(QtWidgets.QLineEdit(str(stress)),  index+1, 3)
     
-    def addLine(self):
+    def __addLine(self):
         self._class.addLine(0, 0, 0, 0)
         self.__makeLine()

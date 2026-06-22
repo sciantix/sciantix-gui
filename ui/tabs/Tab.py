@@ -18,6 +18,7 @@
 """
 
 
+import PyQt6.QtCore    as QtCore
 import PyQt6.QtWidgets as QtWidgets
 
 
@@ -27,8 +28,10 @@ class Tab(QtWidgets.QWidget):
 
         self.__name   = name
         # To have access to the business logic since we cannot import from outside the ui module
-        self._class  = classe
+        self._class   = classe
         self.__layout = QtWidgets.QGridLayout()
+
+        self.__layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
 
         self.setLayout(self.__layout)
     

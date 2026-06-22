@@ -18,10 +18,20 @@
 """
 
 
+import PyQt6.QtWidgets as QtWidgets
+
 from . import Tab
 
 
 class ScalingFactorTab(Tab.Tab):
-    def __init__(self, classes):
-        super().__init__("Input Scaling Factor", classes)
+    def __init__(self, scaling_factor_class):
+        super().__init__("Input Scaling Factor", scaling_factor_class)
+
+        for i, elt in enumerate(self._class.getOptionsNames()):
+            self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
+            current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(elt)))
+            current_input.textChanged.connect(
+                lambda text: self._class.setValueByName(elt, text)
+            )
+            self.addItemToLayout(current_input, i, 1)
         

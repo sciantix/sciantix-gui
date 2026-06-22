@@ -18,10 +18,20 @@
 """
 
 
+import PyQt6.QtWidgets as QtWidgets
+
 from . import Tab
 
 
 class SettingsTab(Tab.Tab):
-    def __init__(self, classes):
-        super().__init__("Input Settings", classes)
+    def __init__(self, settings_class):
+        super().__init__("Input Settings", settings_class)
+
+        for i, elt in enumerate(self._class.getOptionsNames()):
+            self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
+            current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(elt)))
+            current_input.textChanged.connect(
+                lambda text: self._class.setValueByName(elt, text)
+            )
+            self.addItemToLayout(current_input, i, 1)
         
