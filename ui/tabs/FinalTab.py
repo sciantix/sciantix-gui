@@ -21,6 +21,7 @@
 import PyQt6.QtWidgets as QtWidgets
 
 from . import Tab
+from .. import config
 
 
 class FinalTab(Tab.Tab):
@@ -29,9 +30,11 @@ class FinalTab(Tab.Tab):
 
         self.__classes = classes
 
+        self.__setPath(config.DEFAULT_OUTPUT_PATH)
+
         self.addItemToLayout(QtWidgets.QLabel("Path"), 0, 0)
 
-        path_input = QtWidgets.QLineEdit()
+        path_input = QtWidgets.QLineEdit(config.DEFAULT_OUTPUT_PATH)
         path_input.textChanged.connect(self.__setPath)
         self.addItemToLayout(path_input, 0, 1)
 

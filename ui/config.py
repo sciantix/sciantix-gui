@@ -21,7 +21,10 @@
 # +---------------------------+
 # |   Window and GUI config   |
 # +---------------------------+
-WINDOW_TITLE  = "Sciantix Input Builder"
-# WINDOW_TITLE  = "Sciantix Input Wizzard"        # Alternative title ?
+WINDOW_TITLE  = "Sciantix'Wizzard"
+# WINDOW_TITLE  = "Sciantix Input Wizzard"        # Alternative titles ?
+# WINDOW_TITLE  = "Sciantix Input Builder"
 WINDOW_WIDTH  = 1000
 WINDOW_HEIGHT = 700
+
+DEFAULT_OUTPUT_PATH = ""
