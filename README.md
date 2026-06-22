@@ -123,6 +123,7 @@ There are 2 config files :
 
 ### File Tree
 
+```
 ├─classes/
 |   ├─InputFields/
 |   |   ├─__init__.py
@@ -159,4 +160,8 @@ There are 2 config files :
 ├─README.md
 ├─Sciantix_Wizard                   Launch file
 └─test.py                           Make sure that all the logic works properly
+<<<<<<< HEAD
 >>>>>>> d75c30d (Drafted the README.md + minor fixes)
+=======
+```
+>>>>>>> e280e7c (oups, formating error in the README)
