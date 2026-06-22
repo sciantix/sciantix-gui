@@ -29,6 +29,10 @@ class HistoryTab(Tab.Tab):
 
         button = QtWidgets.QPushButton("Add Line")
         button.clicked.connect(self.__addLine)
+        self.addItemToLayout(button, 0, 0)
+
+        button = QtWidgets.QPushButton("Add Steam Pressure")
+        button.clicked.connect(self.__addSteamPressure)
         self.addItemToLayout(button, 0, 3)
 
         self.addItemToLayout(QtWidgets.QLabel("time"),               1, 0)
@@ -45,7 +49,7 @@ class HistoryTab(Tab.Tab):
         names  = self._class.getLineNames()
         values = self._class.getLineByNbr(index-1)
 
-        for i in range(4):
+        for i in range(len(names)):
             current_input = QtWidgets.QLineEdit(str(values[i]))
             current_input.textChanged.connect(
                 lambda text: self._class.setValueByName(f"{index-1}{names[i]}", int(text) if (len(text) != 0) else 0)
@@ -53,5 +57,21 @@ class HistoryTab(Tab.Tab):
             self.addItemToLayout(current_input, index+1, i)
     
     def __addLine(self):
-        self._class.addLine(0, 0, 0, 0)
+        if (self._class.hasSteamPressure()):
+            self._class.addLine(0, 0, 0, 0, 0)
+        else:
+            self._class.addLine(0, 0, 0, 0)
+
         self.__makeLine()
+
+    def __addSteamPressure(self):
+        self._class.toggleSteamPressure()
+        
+        self.addItemToLayout(QtWidgets.QLabel("steam_pressure"), 1, 4)
+
+        for i in range(self._class.getNbrLines()):
+            current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(f"{i}steam_pressure")))
+            current_input.textChanged.connect(
+                lambda text: self._class.setValueByName(f"{i}steam_pressure", int(text) if (len(text) != 0) else 0)
+            )
+            self.addItemToLayout(current_input, i+2, 4)

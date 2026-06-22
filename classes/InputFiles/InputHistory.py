@@ -41,12 +41,21 @@ class InputHistory(InputFile.InputFile, printable.Printable):
         self.addOptionInterval("0fission_rate",       1e19, 0, 1e20)
         self.addOptionInterval("0hydrostatic_stress", 0,    0, 1e20)
 
-        if has_steam_pressure is not None:
+        if has_steam_pressure:
             self.addOptionInterval("0steam_pressure", 0, 0, 1e20)
 
     
     def getNbrLines(self) -> int:
         return self.__nbr_lines
+
+    def hasSteamPressure(self) -> bool:
+        return self.__has_steam_pressure
+
+    def toggleSteamPressure(self):
+        if not self.__has_steam_pressure:
+            self.__has_steam_pressure = True
+            for i in range(self.__nbr_lines):
+                self.addOptionInterval(f"{i}steam_pressure", 0, 0, 1e20)
 
     def getLineNames(self):
         if self.__has_steam_pressure:
