@@ -106,7 +106,7 @@ It contains the tabs (`sciantix-input-builder/gui/tabs`) submodule that segment 
 
 This module act as the frontend of the app.
 
-#### The gui module
+#### The classes module
 It takes care of the business logic and data structure.
 It contains 3 submodules:
 - The InputFields submodule (`sciantix-input-builder/classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
