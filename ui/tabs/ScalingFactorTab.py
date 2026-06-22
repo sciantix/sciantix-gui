@@ -27,11 +27,22 @@ class ScalingFactorTab(Tab.Tab):
     def __init__(self, scaling_factor_class):
         super().__init__("Input Scaling Factor", scaling_factor_class)
 
+        self._option = False
+
+        self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
+        self.__button.clicked.connect(self.__toggleOption)
+        self.addItemToLayout(self.__button, 0, 1)
+
         for i, elt in enumerate(self._class.getOptionsNames()):
-            self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
+            self.addItemToLayout(QtWidgets.QLabel(elt), i+1, 0)
             current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(elt)))
             current_input.textChanged.connect(
                 lambda text: self._class.setValueByName(elt, int(text) if (len(text) != 0) else 0)
             )
-            self.addItemToLayout(current_input, i, 1)
+            self.addItemToLayout(current_input, i+1, 1)
+    
+
+    def __toggleOption(self):
+        self._option = not self._option
+        self.__button.setText(f"Use Scaling Factor : {self._option}")
         

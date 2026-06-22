@@ -46,5 +46,6 @@ class FinalTab(Tab.Tab):
 
     def __submit(self):
         for cla in self.__classes:
-            cla.print()
+            if cla.getOption():
+                cla.print()
         

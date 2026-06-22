@@ -27,6 +27,7 @@ class Tab(QtWidgets.QWidget):
         super().__init__()
 
         self.__name   = name
+        self._option  = True
         # To have access to the business logic since we cannot import from outside the ui module
         self._class   = classe
         self.__layout = QtWidgets.QGridLayout()
@@ -39,6 +40,9 @@ class Tab(QtWidgets.QWidget):
 
     def getName(self) -> str:
         return self.__name 
+
+    def getOption(self) -> bool:
+        return self._option
     
     def addItemToLayout(self, new_item, row: int, column: int):
         self.__layout.addWidget(new_item, row, column)
@@ -47,7 +51,7 @@ class Tab(QtWidgets.QWidget):
     def addToTabList(self, tab_list: list):
         tab_list.addTab(self, self.__name)
         
-    def setPath(self, path):
+    def setPath(self, path: str):
         self._class.setPath(path)
         
     def print(self):
