@@ -19,6 +19,7 @@
 
 
 from . import InputFile
+from .. import config
 from .. import printable
 
 
@@ -36,13 +37,13 @@ class InputHistory(InputFile.InputFile, printable.Printable):
         self.__has_steam_pressure = has_steam_pressure
 
         # Base setup : seting up the first line
-        self.addOptionInterval("0time",               0,    0, 1e20)
-        self.addOptionInterval("0temperature",        1273, 0, 1e20)
-        self.addOptionInterval("0fission_rate",       1e19, 0, 1e20)
-        self.addOptionInterval("0hydrostatic_stress", 0,    0, 1e20)
+        self.addOptionInterval("0time",               0,    config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval("0temperature",        1273, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval("0fission_rate",       1e19, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval("0hydrostatic_stress", 0,    config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         if has_steam_pressure:
-            self.addOptionInterval("0steam_pressure", 0, 0, 1e20)
+            self.addOptionInterval("0steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
     
     def getNbrLines(self) -> int:
@@ -55,7 +56,7 @@ class InputHistory(InputFile.InputFile, printable.Printable):
         if not self.__has_steam_pressure:
             self.__has_steam_pressure = True
             for i in range(self.__nbr_lines):
-                self.addOptionInterval(f"{i}steam_pressure", 0, 0, 1e20)
+                self.addOptionInterval(f"{i}steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
     def getLineNames(self):
         if self.__has_steam_pressure:
@@ -110,13 +111,13 @@ class InputHistory(InputFile.InputFile, printable.Printable):
         if steam_pressure is None and self.__has_steam_pressure:
             raise TypeError
 
-        self.addOptionInterval(f"{self.__nbr_lines}time", time,                             0, 1e20)
-        self.addOptionInterval(f"{self.__nbr_lines}temperature", temperature,               0, 1e20)
-        self.addOptionInterval(f"{self.__nbr_lines}fission_rate", fission_rate,             0, 1e20)
-        self.addOptionInterval(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress, 0, 1e20)
+        self.addOptionInterval(f"{self.__nbr_lines}time", time,                             config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}temperature", temperature,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}fission_rate", fission_rate,             config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         if steam_pressure is not None:
-            self.addOptionInterval(f"{self.__nbr_lines}steam_pressure", steam_pressure, 0, 1e20)
+            self.addOptionInterval(f"{self.__nbr_lines}steam_pressure", steam_pressure, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         self.__nbr_lines += 1
 

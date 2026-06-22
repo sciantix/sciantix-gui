@@ -19,6 +19,7 @@
 
 
 from . import InputFile
+fomr .. import config
 from .. import printable
 
 
@@ -29,69 +30,56 @@ class InputInitialCondition(InputFile.InputFile, printable.Printable):
 
         # Variable to represent the layout of data from the input_initial_condition.txt input file
         # Each element of the array represent the number of factor on each lines of input_initial_condition.txt
-        self.__layout = [
-            1,
-            6,
-            6,
-            6,
-            2,
-            1,
-            1,
-            1,
-            1,
-            5,
-            7,
-            7,
-            1
-        ]
+        self.__layout = config.INITIAL_CONDITION_LAYOUT
 
+        # TODO : Maybe clean up by putting the initial conditions into config.py
         # Base setup
-        self.addOptionInterval("grain_radius", 5.0e-06, 0, 1e10)
-        self.addOptionInterval("Xe_produced",               0.0, 0, 1e10)
-        self.addOptionInterval("Xe_intragranular",          0.0, 0, 1e10)
-        self.addOptionInterval("Xe_intragranular_solution", 0.0, 0, 1e10)
-        self.addOptionInterval("Xe_intragranular_bubbles",  0.0, 0, 1e10)
-        self.addOptionInterval("Xe_grain_boundary",         0.0, 0, 1e10)
-        self.addOptionInterval("Xe_released",               0.0, 0, 1e10)
-        self.addOptionInterval("Kr_produced",               0.0, 0, 1e10)
-        self.addOptionInterval("Kr_intragranular",          0.0, 0, 1e10)
-        self.addOptionInterval("Kr_intragranular_solution", 0.0, 0, 1e10)
-        self.addOptionInterval("Kr_intragranular_bubbles",  0.0, 0, 1e10)
-        self.addOptionInterval("Kr_grain_boundary",         0.0, 0, 1e10)
-        self.addOptionInterval("Kr_released",               0.0, 0, 1e10)
-        self.addOptionInterval("He_produced",               0.0, 0, 1e10)
-        self.addOptionInterval("He_intragranular",          0.0, 0, 1e10)
-        self.addOptionInterval("He_intragranular_solution", 0.0, 0, 1e10)
-        self.addOptionInterval("He_intragranular_bubbles",  0.0, 0, 1e10)
-        self.addOptionInterval("He_grain_boundary",         0.0, 0, 1e10)
-        self.addOptionInterval("He_released",               0.0, 0, 1e10)
-        self.addOptionInterval("intragranular_bubble_concentration", 0.0, 0, 1e10)
-        self.addOptionInterval("intragranular_bubble_radius",        0.0, 0, 1e10)
-        self.addOptionInterval("fuel_burn_up", 0.0, 0, 1e10)
-        self.addOptionInterval("fuel_effective_burn_up", 0.0, 0, 1e10)
-        self.addOptionInterval("irradiation_time", 0.0, 0, 1e10)
-        self.addOptionInterval("fuel_density", 10641.0, 0, 1e10)
-        self.addOptionInterval("U234_content", 0.0, 0, 1e10)
-        self.addOptionInterval("U235_content", 3.0, 0, 1e10)
-        self.addOptionInterval("U236_content", 0.0, 0, 1e10)
-        self.addOptionInterval("U237_content", 0.0, 0, 1e10)
-        self.addOptionInterval("U238_content", 0.0, 0, 1e10)
-        self.addOptionInterval("U239_content", 97.0, 0, 1e10)
-        self.addOptionInterval("Xe133_produced",               0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_intragranular",          0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_intragranular_solution", 0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_intragranular_bubbles",  0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_decayed",                0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_grain_boundary",         0.0, 0, 1e10)
-        self.addOptionInterval("Xe133_released",               0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_produced",               0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_intragranular",          0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_intragranular_solution", 0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_intragranular_bubbles",  0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_decayed",                0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_grain_boundary",         0.0, 0, 1e10)
-        self.addOptionInterval("Kr85m_released",               0.0, 0, 1e10)
-        self.addOptionInterval("fuel_stoichiometry",           0.0, 0, 1e10)
+        self.addOptionInterval("grain_radius", 5.0e-06, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_produced",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_intragranular",          0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_intragranular_solution", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_intragranular_bubbles",  0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_grain_boundary",         0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe_released",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_produced",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_intragranular",          0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_intragranular_solution", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_intragranular_bubbles",  0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_grain_boundary",         0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr_released",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_produced",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_intragranular",          0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_intragranular_solution", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_intragranular_bubbles",  0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_grain_boundary",         0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("He_released",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("intragranular_bubble_concentration", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("intragranular_bubble_radius",        0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("fuel_burn_up", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("fuel_effective_burn_up", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("irradiation_time", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("fuel_density", 10641.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U234_content", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U235_content", 3.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U236_content", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U237_content", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U238_content", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("U239_content", 97.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_produced",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_intragranular",          0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_intragranular_solution", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_intragranular_bubbles",  0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_decayed",                0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_grain_boundary",         0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Xe133_released",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_produced",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_intragranular",          0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_intragranular_solution", 0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_intragranular_bubbles",  0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_decayed",                0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_grain_boundary",         0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("Kr85m_released",               0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
+        self.addOptionInterval("fuel_stoichiometry",           0.0, config.INITIAL_CONDITION_LOWER_BOUND, config.INITIAL_CONDITION_UPER_BOUND)
 
 
     def getLayout(self) -> list[int]:
