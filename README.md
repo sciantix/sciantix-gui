@@ -51,7 +51,7 @@ sudo apt install python3
 Get this app on out github page  :
 
 ```bash
-git clone 
+git clone https://github.com/Zaynn-lea/sciantix-input-builder.git
 ```
 
 
