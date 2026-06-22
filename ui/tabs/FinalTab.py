@@ -18,10 +18,33 @@
 """
 
 
+import PyQt6.QtWidgets as QtWidgets
+
 from . import Tab
 
 
 class FinalTab(Tab.Tab):
     def __init__(self, classes):
-        super().__init__("Finalize", classes)
+        super().__init__("Finalize", None)
+
+        self.__classes = classes
+
+        self.addItemToLayout(QtWidgets.QLabel("path"), 2, 0)
+
+        path_input = QtWidgets.QLineEdit()
+        path_input.textChanged.connect(self.__setPath)
+        self.addItemToLayout(path_input, 2, 1)
+
+        button = QtWidgets.QPushButton("Finalize")
+        button.clicked.connect(self.__submit)
+        self.addItemToLayout(button, 0, 1)
+    
+
+    def __setPath(self, text):
+        for cla in self.__classes:
+            cla.setPath(text)
+
+    def __submit(self):
+        for cla in self.__classes:
+            cla.print()
         

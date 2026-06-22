@@ -31,7 +31,7 @@ class SettingsTab(Tab.Tab):
             self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
             current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(elt)))
             current_input.textChanged.connect(
-                lambda text: self._class.setValueByName(elt, text)
+                lambda text: self._class.setValueByName(elt, int(text))
             )
             self.addItemToLayout(current_input, i, 1)
         

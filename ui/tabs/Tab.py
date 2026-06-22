@@ -32,6 +32,7 @@ class Tab(QtWidgets.QWidget):
         self.__layout = QtWidgets.QGridLayout()
 
         self.__layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        self.__layout.setVerticalSpacing(5)
 
         self.setLayout(self.__layout)
     
