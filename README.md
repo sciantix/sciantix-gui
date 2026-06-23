@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# sciantix-gui
-=======
-# sciantix-input-builder
-A GUI builder for sciantix inputs files
->>>>>>> c7d61c3 (Initial commit)
-=======
 
 ```
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -16,17 +8,13 @@ A GUI builder for sciantix inputs files
 .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |          \  v   v  /   |  | _/  _/____  /  _____  \ |  |\  \ | |_/  /
 |_______/     \______||__| /__/     \__\ |__| \__|     |__|           \__/^\__/    |__||__________|/__/     \__\|__| \__\|_____/
 
-<<<<<<< HEAD
-A GUI Wizard to build inputs files for sciantix
->>>>>>> 0612e7e (updated the README)
-=======
 ---------------------------------------------------------------------------------------------------------------------------------
 ```
 
 
 # Sciantix'Wizard
 
-A GUI Wizard app to build inputs files for the Sciantix fission simulation software.
+A GUI Wizard app to facilitate the use of the Sciantix fission simulation software.
 It is made to run on Linux.
 
 
@@ -164,4 +152,3 @@ There are 2 config files :
 >>>>>>> d75c30d (Drafted the README.md + minor fixes)
 =======
 ```
->>>>>>> e280e7c (oups, formating error in the README)
