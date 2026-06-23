@@ -75,11 +75,11 @@ Once launched, you will be presented with a Graphical User Interface (GUI) with 
 
 - Tabs 1 to 4 are the differents input files needed for sciantix to run. You will find in thoses tabs a form-like interface allowing you to fill the input values as you need.
 
-- Tabs 5 `Finilize` is to build the input file and add a custom output path.
+- Tabs 5 `Finalize` is to build the input file and add a custom output path.
 
 ### Getting the newly built input files
 
-By default, the input files end up in the `sciantix-input-builder` folder. You can change it in the Finilize tab.
+By default, the input files end up in the `sciantix-input-builder` folder. You can change it in the Finalize tab.
 
 If you only see 3 files and are missing `input_scaling_factors.txt` it's probably because it's optional. 
 You have to go into the 4th tab `Input Scaling Factor` and togle the option to have this file too.
