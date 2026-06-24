@@ -30,6 +30,7 @@ class ScalingFactorTab(Tab.Tab):
         self._option = False
 
         self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
+        self.__button.setStyleSheet("background: darkred")
         self.__button.clicked.connect(self.__toggleOption)
         self.addItemToLayout(self.__button, 0, 1)
 
@@ -45,4 +46,8 @@ class ScalingFactorTab(Tab.Tab):
     def __toggleOption(self):
         self._option = not self._option
         self.__button.setText(f"Use Scaling Factor : {self._option}")
+        if self._option:
+            self.__button.setStyleSheet("background: green")
+        else:
+            self.__button.setStyleSheet("background: darkred")
         
