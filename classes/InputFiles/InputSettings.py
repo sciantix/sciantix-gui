@@ -19,6 +19,7 @@
 
 
 from . import InputFile
+from .. import config
 from .. import printable
 
 
@@ -28,26 +29,26 @@ class InputSettings(InputFile.InputFile, printable.Printable):
         printable.Printable.__init__(self, printable.settings_template)
 
         # Base setup
-        self.addOptionSet("GrainGrowth",                     1, (0, 1, 2))
-        self.addOptionSet("FissionGasDiffusivity",           1, (0, 1))
-        self.addOptionSet("DiffusionSolver",                 1, (0, 1, 2))
-        self.addOptionSet("IntraGranularBubbleBehavior",     1, (0, 1))
-        self.addOptionSet("ResolutionRate",                  1, (0, 1, 2, 3))
-        self.addOptionSet("TrappingRate",                    1, (0, 1))
-        self.addOptionSet("NucleationRate",                  1, (0, 1))
-        self.addOptionSet("Output",                          1, (0, 1))
-        self.addOptionSet("GrainBoundaryVacancyDiffusivity", 1, (0, 1, 2))
-        self.addOptionSet("GrainBoundaryBehaviour",          1, (0, 1))
-        self.addOptionSet("GrainBoundaryMicroCracking",      1, (0, 1))
-        self.addOptionSet("FuelMatrix",                      0, (0, 1))
-        self.addOptionSet("GrainBoundaryVenting",            0, (0, 1))
-        self.addOptionSet("RadioactiveFissionGas",           0, (0, 1))
-        self.addOptionSet("Helium",                          0, (0, 1))
-        self.addOptionSet("HeDiffusivity",                   0, (0, 1, 2))
-        self.addOptionSet("GrainBoundarySweeping",           0, (0, 1))
-        self.addOptionSet("HighBurnupStructureFormation",    0, (0, 1))
-        self.addOptionSet("HighBurnupStructurePorosity",     0, (0, 1))
-        self.addOptionSet("HeliumProductionRate",            0, (0, 1, 2))
-        self.addOptionSet("StoichiometryDeviation",          0, (0, 1, 2, 3, 4, 5))
-        self.addOptionSet("BubbleDiffusivity",               0, (0, 1))
+        self.addOptionSet("GrainGrowth",                     config.SETTINGS_DEFAULT, (0, 1, 2))
+        self.addOptionSet("FissionGasDiffusivity",           config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("DiffusionSolver",                 config.SETTINGS_DEFAULT, (0, 1, 2))
+        self.addOptionSet("IntraGranularBubbleBehavior",     config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("ResolutionRate",                  config.SETTINGS_DEFAULT, (0, 1, 2, 3))
+        self.addOptionSet("TrappingRate",                    config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("NucleationRate",                  config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("Output",                          config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("GrainBoundaryVacancyDiffusivity", config.SETTINGS_DEFAULT, (0, 1, 2))
+        self.addOptionSet("GrainBoundaryBehaviour",          config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("GrainBoundaryMicroCracking",      config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("FuelMatrix",                      config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("GrainBoundaryVenting",            config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("RadioactiveFissionGas",           config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("Helium",                          config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("HeDiffusivity",                   config.SETTINGS_DEFAULT, (0, 1, 2))
+        self.addOptionSet("GrainBoundarySweeping",           config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("HighBurnupStructureFormation",    config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("HighBurnupStructurePorosity",     config.SETTINGS_DEFAULT, (0, 1))
+        self.addOptionSet("HeliumProductionRate",            config.SETTINGS_DEFAULT, (0, 1, 2))
+        self.addOptionSet("StoichiometryDeviation",          config.SETTINGS_DEFAULT, (0, 1, 2, 3, 4, 5))
+        self.addOptionSet("BubbleDiffusivity",               config.SETTINGS_DEFAULT, (0, 1))
         

@@ -61,12 +61,8 @@ class SettingsTab(Tab.Tab):
             current_input.addItems(self.__settings_options[i])
             current_input.currentIndexChanged.connect(
                 (lambda name:
-                    lambda index: self.__change_option(name, index)
+                    lambda index: self._class.setValueByName(name, index)
                 )(elt)
             )
             self.addItemToLayout(current_input, i, 1)
-    
-
-    def __change_option(self, name, index):
-        print(name, index)
         
