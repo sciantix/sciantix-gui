@@ -91,7 +91,7 @@ class InputHistory(InputFile.InputFile, printable.Printable):
             (time, temperature, fission rate, hydrostatic stress, steam pressure)
         """
         if not (0 <= index < self.__nbr_lines):
-            raise IndexError
+            raise IndexError("You can't get a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
         
         if self.__has_steam_pressure:
             line = (
@@ -113,7 +113,7 @@ class InputHistory(InputFile.InputFile, printable.Printable):
     
     def addLine(self, time: int, temperature: int, fission_rate: int, hydrostatic_stress: int, steam_pressure: int | None = None):
         if steam_pressure is None and self.__has_steam_pressure:
-            raise TypeError
+            raise TypeError("You need to specify the steam_pressure value if you have set it togled")
 
         self.addOptionInterval(f"{self.__nbr_lines}time",               time,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
         self.addOptionInterval(f"{self.__nbr_lines}temperature",        temperature,        config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
@@ -127,9 +127,9 @@ class InputHistory(InputFile.InputFile, printable.Printable):
     
     def __moveLine(self, index, line: tuple):
         if len(line) > 5 or (len(line) == 5 and self.__has_steam_pressure):
-            raise TypeError
+            raise TypeError("A line should be 4; 5 if steam_pressure i togled")
         if not (0 <= index < self.__nbr_lines):
-            raise IndexError
+            raise IndexError("You can't move a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
 
         if self.__has_steam_pressure:
             time, temperature, fission_rate, hydrostatic_stress, steam_pressure = line
@@ -144,7 +144,7 @@ class InputHistory(InputFile.InputFile, printable.Printable):
 
     def deleteLineByNbr(self, index: int):
         if not (0 <= index < self.__nbr_lines):
-            raise IndexError
+            raise IndexError("You can't delete a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
         
         self.removeOptionByName(f"{index}time")
         self.removeOptionByName(f"{index}temperature")

@@ -29,7 +29,7 @@ class IntervalInputField(InputField.InputField):
         self.__value_max = value_max
         
         if not self.__checkValue(value):
-            raise ValueError
+            raise ValueError(f"You can't use this value, It is not in the interval [{self.__value_min}, {self.__value_max}]")
     
     
     def __checkValue(self, new_value: int | float) -> bool:
@@ -38,6 +38,6 @@ class IntervalInputField(InputField.InputField):
     # We have to re-implement it for it to use the IntervalInputField __checkValue and not the InputField one
     def setValue(self, new_value: int | float):
         if not self.__checkValue(new_value):
-            raise ValueError
+            raise ValueError(f"You can't use this value, It is not in the interval [{self.__value_min}, {self.__value_max}]")
 
         super().setValue(new_value)

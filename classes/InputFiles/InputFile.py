@@ -37,30 +37,30 @@ class InputFile(abc.ABC):
     
     def addOptionSet(self, name: str, value: int | float, value_set: set[int|float] | list[int|float] | tuple[int|float]):
         if name in self.__options.keys():
-            raise KeyError
+            raise KeyError("You can't add this option : this name is already taken")
         
         self.__options[name] = SetInputField.SetInputField(value, value_set)
     
     def addOptionInterval(self, name: str, value: int | float, value_min: int | float, value_max: int | float):
         if name in self.__options.keys():
-            raise KeyError
+            raise KeyError("You can't add this option : this name is already taken")
         
         self.__options[name] = IntervalInputField.IntervalInputField(value, value_min, value_max)
     
     def removeOptionByName(self, name: str):
         if name not in self.__options.keys():
-            raise KeyError
+            raise KeyError("You can't remove this option : this name is already taken")
         
         self.__options.pop(name)
 
     def getValueByName(self, name: str):
         if name not in self.__options.keys():
-            raise KeyError
+            raise KeyError("No option with this name exist")
 
         return self.__options[name].getValue()
 
     def setValueByName(self, name: str, new_value):
         if name not in self.__options.keys():
-            raise KeyError
+            raise KeyError("No option with this name exist")
 
         self.__options[name].setValue(new_value)

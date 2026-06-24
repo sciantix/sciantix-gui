@@ -35,6 +35,6 @@ class InputField(abc.ABC):
 
     def setValue(self, new_value: int | float):
         if not self.__checkValue(new_value):
-            raise ValueError
+            raise ValueError("If you see this, you messed up badly...")
 
         self.__value = new_value
