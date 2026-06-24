@@ -73,6 +73,18 @@ If you only see 3 files and are missing `input_scaling_factors.txt` it's probabl
 You have to go into the 4th tab `Input Scaling Factor` and togle the option to have this file too.
 
 
+## Versions
+
+Here is how to read the version numbers :
+
+```
+    X . Y . Z
+    |   |   └───bug fixes
+    |   └───minor versions
+    └───major versions
+```
+
+
 ## APP architecure
 
 This last section is dedicated to the structure and inner working of the app.
