@@ -57,6 +57,10 @@ class InputHistory(InputFile.InputFile, printable.Printable):
             self.__has_steam_pressure = True
             for i in range(self.__nbr_lines):
                 self.addOptionInterval(f"{i}steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        else:
+            self.__has_steam_pressure = False
+            for i in range(self.__nbr_lines):
+                self.removeOptionByName(f"{i}steam_pressure")
 
     def getLineNames(self):
         if self.__has_steam_pressure:

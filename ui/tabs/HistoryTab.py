@@ -32,7 +32,7 @@ class HistoryTab(Tab.Tab):
         self.addItemToLayout(button, 0, 0)
 
         button = QtWidgets.QPushButton("Add Steam Pressure")
-        button.clicked.connect(self.__addSteamPressure)
+        button.clicked.connect(self.__toggleSteamPressure)
         self.addItemToLayout(button, 0, 5)
 
         for i, name in enumerate(self._class.getLineNames()):
@@ -84,6 +84,12 @@ class HistoryTab(Tab.Tab):
                 if (column != 4) or self._class.hasSteamPressure():
                     self.moveItemInLayout(row+1, column, row, column)
 
+    def __toggleSteamPressure(self):
+        if self._class.hasSteamPressure():
+            self.__removeSteamPressure()
+        else:
+            self.__addSteamPressure()
+
     def __addSteamPressure(self):
         self._class.toggleSteamPressure()
         
@@ -97,3 +103,11 @@ class HistoryTab(Tab.Tab):
                 )(i)
             )
             self.addItemToLayout(current_input, i+2, 4)
+
+    def __removeSteamPressure(self):
+        self._class.toggleSteamPressure()
+        
+        self.removeItemFromLayout(1, 4)
+
+        for i in range(self._class.getNbrLines()):
+            self.removeItemFromLayout(i+2, 4)
