@@ -33,7 +33,7 @@ class HistoryTab(Tab.Tab):
 
         button = QtWidgets.QPushButton("Add Steam Pressure")
         button.clicked.connect(self.__addSteamPressure)
-        self.addItemToLayout(button, 0, 3)
+        self.addItemToLayout(button, 0, 5)
 
         for i, name in enumerate(self._class.getLineNames()):
             self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
@@ -55,6 +55,11 @@ class HistoryTab(Tab.Tab):
                 )(names[i], index)
             )
             self.addItemToLayout(current_input, index+1, i)
+
+        if index != 1:
+            button = QtWidgets.QPushButton("Remove")
+            button.clicked.connect(lambda: self.__removeLineByIndex(index))
+            self.addItemToLayout(button, index+1, 5)
     
     def __addLine(self):
         if (self._class.hasSteamPressure()):
@@ -63,6 +68,21 @@ class HistoryTab(Tab.Tab):
             self._class.addLine(0, 0, 0, 0)
 
         self.__makeLine()
+    
+    def __removeLineByIndex(self, index: int):
+        nbr_of_lines = self._class.getNbrLines()
+
+        for column in range(6):
+            if (column != 4) or self._class.hasSteamPressure():
+                self.removeItemFromLayout(index+1, column)
+        
+        self._class.deleteLineByNbr(index-1)
+
+        # adjusting the layout
+        for row in range(index+1, nbr_of_lines+1):
+            for column in range(6):
+                if (column != 4) or self._class.hasSteamPressure():
+                    self.moveItemInLayout(row+1, column, row, column)
 
     def __addSteamPressure(self):
         self._class.toggleSteamPressure()

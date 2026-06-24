@@ -111,30 +111,54 @@ class InputHistory(InputFile.InputFile, printable.Printable):
         if steam_pressure is None and self.__has_steam_pressure:
             raise TypeError
 
-        self.addOptionInterval(f"{self.__nbr_lines}time", time,                             config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval(f"{self.__nbr_lines}temperature", temperature,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval(f"{self.__nbr_lines}fission_rate", fission_rate,             config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}time",               time,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}temperature",        temperature,        config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.__nbr_lines}fission_rate",       fission_rate,       config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
         self.addOptionInterval(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         if steam_pressure is not None:
             self.addOptionInterval(f"{self.__nbr_lines}steam_pressure", steam_pressure, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         self.__nbr_lines += 1
+    
+    def __moveLine(self, index, line: tuple):
+        if len(line) > 5 or (len(line) == 5 and self.__has_steam_pressure):
+            raise TypeError
+        if not (0 <= index < self.__nbr_lines):
+            raise IndexError
 
+        if self.__has_steam_pressure:
+            time, temperature, fission_rate, hydrostatic_stress, steam_pressure = line
+            self.addOptionInterval(f"{index}steam_pressure", steam_pressure, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        else:
+            time, temperature, fission_rate, hydrostatic_stress = line
 
-# Maybe on a future version, but would require to modify the InputFile base class
+        self.addOptionInterval(f"{index}time",               time,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{index}temperature",        temperature,        config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{index}fission_rate",       fission_rate,       config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{index}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
-#    def deleteLine(self, index: int):
-#        if not (0 <= index < self.__nbr_lines):
-#            raise IndexError
-#        
-#        self.setValueByName(f"{self.__nbr_lines}time", time)
-#        self.setValueByName(f"{self.__nbr_lines}temperature", temperature)
-#        self.setValueByName(f"{self.__nbr_lines}fission_rate", fission_rate)
-#        self.setValueByName(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress)
-#
-#        if steam_pressure is not None:
-#            self.setValueByName(f"{self.__nbr_lines}steam_pressure", steam_pressure)
-#
-#        self.__nbr_lines -= 1
+    def deleteLineByNbr(self, index: int):
+        if not (0 <= index < self.__nbr_lines):
+            raise IndexError
+        
+        self.removeOptionByName(f"{index}time")
+        self.removeOptionByName(f"{index}temperature")
+        self.removeOptionByName(f"{index}fission_rate")
+        self.removeOptionByName(f"{index}hydrostatic_stress")
 
+        if self.__has_steam_pressure:
+            self.removeOptionByName(f"{index}steam_pressure")
+
+        for i in range(index, self.__nbr_lines-1):
+            self.__moveLine(i, self.getLineByNbr(i+1))
+        
+            self.removeOptionByName(f"{i+1}time")
+            self.removeOptionByName(f"{i+1}temperature")
+            self.removeOptionByName(f"{i+1}fission_rate")
+            self.removeOptionByName(f"{i+1}hydrostatic_stress")
+
+            if self.__has_steam_pressure:
+                self.removeOptionByName(f"{i+1}steam_pressure")
+
+        self.__nbr_lines -= 1

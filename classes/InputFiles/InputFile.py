@@ -46,6 +46,12 @@ class InputFile(abc.ABC):
             raise KeyError
         
         self.__options[name] = IntervalInputField.IntervalInputField(value, value_min, value_max)
+    
+    def removeOptionByName(self, name: str):
+        if name not in self.__options.keys():
+            raise KeyError
+        
+        self.__options.pop(name)
 
     def getValueByName(self, name: str):
         if name not in self.__options.keys():
