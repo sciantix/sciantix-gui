@@ -50,7 +50,9 @@ class HistoryTab(Tab.Tab):
         for i in range(len(names)):
             current_input = QtWidgets.QLineEdit(str(values[i]))
             current_input.textChanged.connect(
-                lambda text: self._class.setValueByName(f"{index-1}{names[i]}", int(text) if (len(text) != 0) else 0)
+                (lambda name, index:
+                    lambda text: self._class.setValueByName(f"{index-1}{name}", int(text) if (len(text) != 0) else 0)
+                )(names[i], index)
             )
             self.addItemToLayout(current_input, index+1, i)
     
@@ -70,6 +72,8 @@ class HistoryTab(Tab.Tab):
         for i in range(self._class.getNbrLines()):
             current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(f"{i}steam_pressure")))
             current_input.textChanged.connect(
-                lambda text: self._class.setValueByName(f"{i}steam_pressure", int(text) if (len(text) != 0) else 0)
+                (lambda index:
+                    lambda text: self._class.setValueByName(f"{index}steam_pressure", int(text) if (len(text) != 0) else 0)
+                )(i)
             )
             self.addItemToLayout(current_input, i+2, 4)
