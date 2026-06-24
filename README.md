@@ -160,7 +160,4 @@ There are 2 config files :
 ├─README.md
 ├─Sciantix_Wizard                   Launch file
 └─test.py                           Make sure that all the logic works properly
-<<<<<<< HEAD
->>>>>>> d75c30d (Drafted the README.md + minor fixes)
-=======
 ```
