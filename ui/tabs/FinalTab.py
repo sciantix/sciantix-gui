@@ -18,6 +18,7 @@
 """
 
 
+import os
 import PyQt6.QtWidgets as QtWidgets
 
 from . import Tab
@@ -57,5 +58,10 @@ class FinalTab(Tab.Tab):
                 cla.print()
 
     def __runSciantix(self):
-        print("not yet...")
+        # To clean the input and output files
+        os.system("rm sciantix/*.txt")
+
+        self.__setPath("sciantix")
+        self.__submit()
+        os.system("sciantix/sciantix.x sciantix/")
         
