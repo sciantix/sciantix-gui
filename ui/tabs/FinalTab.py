@@ -38,9 +38,13 @@ class FinalTab(Tab.Tab):
         path_input.textChanged.connect(self.__setPath)
         self.addItemToLayout(path_input, 0, 1)
 
-        button = QtWidgets.QPushButton("Finalize")
+        button = QtWidgets.QPushButton("Build Input Files")
         button.clicked.connect(self.__submit)
         self.addItemToLayout(button, 1, 1)
+
+        button = QtWidgets.QPushButton("Build and Run the Simulation")
+        button.clicked.connect(self.__runSciantix)
+        self.addItemToLayout(button, 2, 1)
     
 
     def __setPath(self, text):
@@ -51,4 +55,7 @@ class FinalTab(Tab.Tab):
         for cla in self.__classes:
             if cla.getOption():
                 cla.print()
+
+    def __runSciantix(self):
+        print("not yet...")
         
