@@ -29,7 +29,7 @@ class Printable(abc.ABC):
     
     
     def print(self):
-        with open(f"{self.__path}input_{self.getName()}.txt", 'w') as file:
+        with open(f"{self.__path}{self.getName()}.txt", 'w') as file:
             # Here template is a module, not the function, so we have to call the .template function
             file.write(self.__template.template(self))
     
