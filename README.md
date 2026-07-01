@@ -136,7 +136,8 @@ There are 2 config files :
 |   |   ├─InputHistory.py
 |   |   ├─InputInitialCondition.py
 |   |   ├─InputScalingFactor.py
-|   |   └─InputSettings.py
+|   |   ├─InputSettings.py
+|   |   └─MultiLines.py
 |   ├─FileAcess/
 |   |   ├─printable/
 |   |   |   ├─templates/                Representation of how to print a file

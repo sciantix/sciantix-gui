@@ -19,6 +19,7 @@
 
 
 from . import InputFile
+from . import MultiLines
 from .. import config
 from .. import FileAccess
 
@@ -28,12 +29,12 @@ from .. import FileAccess
 #       0time
 # Is the time value for the 1st line
 
-class InputHistory(InputFile.InputFile, FileAccess.Printable):
+class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printable):
     def __init__(self, has_steam_pressure: bool = False):
         InputFile.InputFile.__init__(self, "input_history")
+        MultiLines.MultiLines.__init__(self)
         FileAccess.Printable.__init__(self, FileAccess.history_template)
 
-        self.__nbr_lines          = 1
         self.__has_steam_pressure = has_steam_pressure
 
         # Base setup : seting up the first line
@@ -46,9 +47,6 @@ class InputHistory(InputFile.InputFile, FileAccess.Printable):
             self.addOptionInterval("0steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
     
-    def getNbrLines(self) -> int:
-        return self.__nbr_lines
-
     def hasSteamPressure(self) -> bool:
         return self.__has_steam_pressure
 
@@ -90,7 +88,7 @@ class InputHistory(InputFile.InputFile, FileAccess.Printable):
                                     or
             (time, temperature, fission rate, hydrostatic stress, steam pressure)
         """
-        if not (0 <= index < self.__nbr_lines):
+        if not (0 <= index < self.getNbrLines()):
             raise IndexError("You can't get a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
         
         if self.__has_steam_pressure:
@@ -115,15 +113,15 @@ class InputHistory(InputFile.InputFile, FileAccess.Printable):
         if steam_pressure is None and self.__has_steam_pressure:
             raise TypeError("You need to specify the steam_pressure value if you have set it togled")
 
-        self.addOptionInterval(f"{self.__nbr_lines}time",               time,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval(f"{self.__nbr_lines}temperature",        temperature,        config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval(f"{self.__nbr_lines}fission_rate",       fission_rate,       config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval(f"{self.__nbr_lines}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.getNbrLines()}time",               time,               config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.getNbrLines()}temperature",        temperature,        config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.getNbrLines()}fission_rate",       fission_rate,       config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        self.addOptionInterval(f"{self.getNbrLines()}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
         if steam_pressure is not None:
-            self.addOptionInterval(f"{self.__nbr_lines}steam_pressure", steam_pressure, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+            self.addOptionInterval(f"{self.getNbrLines()}steam_pressure", steam_pressure, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
-        self.__nbr_lines += 1
+        self._incrementLineNbr()
     
     def __moveLine(self, index, line: tuple):
         if len(line) > 5 or (len(line) == 5 and self.__has_steam_pressure):
@@ -165,4 +163,4 @@ class InputHistory(InputFile.InputFile, FileAccess.Printable):
             if self.__has_steam_pressure:
                 self.removeOptionByName(f"{i+1}steam_pressure")
 
-        self.__nbr_lines -= 1
+        self._decrementLineNbr()
