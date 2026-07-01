@@ -20,13 +20,13 @@
 
 from . import InputFile
 from .. import config
-from .. import printable
+from .. import FileAccess
 
 
-class InputScalingFactor(InputFile.InputFile, printable.Printable):
+class InputScalingFactor(InputFile.InputFile, FileAccess.Printable):
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_scaling_factor")
-        printable.Printable.__init__(self, printable.scaling_factor_template)
+        FileAccess.Printable.__init__(self, FileAccess.scaling_factor_template)
 
         # Base setup
         self.addOptionInterval("resolution_rate",        config.SCALING_FACTOR_DEFAULT, config.SCALING_FACTOR_LOWER_BOUND, config.SCALING_FACTOR_UPER_BOUND)

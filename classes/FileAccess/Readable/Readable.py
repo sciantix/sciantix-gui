@@ -18,25 +18,17 @@
 """
 
 
-import abc
+from .. import FileAccess
 
 
-class Printable(abc.ABC):
-    def __init__(self, template):
+class Readable(FileAccess.FileAccess):
+    def __init__(self):
+        super().__init__()
+
         # Here template is a module, not the function
         self.__template = template
-        self.__path     = ""
     
     
-    def print(self):
-        with open(f"{self.__path}{self.getName()}.txt", 'w') as file:
-            # Here template is a module, not the function, so we have to call the .template function
-            file.write(self.__template.template(self))
-    
-    def getPath(self) -> str:
-        return self.__path
-
-    def setPath(self, new_path: str):
-        self.__path = new_path
-        if len(self.__path) != 0 and self.__path[-1] != '/':
-            self.__path += '/'
+    def read(self):
+        with open(f"{self.getPath()}{self.getName()}.txt", 'r') as file:
+            pass        # TODO

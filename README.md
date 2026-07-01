@@ -111,7 +111,7 @@ It takes care of the business logic and data structure.
 It contains 3 submodules:
 - The InputFields submodule (`sciantix-input-builder/classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
 - The InputFiles submodule (`sciantix-input-builder/classes/InputFiles`) : structure and setup the fields into 
-- The printable submodule (`sciantix-input-builder/classes/printable`) : handles outputing to files
+- The FileAccess submodule (`sciantix-input-builder/classes/FileAccess`) : handles accessing files (reading and printing)
 
 This module act as the backend of the app.
 
@@ -137,10 +137,16 @@ There are 2 config files :
 |   |   ├─InputInitialCondition.py
 |   |   ├─InputScalingFactor.py
 |   |   └─InputSettings.py
-|   ├─printable/
-|   |   ├─templates/                Representation of how to print a file
+|   ├─FileAcess/
+|   |   ├─printable/
+|   |   |   ├─templates/                Representation of how to print a file
+|   |   |   ├─__init__.py
+|   |   |   └─Printable.py
+|   |   ├─Readable/
+|   |   |   ├─__init__.py
+|   |   |   └─Readable.py
 |   |   ├─__init__.py
-|   |   └─Printable.py
+|   |   └─FileAcess.py
 |   ├─__init__.py
 |   └─config.py
 ├─ui/

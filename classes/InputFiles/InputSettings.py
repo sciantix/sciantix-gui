@@ -20,13 +20,13 @@
 
 from . import InputFile
 from .. import config
-from .. import printable
+from .. import FileAccess
 
 
-class InputSettings(InputFile.InputFile, printable.Printable):
+class InputSettings(InputFile.InputFile, FileAccess.Printable):
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_settings")
-        printable.Printable.__init__(self, printable.settings_template)
+        FileAccess.Printable.__init__(self, FileAccess.settings_template)
 
         # Base setup
         self.addOptionSet("GrainGrowth",                     config.SETTINGS_DEFAULT, (0, 1, 2))
