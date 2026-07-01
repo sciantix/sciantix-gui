@@ -18,40 +18,16 @@
 """
 
 
-import PyQt6.QtCore    as QtCore
 import PyQt6.QtWidgets as QtWidgets
 
-from . import config
-from . import tabs
+from . import Tab
 
 
-class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, classes):
-        super().__init__()
+class OutputTab(Tab.Tab):
+    def __init__(self, output_class):
+        super().__init__("Output", None)
 
-        self.__tab_list = QtWidgets.QTabWidget()
+        self._option = False
+
+        self.addItemToLayout(QtWidgets.QLabel("Temp"), 0, 0)
         
-        self.setWindowTitle(config.WINDOW_TITLE)
-        self.setFixedSize(QtCore.QSize(config.WINDOW_WIDTH, config.WINDOW_HEIGHT))
-
-        # Passing the business logic to the Tabs
-        self.__createTabs(classes)
-
-
-    def __createTabs(self, classes):
-        class_list = [
-            # Passing the business logic classes to the corresponding Tabs
-            tabs.SettingsTab(classes.InputSettings()),
-            tabs.InitialConditionTab(classes.InputInitialCondition()),
-            tabs.HistoryTab(classes.InputHistory()),
-            tabs.ScalingFactorTab(classes.InputScalingFactor()),
-        ]
-
-        for cla in class_list:
-            cla.addToTabList(self.__tab_list)
-
-        # No logic needed to be passed to thoses one
-        tabs.FinalTab(class_list).addToTabList(self.__tab_list)
-        tabs.OutputTab(None).addToTabList(self.__tab_list)
-       
-        self.setCentralWidget(self.__tab_list)
