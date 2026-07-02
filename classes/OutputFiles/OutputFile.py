@@ -19,7 +19,6 @@
 
 
 from ..InputFiles import InputFile, MultiLines
-from .. import config
 from .. import FileAccess
 
 
@@ -86,5 +85,4 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
     
     def deleteLineByNbr(self, index: int):
         # Not Implemented yet and probably wont be since I don't think it's needed for now
-        
         pass

@@ -45,6 +45,8 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
 
         if has_steam_pressure:
             self.addOptionInterval("0steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
+        
+        self._incrementLineNbr()
 
     
     def hasSteamPressure(self) -> bool:

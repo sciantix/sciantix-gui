@@ -108,10 +108,11 @@ This module act as the frontend of the app.
 
 #### The classes module
 It takes care of the business logic and data structure.
-It contains 3 submodules:
+It contains  submodules:
 - The InputFields submodule (`sciantix-input-builder/classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
 - The InputFiles submodule (`sciantix-input-builder/classes/InputFiles`) : structure and setup the fields into 
 - The FileAccess submodule (`sciantix-input-builder/classes/FileAccess`) : handles accessing files (reading and printing)
+- The OutputFiles submodule (`sciantix-input-builder/classes/OutputFiles`) : representation in memory of the output of Sciantix for the gui
 
 This module act as the backend of the app.
 
@@ -148,6 +149,9 @@ There are 2 config files :
 |   |   |   └─Readable.py
 |   |   ├─__init__.py
 |   |   └─FileAcess.py
+|   ├─OutputFiles/
+|   |   ├─__init__.py
+|   |   └─OutputFile.py
 |   ├─__init__.py
 |   └─config.py
 ├─ui/

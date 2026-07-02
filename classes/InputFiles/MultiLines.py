@@ -23,7 +23,7 @@ import abc
 
 class MultiLines(abc.ABC):
     def __init__(self):
-        self.__nbr_lines = 1
+        self.__nbr_lines = 0
 
     
     def getNbrLines(self) -> int:
