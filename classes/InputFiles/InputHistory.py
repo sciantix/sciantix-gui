@@ -55,11 +55,11 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
     def toggleSteamPressure(self):
         if not self.__has_steam_pressure:
             self.__has_steam_pressure = True
-            for i in range(self.__nbr_lines):
+            for i in range(self.getNbrLines()):
                 self.addOptionInterval(f"{i}steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
         else:
             self.__has_steam_pressure = False
-            for i in range(self.__nbr_lines):
+            for i in range(self.getNbrLines()):
                 self.removeOptionByName(f"{i}steam_pressure")
 
     def getLineNames(self) -> tuple:
@@ -128,7 +128,7 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
     def __moveLine(self, index, line: tuple):
         if len(line) > 5 or (len(line) == 5 and self.__has_steam_pressure):
             raise TypeError("A line should be 4; 5 if steam_pressure i togled")
-        if not (0 <= index < self.__nbr_lines):
+        if not (0 <= index < self.getNbrLines()):
             raise IndexError("You can't move a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
 
         if self.__has_steam_pressure:
@@ -143,7 +143,7 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         self.addOptionInterval(f"{index}hydrostatic_stress", hydrostatic_stress, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
 
     def deleteLineByNbr(self, index: int):
-        if not (0 <= index < self.__nbr_lines):
+        if not (0 <= index < self.getNbrLines()):
             raise IndexError("You can't delete a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
         
         self.removeOptionByName(f"{index}time")
@@ -154,7 +154,7 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         if self.__has_steam_pressure:
             self.removeOptionByName(f"{index}steam_pressure")
 
-        for i in range(index, self.__nbr_lines-1):
+        for i in range(index, self.getNbrLines()-1):
             self.__moveLine(i, self.getLineByNbr(i+1))
         
             self.removeOptionByName(f"{i+1}time")
