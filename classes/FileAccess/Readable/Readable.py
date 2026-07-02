@@ -24,11 +24,10 @@ from .. import FileAccess
 class Readable(FileAccess.FileAccess):
     def __init__(self):
         super().__init__()
-
-        # Here template is a module, not the function
-        self.__template = template
     
     
     def read(self):
         with open(f"{self.getPath()}{self.getName()}.txt", 'r') as file:
-            pass        # TODO
+            for i, line in enumerate(file):
+                if i != 0:
+                    self.addLine(line.split("\t"))

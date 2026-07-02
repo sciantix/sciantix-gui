@@ -20,7 +20,7 @@
 
 import abc
 
-from ..InputFields import SetInputField, IntervalInputField
+from ..InputFields import InputField, SetInputField, IntervalInputField
 
 
 class InputFile(abc.ABC):
@@ -46,6 +46,12 @@ class InputFile(abc.ABC):
             raise KeyError("You can't add this option : this name is already taken")
         
         self.__options[name] = IntervalInputField.IntervalInputField(value, value_min, value_max)
+    
+    def addOptionOutput(self, name: str, value: int | float):
+        if name in self.__options.keys():
+            raise KeyError("You can't add this option : this name is already taken")
+        
+        self.__options[name] = InputField.InputField(value)
     
     def removeOptionByName(self, name: str):
         if name not in self.__options.keys():
