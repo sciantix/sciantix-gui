@@ -160,7 +160,9 @@ There are 2 config files :
 |   |   ├─FinalTab.py
 |   |   ├─HistoryTab.py
 |   |   ├─InitialConditionTab.py
+|   |   ├─OutputTab.py
 |   |   ├─ScalingFactorTab.py
+|   |   ├─ScrollableTab.py
 |   |   ├─SettingsTab.py
 |   |   └─Tab.py
 |   ├─__init__.py
@@ -169,6 +171,8 @@ There are 2 config files :
 ├─.gitignore
 ├─main.py
 ├─README.md
-├─Sciantix_Wizard                   Launch file
-└─test.py                           Make sure that all the logic works properly
+├─Sciantix_Wizard                       Launch file
+├─tests_input_fields.py                 |
+├─tests_input_files.py                  | Make sure that all the logic works properly
+└─tests_output_files.py                 |
 ```
