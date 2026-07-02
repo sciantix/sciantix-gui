@@ -21,8 +21,10 @@
 import PyQt6.QtCore    as QtCore
 import PyQt6.QtWidgets as QtWidgets
 
+from . import Tab
 
-class Tab(QtWidgets.QWidget):
+
+class ScrollableTab(QtWidgets.QWidget):
     def __init__(self, name: str, classe):
         super().__init__()
 
@@ -36,7 +38,17 @@ class Tab(QtWidgets.QWidget):
         self.__layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         self.__layout.setVerticalSpacing(5)
 
-        self.setLayout(self.__layout)
+        # self.setLayout(self.__layout)
+
+        self.__group_box = QtWidgets.QGroupBox()
+        self.__group_box.setLayout(self.__layout)
+
+        self.__scroll = QtWidgets.QScrollArea()
+        self.__scroll.setWidget(self.__group_box)
+        self.__scroll.setWidgetResizable(True)
+
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addWidget(self.__scroll)
     
 
     def getName(self) -> str:
@@ -64,4 +76,4 @@ class Tab(QtWidgets.QWidget):
         self._class.setPath(path)
         
     def print(self):
-        self._class.print()
+        self._class.print()    

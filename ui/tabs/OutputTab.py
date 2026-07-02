@@ -20,10 +20,10 @@
 import os
 import PyQt6.QtWidgets as QtWidgets
 
-from . import Tab
+from . import ScrollableTab
 
 
-class OutputTab(Tab.Tab):
+class OutputTab(ScrollableTab.ScrollableTab):
     def __init__(self, output_class):
         super().__init__("Output", output_class)
 

@@ -20,10 +20,10 @@
 
 import PyQt6.QtWidgets as QtWidgets
 
-from . import Tab
+from . import ScrollableTab
 
 
-class HistoryTab(Tab.Tab):
+class HistoryTab(ScrollableTab.ScrollableTab):
     def __init__(self, history_class):
         super().__init__("Input History", history_class)
 
@@ -31,7 +31,7 @@ class HistoryTab(Tab.Tab):
         button.clicked.connect(self.__addLine)
         self.addItemToLayout(button, 0, 0)
 
-        button = QtWidgets.QPushButton("Add Steam Pressure")
+        button = QtWidgets.QPushButton("Toggle Steam Pressure")
         button.clicked.connect(self.__toggleSteamPressure)
         self.addItemToLayout(button, 0, 5)
 
