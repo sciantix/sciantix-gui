@@ -8,6 +8,7 @@ __pycache__/
 sciantix/*.txt
 error_log.txt
 input_check.txt
+test_templates/input/*
 
 # C extensions
 *.so

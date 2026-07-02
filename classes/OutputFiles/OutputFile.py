@@ -75,7 +75,10 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
         if not (0 <= index < self.getNbrLines()):
             raise IndexError("You can't get a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
 
-        return tuple(self.getValueByName(f"{index}{name}") for name in self.__column_names)
+        return tuple(
+            self.getValueByName(f"{index}{name}")
+            for name in self.__column_names
+        )
     
     def addLine(self, *args):
         for arg, name in zip(*args, self.__column_names):

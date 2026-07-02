@@ -25,7 +25,7 @@ import classes
 
 print("Setup...")
 
-test_path = "test_templates/"
+test_path = "test_templates/input/"
 
 
 print(f"Emptying the test directory ({test_path})...")

@@ -23,6 +23,8 @@ import os
 import classes
 
 
+# No setup needed here
+"""
 print("Setup...")
 
 test_path = "test_templates/"
@@ -31,7 +33,7 @@ test_path = "test_templates/"
 print(f"Emptying the test directory ({test_path})...")
 for elt in os.listdir(f"./{test_path}"):
     os.remove(f"./{test_path}{elt}")
-
+"""
 
 print("\n+----------------------------------------+")
 print("|   Testing the InputFields sub-module   |")
