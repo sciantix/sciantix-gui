@@ -26,10 +26,11 @@ from .. import config
 
 
 class FinalTab(Tab.Tab):
-    def __init__(self, classes):
+    def __init__(self, classes, output):
         super().__init__("Finalize", None)
 
         self.__classes = classes
+        self.__output  = output
 
         self.__setPath(config.DEFAULT_OUTPUT_PATH)
 
@@ -52,6 +53,8 @@ class FinalTab(Tab.Tab):
         for cla in self.__classes:
             cla.setPath(text)
 
+        self.__output.setPath(text)
+
     def __submit(self):
         for cla in self.__classes:
             if cla.getOption():
@@ -64,4 +67,6 @@ class FinalTab(Tab.Tab):
         self.__setPath("sciantix")
         self.__submit()
         os.system("sciantix/sciantix.x sciantix/")
+
+        self.__output.read()
         

@@ -17,7 +17,7 @@
     Authors : G. Léandre
 """
 
-
+import os
 import PyQt6.QtWidgets as QtWidgets
 
 from . import Tab
@@ -25,9 +25,22 @@ from . import Tab
 
 class OutputTab(Tab.Tab):
     def __init__(self, output_class):
-        super().__init__("Output", None)
+        super().__init__("Output", output_class)
 
         self._option = False
 
-        self.addItemToLayout(QtWidgets.QLabel("Temp"), 0, 0)
+        for i, name in enumerate(self._class.getLineNames()):
+            self.addItemToLayout(QtWidgets.QLabel(name), 0, i)
+        
+    
+    def __make_layout(self):
+        for line in range(self._class.getNbrLines()):
+            for column, value in enumerate(self._class.getLineByNbr(line)):
+                self.addItemToLayout(QtWidgets.QLabel(str(value)), line, column)
+    
+    def read(self):
+        if os.path.exists(f"sciantix/{self._class.getName()}.txt"):
+            self._class.read()
+
+        self.__make_layout()    
         

@@ -62,7 +62,7 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
             for i in range(self.__nbr_lines):
                 self.removeOptionByName(f"{i}steam_pressure")
 
-    def getLineNames(self):
+    def getLineNames(self) -> tuple:
         if self.__has_steam_pressure:
             line = (
                 "time",

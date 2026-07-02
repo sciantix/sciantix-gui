@@ -50,8 +50,8 @@ class MainWindow(QtWidgets.QMainWindow):
         for cla in class_list:
             cla.addToTabList(self.__tab_list)
 
-        # No logic needed to be passed to thoses one
-        tabs.FinalTab(class_list).addToTabList(self.__tab_list)
-        tabs.OutputTab(None).addToTabList(self.__tab_list)
-       
+        output = tabs.OutputTab(classes.OutputFile())
+        tabs.FinalTab(class_list, output).addToTabList(self.__tab_list)
+        output.addToTabList(self.__tab_list)
+        
         self.setCentralWidget(self.__tab_list)
