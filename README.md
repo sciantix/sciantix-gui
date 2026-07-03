@@ -63,19 +63,25 @@ To open the app, execute the launcher script `Sciantix_Wizzard`, it does not tak
 
 ```bash
 ./Sciantix_Wizard
-# or
-<Your/Path>/Sciantix_Wizard
 ```
 
 If you plan on using it often, you can create a symbolic link (shortcut) or add an alias in your `.bashrc` file.
 
 ### Using the app
 
-Once launched, you will be presented with a Graphical User Interface (GUI) with 5 tabs :
+Once launched, you will be presented with a Graphical User Interface (GUI) with tabs :
 
-- Tabs 1 to 4 are the differents input files needed for sciantix to run. You will find in thoses tabs a form-like interface allowing you to fill the input values as you need.
+- The first 4 tabs are the differents input files needed for sciantix to run. You will find in thoses tabs a form-like interface allowing you to fill the input values as you need.
 
-- Tabs 5 `Finalize` is to build the input file and add a custom output path.
+- The 5th tab `Finalize` is to build the input file and run the sciantix simulation.
+
+- The Last 2 tabs are to display and visualize the output of the simulation
+
+The typical use of the app will be :
+- Filling the inputs forms
+- Runing sciantix
+- Inspecting and visualizing the output, maybe copying some of the graphs
+- Start again with differents inputs 
 
 ### Getting the newly built input files
 
@@ -83,6 +89,14 @@ By default, the input files end up in the `sciantix-input-builder` folder. You c
 
 If you only see 3 files and are missing `input_scaling_factors.txt` it's probably because it's optional. 
 You have to go into the 4th tab `Input Scaling Factor` and togle the option to have this file too.
+
+### Getting the graphs
+
+If you want to use the current graph outside of the gui, it is availible as a .png file at the root of the software.
+It is named `plot.png`.
+
+Be warned, it is only the current graph being shown in the GUI.
+If you want multiple graphs, you have to copy the `plot.png` file somewhere else for each graphs you want.
 
 
 ## Versions
@@ -109,30 +123,32 @@ It has been coded on Linux for Linux.
 ### App structure
 
 The app is build around 2 modules :
-- The gui module : `sciantix-input-builder/gui/` 
-- The classes module : `sciantix-input-builder/classes/` 
+- The gui module : `gui/` 
+- The classes module : `classes/` 
+
+And the simulation software sciantix, which a pre-compiled executable of version 2.2 is included in the `sciantix/` folder.
 
 #### The gui module
 It takes care of making the window.
-It contains the tabs (`sciantix-input-builder/gui/tabs`) submodule that segment each tab in its own class with its own layout and logic to connect to the business logic.
+It contains the tabs (`gui/tabs`) submodule that segment each tab in its own class with its own layout and logic to connect to the business logic.
 
 This module act as the frontend of the app.
 
 #### The classes module
 It takes care of the business logic and data structure.
 It contains  submodules:
-- The InputFields submodule (`sciantix-input-builder/classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
-- The InputFiles submodule (`sciantix-input-builder/classes/InputFiles`) : structure and setup the fields into 
-- The FileAccess submodule (`sciantix-input-builder/classes/FileAccess`) : handles accessing files (reading,  printing and ploting)
-- The OutputFiles submodule (`sciantix-input-builder/classes/OutputFiles`) : representation in memory of the output of Sciantix for the gui
+- The InputFields submodule (`classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
+- The InputFiles submodule (`classes/InputFiles`) : structure and setup the fields into 
+- The FileAccess submodule (`classes/FileAccess`) : handles accessing files (reading,  printing and ploting)
+- The OutputFiles submodule (`classes/OutputFiles`) : representation in memory of the output of Sciantix for the gui
 
 This module act as the backend of the app.
 
 ### Config Files
 
 There are 2 config files :
-- one for the GUI : `sciantix-input-builder/gui/config.py` 
-- one for the Business Logic : `sciantix-input-builder/classes/config.py` 
+- one for the GUI : `gui/config.py` 
+- one for the Business Logic : `classes/config.py` 
 
 ### File Tree
 
