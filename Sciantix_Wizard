@@ -12,7 +12,7 @@
 #
 #    Originally developed by G. Léandre
 #
-#    Version : 1.3.0
+#    Version : 1.4.0
 #    Year :    2026
 #    Authors : G. Léandre
 #
@@ -28,7 +28,7 @@ then
     echo "+-------------------------------------------------+"
     pip install -r requirements.txt
     touch .__is_installed
-    echo ""
+    echo -e "\n"
 fi
 
 
