@@ -28,7 +28,7 @@ from .. import FileAccess
 # Is the time value for the 1st line
 
 class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable):
-    def __init__(self, has_steam_pressure: bool = False):
+    def __init__(self):
         InputFile.InputFile.__init__(self, "output")
         MultiLines.MultiLines.__init__(self)
         FileAccess.Readable.__init__(self)
