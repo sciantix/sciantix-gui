@@ -55,13 +55,13 @@ class SettingsTab(Tab.Tab):
             # ["not considered", "P. Van Uffelen PhD thesis (2002)"],
         ]
 
-        for i, elt in enumerate(self._class.getOptionsNames()):
+        for i, elt in enumerate(self._getClass().getOptionsNames()):
             self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
             current_input = QtWidgets.QComboBox()
             current_input.addItems(self.__settings_options[i])
             current_input.currentIndexChanged.connect(
                 (lambda name:
-                    lambda index: self._class.setValueByName(name, index)
+                    lambda index: self._getClass().setValueByName(name, index)
                 )(elt)
             )
             self.addItemToLayout(current_input, i, 1)

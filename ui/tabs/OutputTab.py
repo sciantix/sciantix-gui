@@ -29,18 +29,18 @@ class OutputTab(ScrollableTab.ScrollableTab):
 
         self._option = False
 
-        for i, name in enumerate(self._class.getLineNames()):
+        for i, name in enumerate(self._getClass().getLineNames()):
             self.addItemToLayout(QtWidgets.QLabel(name), 0, i)
         
     
     def __make_layout(self):
-        for line in range(self._class.getNbrLines()):
-            for column, value in enumerate(self._class.getLineByNbr(line)):
+        for line in range(self._getClass().getNbrLines()):
+            for column, value in enumerate(self._getClass().getLineByNbr(line)):
                 self.addItemToLayout(QtWidgets.QLabel(str(value)), line, column)
     
     def read(self):
-        if os.path.exists(f"sciantix/{self._class.getName()}.txt"):
-            self._class.read()
+        if os.path.exists(f"sciantix/{self._getClass().getName()}.txt"):
+            self._getClass().read()
 
         self.__make_layout()    
         

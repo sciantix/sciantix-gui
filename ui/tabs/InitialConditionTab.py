@@ -26,17 +26,17 @@ from . import Tab
 class InitialConditionTab(Tab.Tab):
     def __init__(self, classes):
         super().__init__("Input Initial Condition", classes)
-        names = self._class.getOptionsNames()
+        names = self._getClass().getOptionsNames()
         i, j  = 0, 0
 
-        for amount in self._class.getLayout():
+        for amount in self._getClass().getLayout():
             k = 0
             for _ in range(amount):
                 self.addItemToLayout(QtWidgets.QLabel(names[i]), 2*j, k)
-                current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(names[i])))
+                current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i])))
                 current_input.textChanged.connect(
                     (lambda name:
-                        lambda text: self._class.setValueByName(name, float(text) if (len(text) != 0) else 0)
+                        lambda text: self._getClass().setValueByName(name, float(text) if (len(text) != 0) else 0)
                     )(names[i])
                 )
                 self.addItemToLayout(current_input, 2*j+1, k)

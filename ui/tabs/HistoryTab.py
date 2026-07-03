@@ -35,23 +35,23 @@ class HistoryTab(ScrollableTab.ScrollableTab):
         button.clicked.connect(self.__toggleSteamPressure)
         self.addItemToLayout(button, 0, 5)
 
-        for i, name in enumerate(self._class.getLineNames()):
+        for i, name in enumerate(self._getClass().getLineNames()):
             self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
 
         self.__makeLine()
 
     
     def __makeLine(self):
-        index = self._class.getNbrLines()
+        index = self._getClass().getNbrLines()
 
-        names  = self._class.getLineNames()
-        values = self._class.getLineByNbr(index-1)
+        names  = self._getClass().getLineNames()
+        values = self._getClass().getLineByNbr(index-1)
 
         for i in range(len(names)):
             current_input = QtWidgets.QLineEdit(str(values[i]))
             current_input.textChanged.connect(
                 (lambda name, index:
-                    lambda text: self._class.setValueByName(f"{index-1}{name}", int(text) if (len(text) != 0) else 0)
+                    lambda text: self._getClass().setValueByName(f"{index-1}{name}", int(text) if (len(text) != 0) else 0)
                 )(names[i], index)
             )
             self.addItemToLayout(current_input, index+1, i)
@@ -62,52 +62,52 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             self.addItemToLayout(button, index+1, 5)
     
     def __addLine(self):
-        if (self._class.hasSteamPressure()):
-            self._class.addLine(0, 0, 0, 0, 0)
+        if (self._getClass().hasSteamPressure()):
+            self._getClass().addLine(0, 0, 0, 0, 0)
         else:
-            self._class.addLine(0, 0, 0, 0)
+            self._getClass().addLine(0, 0, 0, 0)
 
         self.__makeLine()
     
     def __removeLineByIndex(self, index: int):
-        nbr_of_lines = self._class.getNbrLines()
+        nbr_of_lines = self._getClass().getNbrLines()
 
         for column in range(6):
-            if (column != 4) or self._class.hasSteamPressure():
+            if (column != 4) or self._getClass().hasSteamPressure():
                 self.removeItemFromLayout(index+1, column)
         
-        self._class.deleteLineByNbr(index-1)
+        self._getClass().deleteLineByNbr(index-1)
 
         # adjusting the layout
         for row in range(index+1, nbr_of_lines+1):
             for column in range(6):
-                if (column != 4) or self._class.hasSteamPressure():
+                if (column != 4) or self._getClass().hasSteamPressure():
                     self.moveItemInLayout(row+1, column, row, column)
 
     def __toggleSteamPressure(self):
-        if self._class.hasSteamPressure():
+        if self._getClass().hasSteamPressure():
             self.__removeSteamPressure()
         else:
             self.__addSteamPressure()
 
     def __addSteamPressure(self):
-        self._class.toggleSteamPressure()
+        self._getClass().toggleSteamPressure()
         
         self.addItemToLayout(QtWidgets.QLabel("steam_pressure"), 1, 4)
 
-        for i in range(self._class.getNbrLines()):
-            current_input = QtWidgets.QLineEdit(str(self._class.getValueByName(f"{i}steam_pressure")))
+        for i in range(self._getClass().getNbrLines()):
+            current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))
             current_input.textChanged.connect(
                 (lambda index:
-                    lambda text: self._class.setValueByName(f"{index}steam_pressure", int(text) if (len(text) != 0) else 0)
+                    lambda text: self._getClass().setValueByName(f"{index}steam_pressure", int(text) if (len(text) != 0) else 0)
                 )(i)
             )
             self.addItemToLayout(current_input, i+2, 4)
 
     def __removeSteamPressure(self):
-        self._class.toggleSteamPressure()
+        self._getClass().toggleSteamPressure()
         
         self.removeItemFromLayout(1, 4)
 
-        for i in range(self._class.getNbrLines()):
+        for i in range(self._getClass().getNbrLines()):
             self.removeItemFromLayout(i+2, 4)

@@ -24,24 +24,12 @@ import PyQt6.QtWidgets as QtWidgets
 from . import Tab
 
 
-class ScrollableTab(QtWidgets.QWidget):
+class ScrollableTab(Tab.Tab):
     def __init__(self, name: str, classe):
-        super().__init__()
-
-        self.__name   = name
-        self._option  = True
-        # To have access to the business logic since we cannot import from outside the ui module
-        self._class   = classe
-        
-        self.__layout = QtWidgets.QGridLayout()
-
-        self.__layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
-        self.__layout.setVerticalSpacing(5)
-
-        # self.setLayout(self.__layout)
+        super().__init__(name, classe)
 
         self.__group_box = QtWidgets.QGroupBox()
-        self.__group_box.setLayout(self.__layout)
+        self.__group_box.setLayout(self._getLayout())
 
         self.__scroll = QtWidgets.QScrollArea()
         self.__scroll.setWidget(self.__group_box)
@@ -49,31 +37,3 @@ class ScrollableTab(QtWidgets.QWidget):
 
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.__scroll)
-    
-
-    def getName(self) -> str:
-        return self.__name 
-
-    def getOption(self) -> bool:
-        return self._option
-    
-    def addItemToLayout(self, new_item, row: int, column: int):
-        self.__layout.addWidget(new_item, row, column)
-        # self.setLayout(self.__layout)
-    
-    def removeItemFromLayout(self, row: int, column: int):
-        self.__layout.removeWidget(self.__layout.itemAtPosition(row, column).widget())
-    
-    def moveItemInLayout(self, row: int, column: int, new_row: int, new_column: int):
-        temp = self.__layout.itemAtPosition(row, column).widget()
-        self.__layout.removeWidget(temp)
-        self.addItemToLayout(temp, new_row, new_column)
-    
-    def addToTabList(self, tab_list: list):
-        tab_list.addTab(self, self.__name)
-        
-    def setPath(self, path: str):
-        self._class.setPath(path)
-        
-    def print(self):
-        self._class.print()    
