@@ -111,7 +111,7 @@ It takes care of the business logic and data structure.
 It contains  submodules:
 - The InputFields submodule (`sciantix-input-builder/classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
 - The InputFiles submodule (`sciantix-input-builder/classes/InputFiles`) : structure and setup the fields into 
-- The FileAccess submodule (`sciantix-input-builder/classes/FileAccess`) : handles accessing files (reading and printing)
+- The FileAccess submodule (`sciantix-input-builder/classes/FileAccess`) : handles accessing files (reading,  printing and ploting)
 - The OutputFiles submodule (`sciantix-input-builder/classes/OutputFiles`) : representation in memory of the output of Sciantix for the gui
 
 This module act as the backend of the app.
@@ -157,6 +157,12 @@ There are 2 config files :
 |   |   └─OutputFile.py
 |   ├─__init__.py
 |   └─config.py
+├─sciantix/
+|   ├─...                               All the input and output .txt files for the simulation
+|   └─sciantix.x
+├─sciantix/
+|   ├─input/                            All the input .txt files for the tests
+|   └─output.txt
 ├─ui/
 |   ├─tabs/
 |   |   ├─__init__.py
@@ -167,12 +173,15 @@ There are 2 config files :
 |   |   ├─ScalingFactorTab.py
 |   |   ├─ScrollableTab.py
 |   |   ├─SettingsTab.py
-|   |   └─Tab.py
+|   |   ├─Tab.py
+|   |   └─VisualisationTab.py
 |   ├─__init__.py
 |   ├─config.py
 |   └─MainWindow.py
 ├─.gitignore
+├─LICENSE
 ├─main.py
+├─plot.png
 ├─README.md
 ├─Sciantix_Wizard                       Launch file
 ├─tests_input_fields.py                 |
