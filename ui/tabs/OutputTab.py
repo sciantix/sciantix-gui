@@ -26,9 +26,7 @@ from . import ScrollableTab
 class OutputTab(ScrollableTab.ScrollableTab):
     def __init__(self, output_class):
         super().__init__("Output", output_class)
-
-        self._option = False
-
+        
         for i, name in enumerate(self._getClass().getLineNames()):
             self.addItemToLayout(QtWidgets.QLabel(name), 0, i)
         
@@ -42,5 +40,5 @@ class OutputTab(ScrollableTab.ScrollableTab):
         if os.path.exists(f"sciantix/{self._getClass().getName()}.txt"):
             self._getClass().read()
 
-        self.__make_layout()    
+        self.__make_layout()
         

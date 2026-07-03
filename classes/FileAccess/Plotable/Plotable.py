@@ -46,8 +46,8 @@ class Plotable(FileAccess.FileAccess):
         ])
     
     def makePlot(self, x_name: str, y_name: str, plot_name: str = "plot"):
-        x_array = self.getArrayByName(x_name)
-        y_array = self.getArrayByName(y_name)
+        x_array = self.__getArrayByName(x_name)
+        y_array = self.__getArrayByName(y_name)
 
         fig, ax = plt.subplots()
         ax.plot(x_array, y_array)

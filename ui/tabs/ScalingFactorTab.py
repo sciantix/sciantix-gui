@@ -27,8 +27,6 @@ class ScalingFactorTab(Tab.Tab):
     def __init__(self, scaling_factor_class):
         super().__init__("Input Scaling Factor", scaling_factor_class)
 
-        self._option = False
-
         self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
         self.__button.setStyleSheet("background: darkred")
         self.__button.clicked.connect(self.__toggleOption)
