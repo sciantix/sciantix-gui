@@ -140,7 +140,10 @@ There are 2 config files :
 |   |   ├─InputSettings.py
 |   |   └─MultiLines.py
 |   ├─FileAcess/
-|   |   ├─printable/
+|   |   ├─Plotable/
+|   |   |   ├─__init__.py
+|   |   |   └─Plotable.py
+|   |   ├─Printable/
 |   |   |   ├─templates/                Representation of how to print a file
 |   |   |   ├─__init__.py
 |   |   |   └─Printable.py

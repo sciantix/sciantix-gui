@@ -17,10 +17,8 @@
     Authors : G. Léandre
 """
 
-import numpy
-
-from ..InputFiles import InputFile, MultiLines
 from .. import FileAccess
+from ..InputFiles import InputFile, MultiLines
 
 
 # For this class, the options names (which serves as keys) are precede by the line index
@@ -28,11 +26,12 @@ from .. import FileAccess
 #       0time
 # Is the time value for the 1st line
 
-class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable):
+class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable, FileAccess.Plotable):
     def __init__(self):
         InputFile.InputFile.__init__(self, "output")
         MultiLines.MultiLines.__init__(self)
         FileAccess.Readable.__init__(self)
+        FileAccess.Plotable.__init__(self)
 
         self.__column_names = [
             "time",
@@ -93,15 +92,3 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
     def deleteLineByNbr(self, index: int):
         # Not Implemented yet and probably wont be since I don't think it's needed for now
         pass
-
-    def getArrayByName(self, name: str):
-        """
-        return all the values from the column of specified name in the form of a numpy array
-        """
-        if name not in self.getLineNames():
-            raise KeyError("You can't get this column : this name doesn't exist")
-
-        return numpy.array([
-            self.getValueByName(f"{i}{name}")
-            for i in range(self.getNbrLines())
-        ])
