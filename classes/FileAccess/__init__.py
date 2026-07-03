@@ -1,5 +1,7 @@
 
+from .Plotable.Plotable import Plotable
+
 from .Readable.Readable import Readable
 
-from .printable.Printable import Printable
-from .printable.templates import *
+from .Printable.Printable import Printable
+from .Printable.templates import *
