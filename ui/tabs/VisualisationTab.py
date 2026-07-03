@@ -22,6 +22,7 @@ import PyQt6.QtGui     as QtGui
 import PyQt6.QtWidgets as QtWidgets
 
 from . import Tab
+from .. import config
 
 
 class VisualisationTab(Tab.Tab):
@@ -61,6 +62,6 @@ class VisualisationTab(Tab.Tab):
         self.__makePlot()
 
     def __makePlot(self):
-        if os.path.exists(f"sciantix/{self.__output._getClass().getName()}.txt"):
-            self.__output._getClass().makePlot(self.__x_name, self.__y_name)
-            self.__label.setPixmap(QtGui.QPixmap("plot.png"))
+        if os.path.exists(f"{config.SIMULATION_PATH}/{self.__output._getClass().getName()}.txt"):
+            self.__output._getClass().makePlot(self.__x_name, self.__y_name, config.DEFAULT_PLOT_NAME)
+            self.__label.setPixmap(QtGui.QPixmap(f"{config.DEFAULT_PLOT_NAME}.png"))

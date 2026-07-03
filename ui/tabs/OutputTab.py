@@ -37,7 +37,7 @@ class OutputTab(ScrollableTab.ScrollableTab):
                 self.addItemToLayout(QtWidgets.QLabel(str(value)), line, column)
     
     def read(self):
-        if os.path.exists(f"sciantix/{self._getClass().getName()}.txt"):
+        if os.path.exists(f"{config.SIMULATION_PATH}/{self._getClass().getName()}.txt"):
             self._getClass().read()
 
         self.__make_layout()

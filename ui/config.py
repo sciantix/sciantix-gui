@@ -24,7 +24,16 @@
 WINDOW_TITLE  = "Sciantix'Wizzard"
 # WINDOW_TITLE  = "Sciantix Input Wizzard"        # Alternative titles ?
 # WINDOW_TITLE  = "Sciantix Input Builder"
+# WINDOW_TITLE  = "Sciantix Gui"
 WINDOW_WIDTH  = 1000
 WINDOW_HEIGHT = 700
 
 DEFAULT_OUTPUT_PATH = ""
+DEFAULT_PLOT_PATH   = ""
+DEFAULT_PLOT_NAME   = "plot"
+
+
+# +---------------------------+
+# |   Window and GUI config   |
+# +---------------------------+
+SIMULATION_PATH = "sciantix"

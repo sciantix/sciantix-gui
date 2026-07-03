@@ -62,11 +62,11 @@ class FinalTab(Tab.Tab):
 
     def __runSciantix(self):
         # To clean the input and output files
-        os.system("rm sciantix/*.txt")
+        os.system(f"rm {config.SIMULATION_PATH}/*.txt")
 
-        self.__setPath("sciantix")
+        self.__setPath(f"{config.SIMULATION_PATH}")
         self.__submit()
-        os.system("sciantix/sciantix.x sciantix/")
+        os.system(f"{config.SIMULATION_PATH}/sciantix.x {config.SIMULATION_PATH}/")
 
         self.__output.read()
         
