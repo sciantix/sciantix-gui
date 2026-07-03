@@ -4,6 +4,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# File that show that the correct python packeges are installed
+.__is_installed
+
 # Input and Output files
 sciantix/*.txt
 error_log.txt

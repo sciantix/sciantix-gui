@@ -34,6 +34,18 @@ If you don't have it :
 sudo apt install python3
 ```
 
+Make sure you have pip 22 or highter installed :
+
+```bash
+pip --version
+```
+
+If you don't have it :
+
+```
+sudo apt install python3-pip
+```
+
 ### Getting Sciantix'Wizard
 
 Get this app on out github page  :
@@ -183,6 +195,7 @@ There are 2 config files :
 ├─main.py
 ├─plot.png
 ├─README.md
+├─requirements.txt
 ├─Sciantix_Wizard                       Launch file
 ├─tests_input_fields.py                 |
 ├─tests_input_files.py                  | Make sure that all the logic works properly
