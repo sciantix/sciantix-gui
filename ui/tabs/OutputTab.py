@@ -28,7 +28,10 @@ class OutputTab(ScrollableTab.ScrollableTab):
         super().__init__("Output", output_class)
         
         for i, name in enumerate(self._getClass().getLineNames()):
-            self.addItemToLayout(QtWidgets.QLabel(name), 0, i)
+            if self._getClass().getUnits():
+                self.addItemToLayout(QtWidgets.QLabel(f"{name} in {self._getClass().getUnits()[i]}"), 1, i)
+            else:
+                self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
         
     
     def __make_layout(self):

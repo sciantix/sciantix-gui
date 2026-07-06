@@ -63,5 +63,11 @@ class VisualisationTab(Tab.Tab):
 
     def __makePlot(self):
         if os.path.exists(f"{config.SIMULATION_PATH}/{self.__output._getClass().getName()}.txt"):
-            self.__output._getClass().makePlot(self.__x_name, self.__y_name, config.DEFAULT_PLOT_NAME)
+            self.__output._getClass().makePlot(
+                self.__x_name,
+                self.__y_name,
+                config.DEFAULT_PLOT_NAME,
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__x_name)],
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
+            )
             self.__label.setPixmap(QtGui.QPixmap(f"{config.DEFAULT_PLOT_NAME}.png"))

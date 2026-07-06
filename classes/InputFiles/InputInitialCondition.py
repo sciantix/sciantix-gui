@@ -31,6 +31,7 @@ class InputInitialCondition(InputFile.InputFile, FileAccess.Printable):
         # Variable to represent the layout of data from the input_initial_condition.txt input file
         # Each element of the array represent the number of factor on each lines of input_initial_condition.txt
         self.__layout = config.INITIAL_CONDITION_LAYOUT
+        self.__units  = config.INITIAL_CONDITION_UNITS
 
         # TODO : Maybe clean up by putting the initial conditions into config.py
         # Base setup
@@ -84,3 +85,6 @@ class InputInitialCondition(InputFile.InputFile, FileAccess.Printable):
 
     def getLayout(self) -> list[int]:
         return self.__layout
+    
+    def getUnits(self) -> list[str]:
+        return self.__units

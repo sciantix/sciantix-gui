@@ -27,20 +27,19 @@ class InitialConditionTab(Tab.Tab):
     def __init__(self, classes):
         super().__init__("Input Initial Condition", classes)
         names = self._getClass().getOptionsNames()
-        i, j  = 0, 0
+        i     = 0
 
-        for amount in self._getClass().getLayout():
-            k = 0
-            for _ in range(amount):
-                self.addItemToLayout(QtWidgets.QLabel(names[i]), 2*j, k)
+        for j, amount in enumerate(self._getClass().getLayout()):
+            if self._getClass().getUnits():
+                self.addItemToLayout(QtWidgets.QLabel(f"in {self._getClass().getUnits()[j]}"), 2*j+1, 0)
+    
+            for k in range(amount):
+                self.addItemToLayout(QtWidgets.QLabel(names[i]), 2*j, k+1)
                 current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i])))
                 current_input.textChanged.connect(
                     (lambda name:
                         lambda text: self._getClass().setValueByName(name, float(text) if (len(text) != 0) else 0)
                     )(names[i])
                 )
-                self.addItemToLayout(current_input, 2*j+1, k)
+                self.addItemToLayout(current_input, 2*j+1, k+1)
                 i += 1
-                k += 1
-
-            j += 1

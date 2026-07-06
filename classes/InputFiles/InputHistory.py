@@ -37,6 +37,8 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
 
         self.__has_steam_pressure = has_steam_pressure
 
+        self.__units = config.HISTORY_UNITS
+
         # Base setup : seting up the first line
         self.addOptionInterval("0time",               0,    config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
         self.addOptionInterval("0temperature",        1273, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
@@ -61,6 +63,9 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
             self.__has_steam_pressure = False
             for i in range(self.getNbrLines()):
                 self.removeOptionByName(f"{i}steam_pressure")
+    
+    def getUnits(self) -> list[str]:
+        return self.__units
 
     def getLineNames(self) -> tuple:
         if self.__has_steam_pressure:

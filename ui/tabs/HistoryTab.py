@@ -36,7 +36,10 @@ class HistoryTab(ScrollableTab.ScrollableTab):
         self.addItemToLayout(button, 0, 5)
 
         for i, name in enumerate(self._getClass().getLineNames()):
-            self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
+            if self._getClass().getUnits():
+                self.addItemToLayout(QtWidgets.QLabel(f"{name} in {self._getClass().getUnits()[i]}"), 1, i)
+            else:
+                self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
 
         self.__makeLine()
 

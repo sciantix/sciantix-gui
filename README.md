@@ -81,14 +81,7 @@ The typical use of the app will be :
 - Filling the inputs forms
 - Runing sciantix
 - Inspecting and visualizing the output, maybe copying some of the graphs
-- Start again with differents inputs 
-
-### Getting the newly built input files
-
-By default, the input files end up in the `sciantix-input-builder` folder. You can change it in the Finalize tab.
-
-If you only see 3 files and are missing `input_scaling_factors.txt` it's probably because it's optional. 
-You have to go into the 4th tab `Input Scaling Factor` and togle the option to have this file too.
+- Start again with differents inputs
 
 ### Getting the graphs
 
@@ -98,6 +91,11 @@ It is named `plot.png`.
 Be warned, it is only the current graph being shown in the GUI.
 If you want multiple graphs, you have to copy the `plot.png` file somewhere else for each graphs you want.
 
+
+### Getting the newly built input files
+
+If you only see 3 files and are missing `input_scaling_factors.txt` it's probably because it's optional. 
+You have to go into the 4th tab `Input Scaling Factor` and togle the option to have this file too : if it's red it's off, if it's green it's on.
 
 ## Versions
 
@@ -122,11 +120,7 @@ It has been coded on Linux for Linux.
 
 ### App structure
 
-The app is build around 2 modules :
-- The gui module : `gui/` 
-- The classes module : `classes/` 
-
-And the simulation software sciantix, which a pre-compiled executable of version 2.2 is included in the `sciantix/` folder.
+The app is build around 2 modules : the gui module (`gui/`) and the classes module (`classes/`). And the simulation software sciantix, which a pre-compiled executable of version 2.2 is included in the `sciantix/` folder.
 
 #### The gui module
 It takes care of making the window.
@@ -136,7 +130,7 @@ This module act as the frontend of the app.
 
 #### The classes module
 It takes care of the business logic and data structure.
-It contains  submodules:
+It contains 4 submodules:
 - The InputFields submodule (`classes/InputFields`) : representation of 1 option/value field that the app will give to it's user
 - The InputFiles submodule (`classes/InputFiles`) : structure and setup the fields into 
 - The FileAccess submodule (`classes/FileAccess`) : handles accessing files (reading,  printing and ploting)

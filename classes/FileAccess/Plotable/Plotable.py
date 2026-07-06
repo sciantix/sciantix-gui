@@ -45,7 +45,7 @@ class Plotable(FileAccess.FileAccess):
             for i in range(self.getNbrLines())
         ])
     
-    def makePlot(self, x_name: str, y_name: str, plot_name: str = "plot"):
+    def makePlot(self, x_name: str, y_name: str, plot_name: str = "plot", x_unit: str = "", y_unit: str = ""):
         x_array = self.__getArrayByName(x_name)
         y_array = self.__getArrayByName(y_name)
 
@@ -53,7 +53,16 @@ class Plotable(FileAccess.FileAccess):
         ax.plot(x_array, y_array)
 
         ax.set_title(f"{y_name} in function of {x_name}")
-        ax.set_xlabel(x_name)
-        ax.set_ylabel(y_name)
+
+        if len(x_unit) != 0:
+            ax.set_xlabel(f"{x_name} in {x_unit}")
+        else:
+            ax.set_xlabel(x_name)
+
+        if len(y_unit) != 0:
+            ax.set_ylabel(f"{y_name} in {y_unit}")
+        else:
+            ax.set_ylabel(y_name)
+
 
         fig.savefig(f"{self.getPath()}{plot_name}.png")

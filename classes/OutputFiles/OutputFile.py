@@ -54,7 +54,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
             "fission_gas_release",
             "intragranular_bubble_concentration",
             "intragranular_bubble_radius",
-            "intragranular_gas bubble_swelling",
+            "intragranular_gas_bubble_swelling",
             "intergranular_bubble_concentration",
             "intergranular_atoms_bubble",
             "intergranular_vacancies_bubble",
@@ -69,7 +69,46 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
             "U235",
             "U238",
         ]
+
+        self.__units = [
+            "h",
+            "K",
+            "fiss/m3s",
+            "MPa",
+            "m",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "at/m3",
+            "",
+            "bub/m3",
+            "m",
+            "",
+            "bub/m2",
+            "at/bub",
+            "vac/bub",
+            "m",
+            "m2",
+            "m3",
+            "",
+            "",
+            "",
+            "",
+            "MWd/kgUO2",
+            "at/m3",
+            "at/m3",
+        ]
     
+    def getUnits(self) -> list[str]:
+        return self.__units
 
     def getLineNames(self) -> tuple:
         return tuple(self.__column_names)

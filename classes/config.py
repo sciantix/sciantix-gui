@@ -28,6 +28,13 @@ SETTINGS_DEFAULT = 0
 # InputHistory
 HISTORY_LOWER_BOUND = 0
 HISTORY_UPER_BOUND  = 1e20
+HISTORY_UNITS = [
+    r"h",
+    r"K",
+    r"fiss/m²s",
+    r"MPa",
+    r"",
+]
 
 # InputInitialCondition
 INITIAL_CONDITION_LAYOUT = [
@@ -44,6 +51,21 @@ INITIAL_CONDITION_LAYOUT = [
     7,
     7,
     1
+]
+INITIAL_CONDITION_UNITS = [
+    r"m",
+    r"at/m3",
+    r"at/m3",
+    r"at/m3",
+    r"at/m3",
+    r"MWd/kgUO2",
+    r"MWd/kgUO2",
+    r"h",
+    r"kg/m3",
+    r"%",
+    r"at/m3",
+    r"at/m3",
+    r""
 ]
 INITIAL_CONDITION_LOWER_BOUND = 0
 INITIAL_CONDITION_UPER_BOUND  = 1e10
