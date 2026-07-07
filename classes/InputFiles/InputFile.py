@@ -81,6 +81,9 @@ class InputFile(abc.ABC):
         
         try:
             self.setValueByName(name, eval(new_value))
+        except ValueError as e:
+            print(f"WARNING : {e}. The value will be clamped")
+            self.setValueByName(name, self.__options[name].clampValue(eval(new_value)))
         except:
             state = False
 

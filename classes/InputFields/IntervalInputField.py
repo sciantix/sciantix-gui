@@ -24,6 +24,9 @@ from . import InputField
 class IntervalInputField(InputField.InputField):
     def __init__(self, value: int | float, value_min: int | float, value_max: int | float):
         super().__init__(value)
+
+        if (value_min <= value_max):
+            raise ValueError("You can't have an empty interval : value_min <= value_max has to be respected")
         
         self.__value_min = value_min
         self.__value_max = value_max
@@ -34,6 +37,16 @@ class IntervalInputField(InputField.InputField):
     
     def __checkValue(self, new_value: int | float) -> bool:
         return self.__value_min <= new_value <= self.__value_max
+    
+    def clampValue(self, new_value: int | float) -> int | float:
+        if new_value < self.__value_min:
+            ans = self.__value_min
+        elif new_value > self.__value_max:
+            ans = self.__value_max
+        else:
+            ans = new_value
+
+        return ans
 
     # We have to re-implement it for it to use the IntervalInputField __checkValue and not the InputField one
     def setValue(self, new_value: int | float):

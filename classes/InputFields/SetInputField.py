@@ -33,6 +33,21 @@ class SetInputField(InputField.InputField):
 
     def __checkValue(self, new_value: int | float) -> bool:
         return new_value in self.__value_set
+    
+    def clampValue(self, new_value: int | float) -> int | float:
+        """
+        Find the nearest value in the set from new_value and return this one 
+        """
+        min_distance = float("inf")
+        ans = new_value
+
+        if not self.__checkValue(new_value):
+            for elt in self.__value_set:
+                if abs(elt - new_value) < min_distance:
+                    min_distance = abs()
+                    ans = elt
+
+        return ans
 
     # We have to re-implement it for it to use the SetInputField __checkValue and not the InputField one
     def setValue(self, new_value: int | float):

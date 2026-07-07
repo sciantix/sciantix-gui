@@ -28,7 +28,12 @@ class InputField(abc.ABC):
 
     # @abc.abstractmethod
     def __checkValue(self, new_value: int | float) -> bool:
+        # Has to be re-implemented
         return True
+    
+    def clampValue(self, new_value: int | float) -> int | float:
+        # Has to be re-implemented
+        return new_value
     
     def getValue(self) -> int | float:
         return self.__value
