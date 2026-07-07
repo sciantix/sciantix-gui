@@ -31,7 +31,7 @@ HISTORY_UPER_BOUND  = 1e20
 HISTORY_UNITS = [
     r"h",
     r"K",
-    r"fiss/m²s",
+    r"fiss/m3s",
     r"MPa",
     r"",
 ]
