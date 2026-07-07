@@ -54,7 +54,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             current_input = QtWidgets.QLineEdit(str(values[i]))
             current_input.textChanged.connect(
                 (lambda name, index:
-                    lambda text: self._getClass().setValueByName(f"{index-1}{name}", int(text) if (len(text) != 0) else 0)
+                    lambda text: self._getClass().trySetValueByName(f"{index-1}{name}", text)
                 )(names[i], index)
             )
             self.addItemToLayout(current_input, index+1, i)
@@ -102,7 +102,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))
             current_input.textChanged.connect(
                 (lambda index:
-                    lambda text: self._getClass().setValueByName(f"{index}steam_pressure", int(text) if (len(text) != 0) else 0)
+                    lambda text: self._getClass().trySetValueByName(f"{index}steam_pressure", text)
                 )(i)
             )
             self.addItemToLayout(current_input, i+2, 4)

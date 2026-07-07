@@ -102,7 +102,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
             "",
             "",
             "",
-            "MWd/kgUO2",
+            "MWd/kg",
             "at/m3",
             "at/m3",
         ]

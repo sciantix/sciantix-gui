@@ -27,6 +27,8 @@ class ScalingFactorTab(Tab.Tab):
     def __init__(self, scaling_factor_class):
         super().__init__("Input Scaling Factor", scaling_factor_class)
 
+        self._option = False
+
         self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
         self.__button.setStyleSheet("background: darkred")
         self.__button.clicked.connect(self.__toggleOption)
@@ -37,7 +39,7 @@ class ScalingFactorTab(Tab.Tab):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(elt)))
             current_input.textChanged.connect(
                 (lambda name:
-                    lambda text: self._getClass().setValueByName(name, float(text) if (len(text) != 0) else 0)
+                    lambda text: self._getClass().trySetValueByName(name, text)
                 )(elt)
             )
             self.addItemToLayout(current_input, i+1, 1)

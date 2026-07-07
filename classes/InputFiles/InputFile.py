@@ -70,3 +70,18 @@ class InputFile(abc.ABC):
             raise KeyError("No option with this name exist")
 
         self.__options[name].setValue(new_value)
+
+    def trySetValueByName(self, name: str, new_value) -> bool:
+        """
+        Try to set the value of this field to new_value :
+
+        return True if the value is updated, false otherwise
+        """
+        state = True
+        
+        try:
+            self.setValueByName(name, eval(new_value))
+        except:
+            state = False
+
+        return state

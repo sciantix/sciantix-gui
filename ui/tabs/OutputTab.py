@@ -21,6 +21,7 @@ import os
 import PyQt6.QtWidgets as QtWidgets
 
 from . import ScrollableTab
+from .. import config
 
 
 class OutputTab(ScrollableTab.ScrollableTab):

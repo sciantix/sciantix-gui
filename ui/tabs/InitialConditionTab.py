@@ -38,7 +38,7 @@ class InitialConditionTab(Tab.Tab):
                 current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i])))
                 current_input.textChanged.connect(
                     (lambda name:
-                        lambda text: self._getClass().setValueByName(name, float(text) if (len(text) != 0) else 0)
+                        lambda text: self._getClass().trySetValueByName(name, text)
                     )(names[i])
                 )
                 self.addItemToLayout(current_input, 2*j+1, k+1)
