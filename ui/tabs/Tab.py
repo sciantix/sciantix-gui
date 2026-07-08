@@ -71,3 +71,18 @@ class Tab(QtWidgets.QWidget):
         
     def print(self):
         self.__class.print()
+
+    def _pretifyText(self, text: str) -> str:
+        """
+        Take a cammel case or snake case string like : GetOptionsNames or get_options_names
+        and insert spaces in between the words to make easier to read like : Get Options Names
+        """
+        new_text = ""
+
+        for letter in text:
+            if letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ_":
+                new_text += " "
+            if letter != '_':
+                new_text += letter
+
+        return new_text

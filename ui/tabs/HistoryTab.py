@@ -37,9 +37,9 @@ class HistoryTab(ScrollableTab.ScrollableTab):
 
         for i, name in enumerate(self._getClass().getLineNames()):
             if self._getClass().getUnits():
-                self.addItemToLayout(QtWidgets.QLabel(f"{name} in {self._getClass().getUnits()[i]}"), 1, i)
+                self.addItemToLayout(QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}"), 1, i)
             else:
-                self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
+                self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(name)), 1, i)
 
         self.__makeLine()
 
@@ -96,7 +96,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
     def __addSteamPressure(self):
         self._getClass().toggleSteamPressure()
         
-        self.addItemToLayout(QtWidgets.QLabel("steam_pressure"), 1, 4)
+        self.addItemToLayout(QtWidgets.QLabel("steam pressure"), 1, 4)
 
         for i in range(self._getClass().getNbrLines()):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))

@@ -26,6 +26,7 @@ WINDOW_TITLE  = "Sciantix'Wizzard"
 # WINDOW_TITLE  = "Sciantix Input Builder"
 # WINDOW_TITLE  = "Sciantix Gui"
 WINDOW_WIDTH  = 1000
+# WINDOW_WIDTH  = 1244        # If you want that sweet 16/9 aspect ratio
 WINDOW_HEIGHT = 700
 
 DEFAULT_OUTPUT_PATH = ""

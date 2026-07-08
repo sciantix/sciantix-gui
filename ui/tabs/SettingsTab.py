@@ -30,7 +30,7 @@ class SettingsTab(Tab.Tab):
         self.__settings_options = [
             ["no grain growth", "Ainscough et al. (1973)", "Van Uffelen et al. (2013)"],
             ["constant value", "Turnbull et al. (1988)"],
-            ["SDA with quasi-stationary hypothesis", "SDA without quasi-stationary hypothesis"],
+            ["", "SDA with quasi-stationary hypothesis", "SDA without quasi-stationary hypothesis"],
             ["", "Pizzocri et al. (2018)"],
             ["constant value", "Turnbull (1971)", "Losonen (2000)", "thermal resolution", "Cognini et al. (2021)"],
             ["constant value", "Ham (1958)"],
@@ -54,7 +54,7 @@ class SettingsTab(Tab.Tab):
         ]
 
         for i, elt in enumerate(self._getClass().getOptionsNames()):
-            self.addItemToLayout(QtWidgets.QLabel(elt), i, 0)
+            self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i, 0)
             current_input = QtWidgets.QComboBox()
             current_input.addItems(self.__settings_options[i])
             current_input.currentIndexChanged.connect(

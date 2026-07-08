@@ -27,18 +27,33 @@ from .. import config
 class OutputTab(ScrollableTab.ScrollableTab):
     def __init__(self, output_class):
         super().__init__("Output", output_class)
+
+        self.__column_box_layouts = []
         
         for i, name in enumerate(self._getClass().getLineNames()):
+            layout = QtWidgets.QGridLayout()
+            box    = QtWidgets.QGroupBox()
+            box.setStyleSheet("border: 1px solid gray; border-radius: 3px")
+            box.setLayout(layout)
+            self.__column_box_layouts.append(layout)
+            self.addItemToLayout(box, 0, i)
+
             if self._getClass().getUnits():
-                self.addItemToLayout(QtWidgets.QLabel(f"{name} in {self._getClass().getUnits()[i]}"), 1, i)
+                label = QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}")
             else:
-                self.addItemToLayout(QtWidgets.QLabel(name), 1, i)
+                label = QtWidgets.QLabel(self._pretifyText(name))
+                
+            label.setStyleSheet("border: default")
+            layout.addWidget(label, 0, 0)
         
     
     def __make_layout(self):
         for line in range(self._getClass().getNbrLines()):
             for column, value in enumerate(self._getClass().getLineByNbr(line)):
-                self.addItemToLayout(QtWidgets.QLabel(str(value)), line, column)
+                label = QtWidgets.QLabel(str(value))
+                label.setStyleSheet("border: default")
+                self.__column_box_layouts[column].addWidget(label, line+1, 0)
+
     
     def read(self):
         if os.path.exists(f"{config.SIMULATION_PATH}/{self._getClass().getName()}.txt"):

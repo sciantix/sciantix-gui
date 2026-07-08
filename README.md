@@ -182,7 +182,7 @@ There are 2 config files :
 ├─sciantix/
 |   ├─...                               All the input and output .txt files for the simulation
 |   └─sciantix.x
-├─sciantix/
+├─test_templates/
 |   ├─input/                            All the input .txt files for the tests
 |   └─output.txt
 ├─ui/

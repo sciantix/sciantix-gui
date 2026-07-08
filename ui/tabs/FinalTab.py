@@ -47,7 +47,7 @@ class FinalTab(Tab.Tab):
         button = QtWidgets.QPushButton("Build and Run the Simulation")
         button.clicked.connect(self.__runSciantix)
         self.addItemToLayout(button, 2, 1)
-    
+        
 
     def __setPath(self, text):
         for cla in self.__classes:

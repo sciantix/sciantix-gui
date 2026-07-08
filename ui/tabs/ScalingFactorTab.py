@@ -35,7 +35,7 @@ class ScalingFactorTab(Tab.Tab):
         self.addItemToLayout(self.__button, 0, 1)
 
         for i, elt in enumerate(self._getClass().getOptionsNames()):
-            self.addItemToLayout(QtWidgets.QLabel(elt), i+1, 0)
+            self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i+1, 0)
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(elt)))
             current_input.textChanged.connect(
                 (lambda name:
