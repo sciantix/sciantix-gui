@@ -107,6 +107,23 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
             "at/m3",
         ]
     
+
+    def __checkIsnumber(self, string: str) -> bool:
+        """
+        check if string can be is a number convertible into a float
+        """
+        splits = string.strip().split('e')
+
+        ans = 1 <= len(splits) <= 2
+
+        for i in range(len(splits)):
+            if ans and len(splits[i]) and splits[i][0] in "+-":
+                splits[i] = splits[i][1:]
+            
+            ans = ans and splits[i].replace('.', '', 1).isnumeric()
+
+        return ans
+    
     def getUnits(self) -> list[str]:
         return self.__units
 
@@ -123,8 +140,12 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
         )
     
     def addLine(self, *args):
-        for arg, name in zip(*args, self.__column_names):
-            self.addOptionOutput(f"{self.getNbrLines()}{name}", float(arg))
+        values = list(*args)
+        for i in range(len(self.__column_names)):
+            if i < len(values) and self.__checkIsnumber(values[i]):
+                self.addOptionOutput(f"{self.getNbrLines()}{self.__column_names[i]}", float(values[i]))
+            else:
+                self.addOptionOutput(f"{self.getNbrLines()}{self.__column_names[i]}", 0)
 
         self._incrementLineNbr()
     

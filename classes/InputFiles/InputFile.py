@@ -88,3 +88,12 @@ class InputFile(abc.ABC):
             state = False
 
         return state
+
+    def setValueByNameAndPosition(self, name: str, index: int):
+        if name not in self.__options.keys():
+            raise KeyError("No option with this name exist")
+
+        if -1 <= index < len(self.__options[name]):
+            raise IndexError("Index out of range : index should be kept betwween -1 and nbr_of_options-1")
+        
+        self.setValueByName(name, list(self.__options[name].getSet())[index])

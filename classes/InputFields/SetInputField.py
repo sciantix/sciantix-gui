@@ -55,3 +55,6 @@ class SetInputField(InputField.InputField):
             raise ValueError(f"You can't use this value, It does exist in the set : {self.__value_set}")
 
         super().setValue(new_value)
+    
+    def getSet(self) -> set[int|float]:
+        return self.__value_set
