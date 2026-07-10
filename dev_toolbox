@@ -1,0 +1,107 @@
+
+#
+# ------------------------------------------------------------------------------------------------------------------------------------
+#      _______.  ______  __      ___     .__   __..___________.|| __           __  __  __________      ___     ._______ ._____
+#     /       | /      ||  |    /   \    |  \ |  ||           |//\  \         /  /|  ||______    |    /   \    |   _   \|  _  \
+#    |   (----`|  ,----'|  |   /  ^  \   |   \|  |`---|  |----`   \  \   ^   /  / |  |     _/  _/    /  ^  \   |  |_)  || | \  \
+#     \   \    |  |     |  |  /  /_\  \  |  . `  |    |  |         \  \ / \ /  /  |  |   _/  _/     /  /_\  \  |   ____/| |  )  |
+# .----)   |   |  `----.|  | /  _____  \ |  |\   |    |  |          \  v   v  /   |  | _/  _/____  /  _____  \ |  |\  \ | |_/  /
+# |_______/     \______||__|/__/     \__\|__| \__|    |__|           \__/^\__/    |__||__________|/__/     \__\|__| \__\|_____/
+# 
+# ----------------------------------------------------------------------------------------------------------------------------------
+#
+#    Originally developed by G. Léandre
+#
+#    Version : 1.4.0
+#    Year :    2026
+#    Authors : G. Léandre
+#
+
+
+#!/bin/bash
+
+
+if [[ $# -eq 0 ]]
+then
+    # TODO : error message and help text 
+    echo "This script requires at least an argument"
+else
+
+if [[ $1 == "version" ]]
+then
+    if [[ $# -eq 1 ]]
+    then
+
+    grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" *
+
+    elif [[ $# -eq 2 ]]
+    then
+
+    if [[ $2 == "bug" ]]
+    then
+        # Incrementing the last digit by one
+
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E 's/(.*Version : [0-9]+\.[0-9]+\.)([0-9])+/echo "\1$((\2+1))"/e' $line
+        done
+    elif [[ $2 == "minor" ]]
+    then
+        # Incrementing the middle digit by one and reseting the last digit to 0
+        
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E 's/(.*Version : [0-9]+\.)([0-9]+)\.[0-9]+/echo "\1$((\2+1)).0"/e' $line
+        done
+    elif [[ $2 == "major" ]]
+    then
+        # Incrementing the first digit by one and reseting the other 2 digits to 0
+        
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E 's/(.*Version : )([0-9])+\.[0-9]+\.[0-9]+/echo "\1$((\2+1)).0.0"/e' $line
+        done
+    elif [[ $2 == "reset" ]]
+    then
+        # reset the version number back to 1.0.0
+
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E s"/(Version : )[0-9]+.[0-9]+.[0-9]+/\11.0.0/" $line
+        done
+    elif [[ $2 =~ [0-9]+\.[0-9]+\.[0-9]+ ]]
+    then
+        # same as the set option
+
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E "s/Version : [0-9]+\.[0-9]+\.[0-9]+/Version : $2/" $line
+        done
+    else
+        echo ""
+        # TODO : error message and help text
+    fi
+
+    elif [[ $# -eq 3 ]]
+    then
+
+    if [[ $2 == "set" ]] && [[ $3 =~ [0-9]+\.[0-9]+\.[0-9]+ ]]
+    then
+        # the user specify a new version number
+        
+        grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
+        do
+            sed -i -E "s/Version : [0-9]+\.[0-9]+\.[0-9]+/Version : $3/" $line
+        done
+    else
+        echo ""
+        # TODO : error message and help text
+    fi
+
+    fi
+else
+    echo ""
+    # TODO : error message and help text
+fi
+
+fi
