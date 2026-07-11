@@ -23,11 +23,46 @@
 
 if [[ $# -eq 0 ]]
 then
-    # TODO : error message and help text 
     echo "This script requires at least an argument"
+    echo "Use : "
+    echo -e "\tdev_toolbox help"
+    echo "to have more details"
 else
 
-if [[ $1 == "version" ]]
+if [[ $1 == "help" ]]
+then
+
+    echo ""
+    echo -e "\t++------------------------------++"
+    echo -e "\t||   Welcome to dev_toolbox !   ||"
+    echo -e "\t++------------------------------++"
+    echo ""
+    echo "dev_toolbox is a basch script containing some useful automation to ease the developement"
+    echo ""
+    echo "It contains the following tools :"
+    echo -e "\tdev_toolbox version : a tool to set or increment uniformely the version number accross all the project's files"
+    echo ""
+    echo "In depth explanation :"
+    echo "VERSION :"
+    echo -e "\tShow :"
+    echo -e "\t\t- dev_toolbox version : Show the list of files that are candidates for versions updates"
+    echo ""
+    echo -e "\tIncrements :"
+    echo -e "\t\t- dev_toolbox version bug : Incrementing the last digit by one"
+    echo -e "\t\t- dev_toolbox version minor : Incrementing the middle digit by one and reseting the last digit to 0"
+    echo -e "\t\t- dev_toolbox version major : Incrementing the first digit by one and reseting the other 2 digits to 0"
+    echo ""
+    echo -e "\tReset :"
+    echo -e "\t\t- dev_toolbox version reset : Reset the version number back to 1.0.0"
+    echo ""
+    echo -e "\tSet :"
+    echo -e "\t\t- dev_toolbox version [version number] : Set the version number to [version number]"
+    echo -e "\t\t- dev_toolbox version set [version number] : Set the version number to [version number]"
+    echo -e "\t\t[version number] is of the form : [0-9]+\.[0-9]+\.[0-9]+"
+    echo -e "\t\tExemple : 2.1.13"
+    echo ""
+
+elif [[ $1 == "version" ]]
 then
     if [[ $# -eq 1 ]]
     then
@@ -63,7 +98,7 @@ then
         done
     elif [[ $2 == "reset" ]]
     then
-        # reset the version number back to 1.0.0
+        # Reset the version number back to 1.0.0
 
         grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
         do
@@ -71,15 +106,17 @@ then
         done
     elif [[ $2 =~ [0-9]+\.[0-9]+\.[0-9]+ ]]
     then
-        # same as the set option
+        # Same as the set option
 
         grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
         do
             sed -i -E "s/Version : [0-9]+\.[0-9]+\.[0-9]+/Version : $2/" $line
         done
     else
-        echo ""
-        # TODO : error message and help text
+        echo "This isn't a valid option"
+        echo "Use : "
+        echo -e "\tdev_toolbox help"
+        echo "to have more details"
     fi
 
     elif [[ $# -eq 3 ]]
@@ -87,21 +124,25 @@ then
 
     if [[ $2 == "set" ]] && [[ $3 =~ [0-9]+\.[0-9]+\.[0-9]+ ]]
     then
-        # the user specify a new version number
+        # The user specify a new version number
         
         grep -Irl -E "Version : [0-9]+\.[0-9]+\.[0-9]+" * | while read line
         do
             sed -i -E "s/Version : [0-9]+\.[0-9]+\.[0-9]+/Version : $3/" $line
         done
     else
-        echo ""
-        # TODO : error message and help text
+        echo "This isn't a valid option"
+        echo "Use : "
+        echo -e "\tdev_toolbox help"
+        echo "to have more details"
     fi
 
     fi
 else
-    echo ""
-    # TODO : error message and help text
+    echo "This isn't a valid option"
+    echo "Use : "
+    echo -e "\tdev_toolbox help"
+    echo "to have more details"
 fi
 
 fi
