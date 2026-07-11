@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.0
+    Version : 1.4.1
     Year :    2026
     Authors : G. Léandre
 """
@@ -47,7 +47,7 @@ class VisualisationTab(Tab.Tab):
         self.addItemToLayout(y_input, 1, 1)
 
         self.__label = QtWidgets.QLabel(self)
-        self.__label.setPixmap(QtGui.QPixmap(f"{config.DEFAULT_PLOT_NAME}.png"))
+        self.__label.setPixmap(QtGui.QPixmap(f"{self.__output._getClass().getPath()}{config.DEFAULT_PLOT_NAME}.png"))
         self.addItemToLayout(self.__label, 2, 1)
 
         self.__makePlot()
@@ -66,8 +66,8 @@ class VisualisationTab(Tab.Tab):
             self.__output._getClass().makePlot(
                 self.__x_name,
                 self.__y_name,
-                f"../{config.DEFAULT_PLOT_NAME}",
+                f"{config.DEFAULT_PLOT_NAME}",
                 self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__x_name)],
                 self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
             )
-            self.__label.setPixmap(QtGui.QPixmap(f"{config.DEFAULT_PLOT_NAME}.png"))
+            self.__label.setPixmap(QtGui.QPixmap(f"{self.__output._getClass().getPath()}{config.DEFAULT_PLOT_NAME}.png"))
