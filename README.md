@@ -201,6 +201,7 @@ There are 2 config files :
 |   ├─config.py
 |   └─MainWindow.py
 ├─.gitignore
+├─dev_toolbox                           Just some utilities and automation used for developement
 ├─LICENSE
 ├─main.py
 ├─plot.png
