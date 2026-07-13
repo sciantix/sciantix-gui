@@ -27,6 +27,8 @@ class SettingsTab(Tab.Tab):
     def __init__(self, settings_class):
         super().__init__("Input Settings", settings_class)
 
+        self.__value_labels = []
+
         self.__settings_options = [
             ["no grain growth", "Ainscough et al. (1973)", "Van Uffelen et al. (2013)"],
             ["constant value", "Turnbull et al. (1988)"],
@@ -53,14 +55,24 @@ class SettingsTab(Tab.Tab):
             ["not considered", "P. Van Uffelen PhD thesis (2002)"],
         ]
 
+
         for i, elt in enumerate(self._getClass().getOptionsNames()):
             self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i, 0)
+
+            label = QtWidgets.QLabel(str(self._getClass().getValueByName(elt)))
+            self.__value_labels.append(label)
+            self.addItemToLayout(label, i, 1)
+
             current_input = QtWidgets.QComboBox()
             current_input.addItems(self.__settings_options[i])
             current_input.currentIndexChanged.connect(
-                (lambda name:
-                    lambda index: self._getClass().setValueByName(name, index)
-                )(elt)
+                (lambda name, label_index:
+                    lambda index: self.__update_field(name, index, label_index)
+                )(elt, i)
             )
-            self.addItemToLayout(current_input, i, 1)
-        
+            self.addItemToLayout(current_input, i, 2)
+    
+    
+    def __update_field(self, name: str, index: int, label_index: int):
+        self._getClass().setValueByNameAndPosition(name, index)
+        self.__value_labels[label_index].setText(str(self._getClass().getValueByName(name)))

@@ -90,10 +90,13 @@ class InputFile(abc.ABC):
         return state
 
     def setValueByNameAndPosition(self, name: str, index: int):
+        """
+        This only works for SetInputField options
+        """
         if name not in self.__options.keys():
             raise KeyError("No option with this name exist")
 
-        if -1 <= index < len(self.__options[name]):
+        if -1 > index or index >= len(self.__options[name].getSet()):
             raise IndexError("Index out of range : index should be kept betwween -1 and nbr_of_options-1")
         
         self.setValueByName(name, list(self.__options[name].getSet())[index])
