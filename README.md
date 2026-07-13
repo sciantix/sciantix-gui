@@ -199,7 +199,8 @@ There are 2 config files :
 |   |   └─VisualisationTab.py
 |   ├─__init__.py
 |   ├─config.py
-|   └─MainWindow.py
+|   ├─MainWindow.py
+|   └─stylesheet.qss
 ├─.gitignore
 ├─dev_toolbox                           Just some utilities and automation used for developement
 ├─LICENSE

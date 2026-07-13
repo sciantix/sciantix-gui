@@ -99,20 +99,17 @@ class InitialConditionTab(ScrollableTab.ScrollableTab):
             layout = QtWidgets.QGridLayout()
             box    = QtWidgets.QGroupBox()
             box.setLayout(layout)
-            box.setStyleSheet("border: 1px solid gray; border-radius: 3px")
             self.addItemToLayout(box, j, 0)
 
             gap = 0
 
             if line_names[j]:
                 line_name = QtWidgets.QLabel(line_names[j])
-                line_name.setStyleSheet("border: default")
                 layout.addWidget(line_name, 0, 1)
                 gap += 1
 
             if self._getClass().getUnits()[j]:
                 unit = QtWidgets.QLabel(f"in {self._getClass().getUnits()[j]}")
-                unit.setStyleSheet("border: default")
                 if line_names[j]:
                     layout.addWidget(unit, 0, 2)
                 else:
@@ -120,7 +117,6 @@ class InitialConditionTab(ScrollableTab.ScrollableTab):
 
             for k in range(amount):
                 name = QtWidgets.QLabel(displayed_names[i])
-                name.setStyleSheet("border: default")
                 layout.addWidget(name, gap, k+1)
                 current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i])))
                 current_input.textChanged.connect(

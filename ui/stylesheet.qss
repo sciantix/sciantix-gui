@@ -19,5 +19,13 @@
 
 
 * {
-    background-color: red;
+    background-color: hsl(240, 25%, 10%);
 }
+
+
+QGroupBox QGroupBox,
+QGroupBox QLineEdit {
+    border:        1.25px solid gray;
+    border-radius: 3px
+}
+

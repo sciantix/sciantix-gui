@@ -33,7 +33,6 @@ class OutputTab(ScrollableTab.ScrollableTab):
         for i, name in enumerate(self._getClass().getLineNames()):
             layout = QtWidgets.QGridLayout()
             box    = QtWidgets.QGroupBox()
-            box.setStyleSheet("border: 1px solid gray; border-radius: 3px")
             box.setLayout(layout)
             self.__column_box_layouts.append(layout)
             self.addItemToLayout(box, 0, i)
@@ -43,7 +42,6 @@ class OutputTab(ScrollableTab.ScrollableTab):
             else:
                 label = QtWidgets.QLabel(self._pretifyText(name))
                 
-            label.setStyleSheet("border: default")
             layout.addWidget(label, 0, 0)
         
     
@@ -51,7 +49,6 @@ class OutputTab(ScrollableTab.ScrollableTab):
         for line in range(self._getClass().getNbrLines()):
             for column, value in enumerate(self._getClass().getLineByNbr(line)):
                 label = QtWidgets.QLabel(str(value))
-                label.setStyleSheet("border: default")
                 self.__column_box_layouts[column].addWidget(label, line+1, 0)
 
     
