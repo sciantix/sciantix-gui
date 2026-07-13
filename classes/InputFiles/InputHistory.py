@@ -39,16 +39,13 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
 
         self.__units = config.HISTORY_UNITS
 
-        # Base setup : seting up the first line
-        self.addOptionInterval("0time",               0,    config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval("0temperature",        1273, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval("0fission_rate",       1e19, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        self.addOptionInterval("0hydrostatic_stress", 0,    config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-
+        # Base setup : seting up the first lines from the basic exemple run
         if has_steam_pressure:
-            self.addOptionInterval("0steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        
-        self._incrementLineNbr()
+            self.addLine(0,    1373, 1e19, 0, 0)
+            self.addLine(5500, 1373, 1e19, 0, 0)
+        else:
+            self.addLine(0,    1373, 1e19, 0)
+            self.addLine(5500, 1373, 1e19, 0)
 
     
     def hasSteamPressure(self) -> bool:

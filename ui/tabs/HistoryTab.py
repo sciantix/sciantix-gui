@@ -41,14 +41,21 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             else:
                 self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(name)), 1, i)
 
-        self.__makeLine()
+        for i in range(self._getClass().getNbrLines()):
+            self.__makeLine(i+1)
 
     
-    def __makeLine(self):
-        index = self._getClass().getNbrLines()
+    def __makeLine(self, force_index: int = -1):
+        index  = self._getClass().getNbrLines()
 
+        if -1 > force_index or force_index > index :
+            raise IndexError("Index out of range, the index has to be between -1 and the number of lines from the associated class")
+        elif force_index > -1:
+            index = force_index
+            
         names  = self._getClass().getLineNames()
         values = self._getClass().getLineByNbr(index-1)
+
 
         for i in range(len(names)):
             current_input = QtWidgets.QLineEdit(str(values[i]))
