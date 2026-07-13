@@ -37,6 +37,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Passing the business logic to the Tabs
         self.__createTabs(classes)
 
+        self.__load_stylesheet()
+
 
     def __createTabs(self, classes):
         class_list = [
@@ -56,3 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
         tabs.VisualisationTab(output).addToTabList(self.__tab_list)
         
         self.setCentralWidget(self.__tab_list)
+    
+    def __load_stylesheet(self):
+        with open(config.STYLESHEET_PATH, 'r') as stylesheet:
+            self.setStyleSheet(stylesheet.read())
