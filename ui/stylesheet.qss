@@ -20,6 +20,7 @@
 
 * {
     background-color: hsl(240, 25%, 10%);
+    color: azure;
 }
 
 
@@ -54,4 +55,31 @@ QTabBar::tab:focus {
 QPushButton:pressed,
 QTabBar::tab:selected {
     background-color: rgba(255, 255, 255, 0.30);
+}
+
+
+QPushButton[state="True"] {
+    background-color: green;
+}
+QPushButton[state="False"] {
+    background-color: darkred;
+}
+
+/* Equivalent of applying rgba(255, 255, 255, 0.10) on darkred/green */
+/* Only using 0.10 and 0.15 instead of 0.20 and 0.30 bc it was too bright otherwise */
+/* Pre calculated because I couldn't get the calc() css function to work */
+QPushButton[state="True"]:focus,
+QPushButton[state="True"]:hover {
+    background-color: rgb(25, 153, 25);
+}
+QPushButton[state="False"]:focus,
+QPushButton[state="False"]:hover {
+    background-color: rgb(165, 25, 25);
+}
+
+QPushButton[state="False"]:pressed {
+    background-color: rgb(178, 38, 38);
+}
+QPushButton[state="True"]:pressed {
+    background-color: rgb(38, 166, 38);
 }
