@@ -24,8 +24,34 @@
 
 
 QGroupBox QGroupBox,
-QGroupBox QLineEdit {
+QLineEdit,
+QPushButton,
+QComboBox,
+QComboBox QAbstractItemView {
     border:        1.25px solid gray;
-    border-radius: 3px
+    border-radius: 3px;
+    padding:       3px;
 }
 
+QLineEdit,
+QPushButton,
+QComboBox {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+
+QLineEdit:hover,
+QLineEdit:focus,
+QComboBox:hover,
+QComboBox:focus,
+QPushButton:hover,
+QPushButton:focus,
+QTabBar::tab:hover,
+QTabBar::tab:focus {
+    background-color: rgba(255, 255, 255, 0.20);
+}
+
+QPushButton:pressed,
+QTabBar::tab:selected {
+    background-color: rgba(255, 255, 255, 0.30);
+}
