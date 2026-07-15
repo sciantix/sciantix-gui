@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.5.0
+    Version : 1.4.3
     Year :    2026
     Authors : G. Léandre
 """
