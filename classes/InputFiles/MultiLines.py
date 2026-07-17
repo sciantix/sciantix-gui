@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -22,6 +22,8 @@ import abc
 
 
 class MultiLines(abc.ABC):
+    __slots__ = []
+
     def __init__(self):
         self.__nbr_lines = 0
 

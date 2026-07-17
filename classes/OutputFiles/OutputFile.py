@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -27,6 +27,23 @@ from ..InputFiles import InputFile, MultiLines
 # Is the time value for the 1st line
 
 class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable, FileAccess.Plotable):
+    __slots__ = [
+        # From the InputFile super-class
+        "__options",
+        "__name",
+        # From the MultiLines super-interface
+        "__nbr_Lines",
+
+        # From the FileAccess super-interface
+        "__path",
+        # From the Plotable interface
+        # From the Readable interface
+    
+        # From the OutputFile class
+        "__column_names",
+        "__units"
+    ]
+    
     def __init__(self):
         InputFile.InputFile.__init__(self, "output")
         MultiLines.MultiLines.__init__(self)

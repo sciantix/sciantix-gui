@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -25,6 +25,10 @@ from .. import config
 
 
 class OutputTab(ScrollableTab.ScrollableTab):
+    __slots__ = [
+        "__column_box_layouts",
+    ]
+
     def __init__(self, output_class):
         super().__init__("Output", output_class)
 

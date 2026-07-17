@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -26,6 +26,11 @@ from .. import config
 
 
 class FinalTab(Tab.Tab):
+    __slots__ = [
+        "__classes",
+        "__output",
+    ]
+
     def __init__(self, classes, output):
         super().__init__("Finalize", None)
 

@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -24,6 +24,18 @@ from . import Tab
 
 
 class SettingsTab(Tab.Tab):
+    __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+
+        # From the SettingsTab class
+        "__value_labels",
+        "__settings_options"
+    ]
+
     def __init__(self, settings_class):
         super().__init__("Input Settings", settings_class)
 

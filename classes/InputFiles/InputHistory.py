@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -30,6 +30,23 @@ from .. import FileAccess
 # Is the time value for the 1st line
 
 class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printable):
+    __slots__ = [
+        # From the InputFile super-class
+        "__options",
+        "__name",
+        # From the MultiLines super-class
+
+        # From the FileAccess super-interface
+        "__path",
+        # From the Printable interface
+        "__template"
+
+        "__nbr_Lines",
+        # From the InputHistory class
+        "__has_steam_pressure",
+        "__units"
+    ]
+
     def __init__(self, has_steam_pressure: bool = False):
         InputFile.InputFile.__init__(self, "input_history")
         MultiLines.MultiLines.__init__(self)

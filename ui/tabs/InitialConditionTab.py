@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -24,6 +24,19 @@ from . import ScrollableTab
 
 
 class InitialConditionTab(ScrollableTab.ScrollableTab):
+    __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+        # From the ScrollableTab super-class
+        "__group_box",
+        "__scroll",
+        
+        # From the InitialConditionTab class
+    ]
+
     def __init__(self, classes):
         super().__init__("Input Initial Condition", classes)
         names = self._getClass().getOptionsNames()

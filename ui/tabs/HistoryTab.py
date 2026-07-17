@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -24,6 +24,17 @@ from . import ScrollableTab
 
 
 class HistoryTab(ScrollableTab.ScrollableTab):
+    __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+        # From the ScrollableTab super-class
+        "__group_box",
+        "__scroll",
+    ]
+
     def __init__(self, history_class):
         super().__init__("Input History", history_class)
 

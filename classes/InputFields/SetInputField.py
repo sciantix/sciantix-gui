@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -22,6 +22,14 @@ from . import InputField
 
 
 class SetInputField(InputField.InputField):
+    __slots__ = [
+        # From the InputField super-class
+        "__value",
+        
+        # From the SetInputField class
+        "__value_set"
+    ]
+
     def __init__(self, value: int | float, value_set: set[int|float] | list[int|float] | tuple[int|float]):
         super().__init__(value)
         

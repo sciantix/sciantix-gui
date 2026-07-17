@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -26,6 +26,20 @@ from .. import config
 
 
 class VisualisationTab(Tab.Tab):
+    __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+
+        # From the VisualisationTab class
+        "__output",
+        "__x_name",
+        "__y_name",
+        "__label",
+    ]
+
     def __init__(self, output):
         super().__init__("Visualize", None)
 

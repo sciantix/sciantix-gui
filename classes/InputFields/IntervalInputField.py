@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -22,6 +22,15 @@ from . import InputField
 
 
 class IntervalInputField(InputField.InputField):
+    __slots__ = [
+        # From the InputField super-class
+        "__value",
+        
+        # From the IntervalInputField class
+        "__value_min",
+        "__value_min",
+    ]
+
     def __init__(self, value: int | float, value_min: int | float, value_max: int | float):
         super().__init__(value)
 

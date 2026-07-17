@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -26,6 +26,10 @@ from . import tabs
 
 
 class MainWindow(QtWidgets.QMainWindow):
+    __slots__ = [
+        "__tab_list",
+    ]
+
     def __init__(self, classes):
         super().__init__()
 

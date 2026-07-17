@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.4
+    Version : 1.4.5
     Year :    2026
     Authors : G. Léandre
 """
@@ -24,6 +24,19 @@ from .. import FileAccess
 
 
 class InputScalingFactor(InputFile.InputFile, FileAccess.Printable):
+    __slots__ = [
+        # From the InputFile super-class
+        "__options",
+        "__name",
+
+        # From the FileAccess super-interface
+        "__path",
+        # From the Printable interface
+        "__template"
+
+        # From the InputScalingFactor class
+    ]
+
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_scaling_factor")
         FileAccess.Printable.__init__(self, FileAccess.scaling_factor_template)
