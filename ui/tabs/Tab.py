@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.3
+    Version : 1.4.4
     Year :    2026
     Authors : G. Léandre
 """
@@ -62,7 +62,7 @@ class Tab(QtWidgets.QWidget):
         temp = self.__layout.itemAtPosition(row, column).widget()
         self.__layout.removeWidget(temp)
         self.addItemToLayout(temp, new_row, new_column)
-    
+
     def addToTabList(self, tab_list: list):
         tab_list.addTab(self, self.__name)
         

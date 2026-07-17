@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.3
+    Version : 1.4.4
     Year :    2026
     Authors : G. Léandre
 """
@@ -52,14 +52,14 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         return self.__has_steam_pressure
 
     def toggleSteamPressure(self):
-        if not self.__has_steam_pressure:
-            self.__has_steam_pressure = True
-            for i in range(self.getNbrLines()):
-                self.addOptionInterval(f"{i}steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
-        else:
+        if self.__has_steam_pressure:
             self.__has_steam_pressure = False
             for i in range(self.getNbrLines()):
                 self.removeOptionByName(f"{i}steam_pressure")
+        else:
+            self.__has_steam_pressure = True
+            for i in range(self.getNbrLines()):
+                self.addOptionInterval(f"{i}steam_pressure", 0, config.HISTORY_LOWER_BOUND, config.HISTORY_UPER_BOUND)
     
     def getUnits(self) -> list[str]:
         return self.__units
@@ -128,8 +128,8 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         self._incrementLineNbr()
     
     def __moveLine(self, index, line: tuple):
-        if len(line) > 5 or (len(line) == 5 and self.__has_steam_pressure):
-            raise TypeError("A line should be 4; 5 if steam_pressure i togled")
+        if len(line) > 5 or (len(line) == 5 and not self.__has_steam_pressure):
+            raise TypeError("A line should be 4; 5 if steam_pressure is togled")
         if not (0 <= index < self.getNbrLines()):
             raise IndexError("You can't move a line that doesn't exist, index must be between 0 and InputHistory.getNbrLines()")
 
@@ -156,6 +156,7 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         if self.__has_steam_pressure:
             self.removeOptionByName(f"{index}steam_pressure")
 
+        # Moving the index to keep a gapless sequence
         for i in range(index, self.getNbrLines()-1):
             self.__moveLine(i, self.getLineByNbr(i+1))
         

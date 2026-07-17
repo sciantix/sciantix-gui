@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.3
+    Version : 1.4.4
     Year :    2026
     Authors : G. Léandre
 """
@@ -42,16 +42,16 @@ class HistoryTab(ScrollableTab.ScrollableTab):
                 self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(name)), 1, i)
 
         for i in range(self._getClass().getNbrLines()):
-            self.__makeLine(i+1)
+            self.__makeLine(i)
 
     
     def __makeLine(self, force_index: int = -1):
-        index  = self._getClass().getNbrLines()
+        index = self._getClass().getNbrLines()
 
         if -1 > force_index or force_index > index :
             raise IndexError("Index out of range, the index has to be between -1 and the number of lines from the associated class")
         elif force_index > -1:
-            index = force_index
+            index = force_index+1
             
         names  = self._getClass().getLineNames()
         values = self._getClass().getLineByNbr(index-1)
@@ -68,7 +68,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
 
         if index != 1:
             button = QtWidgets.QPushButton("Remove")
-            button.clicked.connect(lambda: self.__removeLineByIndex(index))
+            button.clicked.connect(lambda: self.__removeLineByIndex(index+1))
             self.addItemToLayout(button, index+1, 5)
     
     def __addLine(self):
@@ -84,26 +84,32 @@ class HistoryTab(ScrollableTab.ScrollableTab):
 
         for column in range(6):
             if (column != 4) or self._getClass().hasSteamPressure():
-                self.removeItemFromLayout(index+1, column)
+                self.removeItemFromLayout(index, column)
         
-        self._getClass().deleteLineByNbr(index-1)
+        self._getClass().deleteLineByNbr(index-2)
 
-        # adjusting the layout
-        for row in range(index+1, nbr_of_lines+1):
+        # Adjusting the layout
+        for row in range(index, nbr_of_lines+1):
             for column in range(6):
                 if (column != 4) or self._getClass().hasSteamPressure():
                     self.moveItemInLayout(row+1, column, row, column)
 
+            # To have the button remove function have the correct row/index number
+            self.removeItemFromLayout(row, 5)
+            button = QtWidgets.QPushButton("Remove")
+            button.clicked.connect((lambda index: lambda: self.__removeLineByIndex(index))(row))
+            self.addItemToLayout(button, row, 5)
+
     def __toggleSteamPressure(self):
+        self._getClass().toggleSteamPressure()
+
         if self._getClass().hasSteamPressure():
-            self.__removeSteamPressure()
-        else:
             self.__addSteamPressure()
+        else:
+            self.__removeSteamPressure()
 
     def __addSteamPressure(self):
-        self._getClass().toggleSteamPressure()
-        
-        self.addItemToLayout(QtWidgets.QLabel("steam pressure"), 1, 4)
+        self.addItemToLayout(QtWidgets.QLabel("Steam Pressure"), 1, 4)
 
         for i in range(self._getClass().getNbrLines()):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))
@@ -115,8 +121,6 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             self.addItemToLayout(current_input, i+2, 4)
 
     def __removeSteamPressure(self):
-        self._getClass().toggleSteamPressure()
-        
         self.removeItemFromLayout(1, 4)
 
         for i in range(self._getClass().getNbrLines()):

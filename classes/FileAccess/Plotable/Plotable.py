@@ -12,7 +12,7 @@
 
     Originally developed by G. Léandre
 
-    Version : 1.4.3
+    Version : 1.4.4
     Year :    2026
     Authors : G. Léandre
 """
@@ -66,3 +66,5 @@ class Plotable(FileAccess.FileAccess):
 
 
         fig.savefig(f"{self.getPath()}{plot_name}.png")
+
+        plt.close()
