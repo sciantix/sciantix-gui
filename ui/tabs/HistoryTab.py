@@ -20,10 +20,10 @@
 
 import PyQt6.QtWidgets as QtWidgets
 
-from . import ScrollableTab
+from . import ScrollableIETab
 
 
-class HistoryTab(ScrollableTab.ScrollableTab):
+class HistoryTab(ScrollableIETab.ScrollableIETab):
     __slots__ = [
         # From the Tab super-class
         "__name",
@@ -33,6 +33,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
         # From the ScrollableTab super-class
         "__group_box",
         "__scroll",
+        # From the ImportExportTab super-class
     ]
 
     def __init__(self, history_class):
@@ -40,17 +41,17 @@ class HistoryTab(ScrollableTab.ScrollableTab):
 
         button = QtWidgets.QPushButton("Add Line")
         button.clicked.connect(self.__addLine)
-        self.addItemToLayout(button, 0, 0)
+        self.addItemToLayout(button, 1, 0)
 
         button = QtWidgets.QPushButton("Toggle Steam Pressure")
         button.clicked.connect(self.__toggleSteamPressure)
-        self.addItemToLayout(button, 0, 5)
+        self.addItemToLayout(button, 1, 5)
 
         for i, name in enumerate(self._getClass().getLineNames()):
             if self._getClass().getUnits():
-                self.addItemToLayout(QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}"), 1, i)
+                self.addItemToLayout(QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}"), 2, i)
             else:
-                self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(name)), 1, i)
+                self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(name)), 2, i)
 
         for i in range(self._getClass().getNbrLines()):
             self.__makeLine(i)
@@ -75,12 +76,12 @@ class HistoryTab(ScrollableTab.ScrollableTab):
                     lambda text: self._getClass().trySetValueByName(f"{index-1}{name}", text)
                 )(names[i], index)
             )
-            self.addItemToLayout(current_input, index+1, i)
+            self.addItemToLayout(current_input, index+2, i)
 
         if index != 1:
             button = QtWidgets.QPushButton("Remove")
-            button.clicked.connect(lambda: self.__removeLineByIndex(index+1))
-            self.addItemToLayout(button, index+1, 5)
+            button.clicked.connect(lambda: self.__removeLineByIndex(index+2))
+            self.addItemToLayout(button, index+2, 5)
     
     def __addLine(self):
         if (self._getClass().hasSteamPressure()):
@@ -97,10 +98,10 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             if (column != 4) or self._getClass().hasSteamPressure():
                 self.removeItemFromLayout(index, column)
         
-        self._getClass().deleteLineByNbr(index-2)
+        self._getClass().deleteLineByNbr(index-3)
 
         # Adjusting the layout
-        for row in range(index, nbr_of_lines+1):
+        for row in range(index, nbr_of_lines+2):
             for column in range(6):
                 if (column != 4) or self._getClass().hasSteamPressure():
                     self.moveItemInLayout(row+1, column, row, column)
@@ -120,7 +121,7 @@ class HistoryTab(ScrollableTab.ScrollableTab):
             self.__removeSteamPressure()
 
     def __addSteamPressure(self):
-        self.addItemToLayout(QtWidgets.QLabel("Steam Pressure"), 1, 4)
+        self.addItemToLayout(QtWidgets.QLabel("Steam Pressure"), 2, 4)
 
         for i in range(self._getClass().getNbrLines()):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))
@@ -129,10 +130,10 @@ class HistoryTab(ScrollableTab.ScrollableTab):
                     lambda text: self._getClass().trySetValueByName(f"{index}steam_pressure", text)
                 )(i)
             )
-            self.addItemToLayout(current_input, i+2, 4)
+            self.addItemToLayout(current_input, i+3, 4)
 
     def __removeSteamPressure(self):
-        self.removeItemFromLayout(1, 4)
+        self.removeItemFromLayout(2, 4)
 
         for i in range(self._getClass().getNbrLines()):
-            self.removeItemFromLayout(i+2, 4)
+            self.removeItemFromLayout(i+3, 4)

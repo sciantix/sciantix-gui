@@ -20,16 +20,17 @@
 
 import PyQt6.QtWidgets as QtWidgets
 
-from . import Tab
+from . import ImportExportTab
 
 
-class ScalingFactorTab(Tab.Tab):
+class ScalingFactorTab(ImportExportTab.ImportExportTab):
     __slots__ = [
         # From the Tab super-class
         "__name",
         "__class",
         "__layout",
         "_option",
+        # From the ImportExportTab super-class
 
         # From the ScalingFactorTab class
         "__button",
@@ -43,7 +44,7 @@ class ScalingFactorTab(Tab.Tab):
         self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
         self.__updateState()
         self.__button.clicked.connect(self.__toggleOption)
-        self.addItemToLayout(self.__button, 0, 1)
+        self.addItemToLayout(self.__button, 0, 2)
 
         for i, elt in enumerate(self._getClass().getOptionsNames()):
             self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i+1, 0)
@@ -53,7 +54,7 @@ class ScalingFactorTab(Tab.Tab):
                     lambda text: self._getClass().trySetValueByName(name, text)
                 )(elt)
             )
-            self.addItemToLayout(current_input, i+1, 1)
+            self.addItemToLayout(current_input, i+1, 2)
     
 
     def __toggleOption(self):

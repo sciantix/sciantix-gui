@@ -29,7 +29,7 @@ class Tab(QtWidgets.QWidget):
         self.__name   = name
         self._option  = True
         # To have access to the business logic since we cannot import from outside the ui module
-        self.__class   = classe
+        self.__class  = classe
         
         self.__layout = QtWidgets.QGridLayout()
 

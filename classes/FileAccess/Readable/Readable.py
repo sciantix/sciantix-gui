@@ -31,3 +31,8 @@ class Readable(FileAccess.FileAccess):
     def read(self):
         with open(f"{self.getPath()}{self.getName()}.txt", 'r') as file:
             self.__read_template.template(self, file)
+    
+    # Couldn't call it import...
+    def importData(self, file_path):
+        with open(file_path, 'r') as file:
+            self.__read_template.template(self, file)

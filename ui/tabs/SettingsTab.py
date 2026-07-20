@@ -20,16 +20,17 @@
 
 import PyQt6.QtWidgets as QtWidgets
 
-from . import Tab
+from . import ImportExportTab
 
 
-class SettingsTab(Tab.Tab):
+class SettingsTab(ImportExportTab.ImportExportTab):
     __slots__ = [
         # From the Tab super-class
         "__name",
         "__class",
         "__layout",
         "_option",
+        # From the ImportExportTab super-class
 
         # From the SettingsTab class
         "__value_labels",
@@ -69,11 +70,11 @@ class SettingsTab(Tab.Tab):
 
 
         for i, elt in enumerate(self._getClass().getOptionsNames()):
-            self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i, 0)
+            self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i+1, 0)
 
             label = QtWidgets.QLabel(str(self._getClass().getValueByName(elt)))
             self.__value_labels.append(label)
-            self.addItemToLayout(label, i, 1)
+            self.addItemToLayout(label, i+1, 1)
 
             current_input = QtWidgets.QComboBox()
             current_input.addItems(self.__settings_options[i])
@@ -82,7 +83,7 @@ class SettingsTab(Tab.Tab):
                     lambda index: self.__update_field(name, index, label_index)
                 )(elt, i)
             )
-            self.addItemToLayout(current_input, i, 2)
+            self.addItemToLayout(current_input, i+1, 2)
     
     
     def __update_field(self, name: str, index: int, label_index: int):

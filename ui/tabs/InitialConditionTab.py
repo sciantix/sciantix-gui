@@ -20,10 +20,10 @@
 
 import PyQt6.QtWidgets as QtWidgets
 
-from . import ScrollableTab
+from . import ScrollableIETab
 
 
-class InitialConditionTab(ScrollableTab.ScrollableTab):
+class InitialConditionTab(ScrollableIETab.ScrollableIETab):
     __slots__ = [
         # From the Tab super-class
         "__name",
@@ -38,7 +38,8 @@ class InitialConditionTab(ScrollableTab.ScrollableTab):
     ]
 
     def __init__(self, classes):
-        super().__init__("Input Initial Condition", classes)
+        super().__init__("Input Initial Condition", classes, box=True)
+
         names = self._getClass().getOptionsNames()
 
         line_names = [
@@ -112,7 +113,7 @@ class InitialConditionTab(ScrollableTab.ScrollableTab):
             layout = QtWidgets.QGridLayout()
             box    = QtWidgets.QGroupBox()
             box.setLayout(layout)
-            self.addItemToLayout(box, j, 0)
+            self.addItemToLayout(box, j+1, 0)
 
             gap = 0
 
