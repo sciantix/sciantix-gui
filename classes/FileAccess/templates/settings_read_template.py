@@ -21,6 +21,5 @@
 def template(output_class, output_file_class):
     for line in output_file_class:
         value, *comments = line.split("\t")
-        print(value)
-        print(*comments)
-    
+        output_class.setValueByName(comments[1].split(" ")[0][1:], eval(value))
+        

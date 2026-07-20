@@ -19,5 +19,9 @@
 
 
 def template(output_class, output_file_class):
-    pass
+    names = output_class.getLineNames()
+
+    for i, line in enumerate(output_file_class):
+        for name, val in zip(names, line.split("\t")):
+            output_class.setValueByName(f"{i}{name}", eval(val))
     

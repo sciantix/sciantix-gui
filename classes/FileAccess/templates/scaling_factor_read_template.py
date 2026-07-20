@@ -19,4 +19,18 @@
 
 
 def template(output_class, output_file_class):
-    pass
+    names = [
+        r"resolution_rate",
+        r"trapping_rate",
+        r"nucleation_rate",
+        r"diffusivity",
+        r"screw_parameter",
+        r"span_parameter",
+        r"cent_parameter",
+        r"helium_production_rate",
+        r"dummy",
+    ]
+
+    for i, line in enumerate(output_file_class):
+        if not i%2:
+            output_class.setValueByName(names[i//2], eval(line))
