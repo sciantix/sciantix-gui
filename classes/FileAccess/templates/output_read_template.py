@@ -18,16 +18,8 @@
 """
 
 
-from .. import FileAccess
-
-
-class Readable(FileAccess.FileAccess):
-    def __init__(self, template):
-        FileAccess.FileAccess.__init__(self)
+def template(output_class, output_file_class):
+    for i, line in enumerate(output_file_class):
+        if i != 0:
+            output_class.addLine(line.split("\t"))
     
-        self.__read_template = template
-    
-    
-    def read(self):
-        with open(f"{self.getPath()}{self.getName()}.txt", 'r') as file:
-            self.__read_template.template(self, file)

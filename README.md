@@ -103,7 +103,7 @@ Here is how to read the version numbers :
 
 ```
     X . Y . Z
-    |   |   └───bug fixes
+    |   |   └───bug fixes and tweaks
     |   └───minor versions
     └───major versions
 ```
@@ -166,12 +166,12 @@ There are 2 config files :
 |   |   |   ├─__init__.py
 |   |   |   └─Plotable.py
 |   |   ├─Printable/
-|   |   |   ├─templates/                Representation of how to print a file
 |   |   |   ├─__init__.py
 |   |   |   └─Printable.py
 |   |   ├─Readable/
 |   |   |   ├─__init__.py
 |   |   |   └─Readable.py
+|   |   ├─templates/                    Representation of how to print, read or plot a file a file
 |   |   ├─__init__.py
 |   |   └─FileAcess.py
 |   ├─OutputFiles/

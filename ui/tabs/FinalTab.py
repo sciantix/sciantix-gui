@@ -27,6 +27,13 @@ from .. import config
 
 class FinalTab(Tab.Tab):
     __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+
+        # From the FinalTabs class
         "__classes",
         "__output",
     ]

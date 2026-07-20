@@ -23,13 +23,13 @@ from .. import FileAccess
 
 class Printable(FileAccess.FileAccess):
     def __init__(self, template):
-        super().__init__()
+        FileAccess.FileAccess.__init__(self)
 
         # Here template is a module, not the function
-        self.__template = template
+        self.__print_template = template
     
     
     def print(self):
         with open(f"{self.getPath()}{self.getName()}.txt", 'w') as file:
             # Here template is a module, not the function, so we have to call the .template function
-            file.write(self.__template.template(self))
+            file.write(self.__print_template.template(self))

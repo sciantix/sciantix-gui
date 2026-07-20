@@ -23,7 +23,7 @@ from .. import config
 from .. import FileAccess
 
 
-class InputSettings(InputFile.InputFile, FileAccess.Printable):
+class InputSettings(InputFile.InputFile, FileAccess.Printable, FileAccess.Readable):
     __slots__ = [
         # From the InputFile super-class
         "__options",
@@ -32,14 +32,17 @@ class InputSettings(InputFile.InputFile, FileAccess.Printable):
         # From the FileAccess super-interface
         "__path",
         # From the Printable interface
-        "__template"
+        "__print_template"
+        # From the Readable interface
+        "__read_template"
         
         # From the InputSettings class
     ]
 
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_settings")
-        FileAccess.Printable.__init__(self, FileAccess.settings_template)
+        FileAccess.Printable.__init__(self, FileAccess.settings_print_template)
+        FileAccess.Readable.__init__(self, FileAccess.settings_read_template)
 
         # Base setup
         self.addOptionSet("GrainGrowth",                     1,                       (0, 1, 2))

@@ -23,7 +23,7 @@ from .. import config
 from .. import FileAccess
 
 
-class InputScalingFactor(InputFile.InputFile, FileAccess.Printable):
+class InputScalingFactor(InputFile.InputFile, FileAccess.Printable, FileAccess.Readable):
     __slots__ = [
         # From the InputFile super-class
         "__options",
@@ -32,14 +32,17 @@ class InputScalingFactor(InputFile.InputFile, FileAccess.Printable):
         # From the FileAccess super-interface
         "__path",
         # From the Printable interface
-        "__template"
+        "__print_template"
+        # From the Readable interface
+        "__read_template"
 
         # From the InputScalingFactor class
     ]
 
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_scaling_factor")
-        FileAccess.Printable.__init__(self, FileAccess.scaling_factor_template)
+        FileAccess.Printable.__init__(self, FileAccess.scaling_factor_print_template)
+        FileAccess.Readable.__init__(self, FileAccess.scaling_factor_read_template)
 
         # Base setup
         self.addOptionInterval("resolution_rate",        config.SCALING_FACTOR_DEFAULT, config.SCALING_FACTOR_LOWER_BOUND, config.SCALING_FACTOR_UPER_BOUND)

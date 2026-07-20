@@ -23,7 +23,7 @@ from .. import config
 from .. import FileAccess
 
 
-class InputInitialCondition(InputFile.InputFile, FileAccess.Printable):
+class InputInitialCondition(InputFile.InputFile, FileAccess.Printable, FileAccess.Readable):
     __slots__ = [
         # From the InputFile super-class
         "__options",
@@ -32,7 +32,9 @@ class InputInitialCondition(InputFile.InputFile, FileAccess.Printable):
         # From the FileAccess super-interface
         "__path",
         # From the Printable interface
-        "__template"
+        "__print_template"
+        # From the Readable interface
+        "__read_template"
 
         # From the InputInitialCondition class
         "__layout",
@@ -41,7 +43,8 @@ class InputInitialCondition(InputFile.InputFile, FileAccess.Printable):
 
     def __init__(self):
         InputFile.InputFile.__init__(self, "input_initial_conditions")
-        FileAccess.Printable.__init__(self, FileAccess.initial_condition_template)
+        FileAccess.Printable.__init__(self, FileAccess.initial_condition_print_template)
+        FileAccess.Readable.__init__(self, FileAccess.initial_condition_read_template)
 
         # Variable to represent the layout of data from the input_initial_condition.txt input file
         # Each element of the array represent the number of factor on each lines of input_initial_condition.txt

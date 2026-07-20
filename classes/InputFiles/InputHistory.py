@@ -29,7 +29,7 @@ from .. import FileAccess
 #       0time
 # Is the time value for the 1st line
 
-class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printable):
+class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printable, FileAccess.Readable):
     __slots__ = [
         # From the InputFile super-class
         "__options",
@@ -39,7 +39,9 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
         # From the FileAccess super-interface
         "__path",
         # From the Printable interface
-        "__template"
+        "__print_template"
+        # From the Readable interface
+        "__read_template"
 
         "__nbr_Lines",
         # From the InputHistory class
@@ -50,7 +52,8 @@ class InputHistory(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printa
     def __init__(self, has_steam_pressure: bool = False):
         InputFile.InputFile.__init__(self, "input_history")
         MultiLines.MultiLines.__init__(self)
-        FileAccess.Printable.__init__(self, FileAccess.history_template)
+        FileAccess.Printable.__init__(self, FileAccess.history_print_template)
+        FileAccess.Readable.__init__(self, FileAccess.history_read_template)
 
         self.__has_steam_pressure = has_steam_pressure
 

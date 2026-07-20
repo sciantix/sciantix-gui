@@ -38,6 +38,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
         "__path",
         # From the Plotable interface
         # From the Readable interface
+        "__read_template"
     
         # From the OutputFile class
         "__column_names",
@@ -47,7 +48,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
     def __init__(self):
         InputFile.InputFile.__init__(self, "output")
         MultiLines.MultiLines.__init__(self)
-        FileAccess.Readable.__init__(self)
+        FileAccess.Readable.__init__(self, FileAccess.output_read_template)
         FileAccess.Plotable.__init__(self)
 
         self.__column_names = [

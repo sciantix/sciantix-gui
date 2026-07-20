@@ -71,6 +71,7 @@ class Tab(QtWidgets.QWidget):
         
     def print(self):
         self.__class.print()
+        self.__class.read()
 
     def _pretifyText(self, text: str) -> str:
         """
