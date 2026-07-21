@@ -20,12 +20,22 @@
 import os
 import PyQt6.QtWidgets as QtWidgets
 
-from . import ScrollableTab
+from . import ScrollableIETab
 from .. import config
 
 
-class OutputTab(ScrollableTab.ScrollableTab):
+class OutputTab(ScrollableIETab.ScrollableIETab):
     __slots__ = [
+        # From the Tab super-class
+        "__name",
+        "__class",
+        "__layout",
+        "_option",
+        # From the ScrollableTab super-class
+        "__group_box",
+        "__scroll",
+        # From the ImportExportTab super-class
+        
         "__column_box_layouts",
     ]
 
@@ -39,26 +49,29 @@ class OutputTab(ScrollableTab.ScrollableTab):
             box    = QtWidgets.QGroupBox()
             box.setLayout(layout)
             self.__column_box_layouts.append(layout)
-            self.addItemToLayout(box, 0, i)
+            self.addItemToLayout(box, 1, i)
 
             if self._getClass().getUnits():
                 label = QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}")
             else:
                 label = QtWidgets.QLabel(self._pretifyText(name))
                 
-            layout.addWidget(label, 0, 0)
+            layout.addWidget(label, 1, 0)
         
     
     def __make_layout(self):
         for line in range(self._getClass().getNbrLines()):
             for column, value in enumerate(self._getClass().getLineByNbr(line)):
                 label = QtWidgets.QLabel(str(value))
-                self.__column_box_layouts[column].addWidget(label, line+1, 0)
+                self.__column_box_layouts[column].addWidget(label, line+2, 0)
 
     
     def read(self):
         if os.path.exists(f"{config.SIMULATION_PATH}/{self._getClass().getName()}.txt"):
             self._getClass().read()
 
+        self.__make_layout()
+
+    def _update_import(self):
         self.__make_layout()
         

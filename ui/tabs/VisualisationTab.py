@@ -60,6 +60,10 @@ class VisualisationTab(Tab.Tab):
         y_input.currentTextChanged.connect(self.__setYName)
         self.addItemToLayout(y_input, 1, 1)
 
+        button = QtWidgets.QPushButton("Export")
+        button.clicked.connect(self.__export)
+        self.addItemToLayout(button, 2, 0)
+
         self.__label = QtWidgets.QLabel(self)
         self.__label.setPixmap(QtGui.QPixmap(f"{self.__output._getClass().getPath()}{config.DEFAULT_PLOT_NAME}.png"))
         self.addItemToLayout(self.__label, 2, 1)
@@ -85,3 +89,6 @@ class VisualisationTab(Tab.Tab):
                 self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
             )
             self.__label.setPixmap(QtGui.QPixmap(f"{self.__output._getClass().getPath()}{config.DEFAULT_PLOT_NAME}.png"))
+
+    def __export(self):
+        pass

@@ -26,7 +26,7 @@ from ..InputFiles import InputFile, MultiLines
 #       0time
 # Is the time value for the 1st line
 
-class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable, FileAccess.Plotable):
+class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printable, FileAccess.Readable, FileAccess.Plotable):
     __slots__ = [
         # From the InputFile super-class
         "__options",
@@ -36,9 +36,11 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
 
         # From the FileAccess super-interface
         "__path",
-        # From the Plotable interface
+        # From the Printable interface
+        "__print_template"
         # From the Readable interface
         "__read_template"
+        # From the Plotable interface
     
         # From the OutputFile class
         "__column_names",
@@ -48,6 +50,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Readable
     def __init__(self):
         InputFile.InputFile.__init__(self, "output")
         MultiLines.MultiLines.__init__(self)
+        FileAccess.Printable.__init__(self, FileAccess.output_print_template)
         FileAccess.Readable.__init__(self, FileAccess.output_read_template)
         FileAccess.Plotable.__init__(self)
 
