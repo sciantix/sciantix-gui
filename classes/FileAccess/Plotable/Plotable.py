@@ -75,5 +75,5 @@ class Plotable(FileAccess.FileAccess):
     def export(self, file_path: str, x_name: str, y_name: str, x_unit: str = "", y_unit: str = ""):
         fig = self.__makePlot(x_name, y_name, x_unit, y_unit)
 
-        fig.savefig(f"{file_path}{y_name}_in_function_of_{x_name}.png")
+        fig.savefig(f"{file_path}/{y_name}_in_function_of_{x_name}.png")
         plt.close()

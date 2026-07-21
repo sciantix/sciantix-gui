@@ -91,4 +91,16 @@ class VisualisationTab(Tab.Tab):
             self.__label.setPixmap(QtGui.QPixmap(f"{self.__output._getClass().getPath()}{config.DEFAULT_PLOT_NAME}.png"))
 
     def __export(self):
-        pass
+        dialog = QtWidgets.QFileDialog()
+        dialog.setFileMode(QtWidgets.QFileDialog.FileMode.Directory)
+        dialog.setOption(QtWidgets.QFileDialog.Option.ShowDirsOnly, True)
+        dialog.setWindowTitle("Select a Directory")
+        
+        if dialog.exec():
+            self.__output._getClass().export(
+                dialog.selectedFiles()[0],
+                self.__x_name,
+                self.__y_name,
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__x_name)],
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
+            )
