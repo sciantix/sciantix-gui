@@ -42,6 +42,9 @@ class Tab(QtWidgets.QWidget):
     def getName(self) -> str:
         return self.__name 
 
+    def getClassName(self) -> str:
+        return self.__class.getName() 
+
     def getOption(self) -> bool:
         return self._option
     
@@ -74,7 +77,7 @@ class Tab(QtWidgets.QWidget):
         
     def print(self):
         self.__class.print()
-        self.__class.read()
+        # self.__class.read()
 
     def _pretifyText(self, text: str) -> str:
         """

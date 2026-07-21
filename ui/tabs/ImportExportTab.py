@@ -43,8 +43,7 @@ class ImportExportTab(Tab.Tab):
         dialog.setWindowTitle("Select a File")
         
         if dialog.exec():
-            self._getClass().importData(dialog.selectedFiles()[0])
-            self._update_import()
+            self.importFrom(dialog.selectedFiles()[0])
 
     def __export(self):
         dialog = QtWidgets.QFileDialog()
@@ -53,5 +52,13 @@ class ImportExportTab(Tab.Tab):
         dialog.setWindowTitle("Select a Directory")
         
         if dialog.exec():
-            self._getClass().setPath(dialog.selectedFiles()[0])
-            self._getClass().print()
+            self.exportTo(dialog.selectedFiles()[0])
+        
+    def importFrom(self, path: str):
+        self._getClass().importData(path)
+        self._update_import()
+        
+    def exportTo(self, path: str):
+        self._getClass().setPath(path)
+        self._getClass().print()
+        

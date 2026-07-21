@@ -81,3 +81,11 @@ class ScrollableIETab(Tab.Tab):
         if dialog.exec():
             self._getClass().setPath(dialog.selectedFiles()[0])
             self._getClass().print()
+        
+    def importFrom(self, path: str):
+        self._getClass().importData(path)
+        self._update_import()
+        
+    def exportTo(self, path: str):
+        self._getClass().setPath(path)
+        self._getClass().print()

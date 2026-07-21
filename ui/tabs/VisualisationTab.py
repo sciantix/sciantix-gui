@@ -104,3 +104,13 @@ class VisualisationTab(Tab.Tab):
                 self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__x_name)],
                 self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
             )
+
+    def exportGraphs(self, path: str):
+        for name in self.__output._getClass().getLineNames()[1:]:
+            self.__output._getClass().export(
+                f"{path}/graphs",
+                self.__x_name,
+                name,
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__x_name)],
+                self.__output._getClass().getUnits()[self.__output._getClass().getLineNames().index(self.__y_name)],
+            )

@@ -65,13 +65,12 @@ class OutputTab(ScrollableIETab.ScrollableIETab):
                 label = QtWidgets.QLabel(str(value))
                 self.__column_box_layouts[column].addWidget(label, line+2, 0)
 
-    
+    def _update_import(self):
+        self.__make_layout()
+
     def read(self):
         if os.path.exists(f"{config.SIMULATION_PATH}/{self._getClass().getName()}.txt"):
             self._getClass().read()
 
-        self.__make_layout()
-
-    def _update_import(self):
         self.__make_layout()
         

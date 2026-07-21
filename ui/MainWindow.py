@@ -57,9 +57,12 @@ class MainWindow(QtWidgets.QMainWindow):
             cla.addToTabList(self.__tab_list)
 
         output = tabs.OutputTab(classes.OutputFile())
-        tabs.FinalTab(class_list, output).addToTabList(self.__tab_list)
+        visualisation = tabs.VisualisationTab(output)
+
+        tabs.FinalTab(class_list, output, visualisation).addToTabList(self.__tab_list)
+
         output.addToTabList(self.__tab_list)
-        tabs.VisualisationTab(output).addToTabList(self.__tab_list)
+        visualisation.addToTabList(self.__tab_list)
         
         self.setCentralWidget(self.__tab_list)
     
