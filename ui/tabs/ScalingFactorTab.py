@@ -76,3 +76,6 @@ class ScalingFactorTab(ImportExportTab.ImportExportTab):
         for i, name in enumerate(self._getClass().getOptionsNames()):
             self.__value_inputs[i].setText(str(self._getClass().getValueByName(name)))
         
+        if not self._option:
+            self.__toggleOption()
+        
