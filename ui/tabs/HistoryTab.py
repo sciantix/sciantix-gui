@@ -34,6 +34,10 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
         "__group_box",
         "__scroll",
         # From the ImportExportTab super-class
+
+        # From the HistoryTab class
+        "__nbr_lines",
+        "__has_steam",
     ]
 
     def __init__(self, history_class):
@@ -47,6 +51,9 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
         button.clicked.connect(self.__toggleSteamPressure)
         self.addItemToLayout(button, 1, 5)
 
+        self.__nbr_lines = 0
+        self.__has_steam = False
+
         for i, name in enumerate(self._getClass().getLineNames()):
             if self._getClass().getUnits():
                 self.addItemToLayout(QtWidgets.QLabel(f"{self._pretifyText(name)} in {self._getClass().getUnits()[i]}"), 2, i)
@@ -55,6 +62,7 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
 
         for i in range(self._getClass().getNbrLines()):
             self.__makeLine(i)
+            self.__nbr_lines += 1
 
     
     def __makeLine(self, force_index: int = -1):
@@ -90,6 +98,7 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
             self._getClass().addLine(0, 0, 0, 0)
 
         self.__makeLine()
+        self.__nbr_lines += 1
     
     def __removeLineByIndex(self, index: int):
         nbr_of_lines = self._getClass().getNbrLines()
@@ -114,6 +123,7 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
 
     def __toggleSteamPressure(self):
         self._getClass().toggleSteamPressure()
+        self.__has_steam = not self.__has_steam
 
         if self._getClass().hasSteamPressure():
             self.__addSteamPressure()
@@ -123,7 +133,7 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
     def __addSteamPressure(self):
         self.addItemToLayout(QtWidgets.QLabel("Steam Pressure"), 2, 4)
 
-        for i in range(self._getClass().getNbrLines()):
+        for i in range(self.__nbr_lines):
             current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(f"{i}steam_pressure")))
             current_input.textChanged.connect(
                 (lambda index:
@@ -135,5 +145,26 @@ class HistoryTab(ScrollableIETab.ScrollableIETab):
     def __removeSteamPressure(self):
         self.removeItemFromLayout(2, 4)
 
-        for i in range(self._getClass().getNbrLines()):
+        for i in range(self.__nbr_lines):
             self.removeItemFromLayout(i+3, 4)
+
+    def _update_import(self):
+        names = self._getClass().getLineNames()
+
+        if self.__has_steam == (not self._getClass().hasSteamPressure()):
+            self.__has_steam = not self.__has_steam
+
+            if self._getClass().hasSteamPressure():
+                self.__addSteamPressure()
+            else:
+                self.__removeSteamPressure()
+
+        for row in range(3, self._getClass().getNbrLines()+3):
+            if row-3 >= self.__nbr_lines:
+                self.__makeLine(row-3)
+ 
+            for column in range(5):
+                if (column != 4) or self._getClass().hasSteamPressure():
+                    self.updateItemValueInLayout(row, column, str(self._getClass().getValueByName(f"{row-3}{names[column]}")))
+        
+        self.__nbr_lines = self._getClass().getNbrLines()

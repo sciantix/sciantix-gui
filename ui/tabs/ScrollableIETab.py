@@ -70,9 +70,7 @@ class ScrollableIETab(Tab.Tab):
         
         if dialog.exec():
             self._getClass().importData(dialog.selectedFiles()[0])
-            
-            for i, name in enumerate(self._getClass().getOptionsNames()):
-                self.__value_labels[i].setText(str(self._getClass().getValueByName(name)))
+            self._update_import()
 
     def __export(self):
         dialog = QtWidgets.QFileDialog()

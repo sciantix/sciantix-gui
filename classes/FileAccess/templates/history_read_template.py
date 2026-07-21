@@ -19,9 +19,22 @@
 
 
 def template(output_class, output_file_class):
+    file = list(output_file_class)
+    
+    if (len(file[0].split("\t")) == 5) and output_class.hasSteamPressure()\
+            or (len(file[0].split("\t")) == 6) and not output_class.hasSteamPressure():
+        output_class.toggleSteamPressure()
+
     names = output_class.getLineNames()
 
-    for i, line in enumerate(output_file_class):
-        for name, val in zip(names, line.split("\t")):
-            output_class.setValueByName(f"{i}{name}", eval(val))
+    for i, line in enumerate(file):
+        if i < output_class.getNbrLines():
+            for name, val in zip(names, line.split("\t")):
+                output_class.setValueByName(f"{i}{name}", eval(val))
+        elif output_class.hasSteamPressure():
+            time, temperature, fission_rate, hydrostatic_stress, steam_pressure, _ = line.split("\t")
+            output_class.addLine(eval(time), eval(temperature), eval(fission_rate), eval(hydrostatic_stress), eval(steam_pressure))
+        else:
+            time, temperature, fission_rate, hydrostatic_stress, _ = line.split("\t")
+            output_class.addLine(eval(time), eval(temperature), eval(fission_rate), eval(hydrostatic_stress))
     

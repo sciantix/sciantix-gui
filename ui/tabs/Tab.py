@@ -62,6 +62,9 @@ class Tab(QtWidgets.QWidget):
         temp = self.__layout.itemAtPosition(row, column).widget()
         self.__layout.removeWidget(temp)
         self.addItemToLayout(temp, new_row, new_column)
+    
+    def updateItemValueInLayout(self, row: int, column: int, new_value: str):
+        self.__layout.itemAtPosition(row, column).widget().setText(new_value)
 
     def addToTabList(self, tab_list: list):
         tab_list.addTab(self, self.__name)

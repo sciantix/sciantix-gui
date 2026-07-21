@@ -89,3 +89,7 @@ class SettingsTab(ImportExportTab.ImportExportTab):
     def __update_field(self, name: str, index: int, label_index: int):
         self._getClass().setValueByNameAndPosition(name, index)
         self.__value_labels[label_index].setText(str(self._getClass().getValueByName(name)))
+
+    def _update_import(self):
+        for i, name in enumerate(self._getClass().getOptionsNames()):
+            self.__value_labels[i].setText(str(self._getClass().getValueByName(name)))

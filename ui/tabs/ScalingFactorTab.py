@@ -34,12 +34,15 @@ class ScalingFactorTab(ImportExportTab.ImportExportTab):
 
         # From the ScalingFactorTab class
         "__button",
+        "__value_inputs",
     ]
 
     def __init__(self, scaling_factor_class):
         super().__init__("Input Scaling Factor", scaling_factor_class)
 
         self._option = False
+
+        self.__value_inputs = []
 
         self.__button = QtWidgets.QPushButton(f"Use Scaling Factor : {self._option}")
         self.__updateState()
@@ -48,13 +51,13 @@ class ScalingFactorTab(ImportExportTab.ImportExportTab):
 
         for i, elt in enumerate(self._getClass().getOptionsNames()):
             self.addItemToLayout(QtWidgets.QLabel(self._pretifyText(elt)), i+1, 0)
-            current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(elt)))
-            current_input.textChanged.connect(
+            self.__value_inputs.append(QtWidgets.QLineEdit(str(self._getClass().getValueByName(elt))))
+            self.__value_inputs[i].textChanged.connect(
                 (lambda name:
                     lambda text: self._getClass().trySetValueByName(name, text)
                 )(elt)
             )
-            self.addItemToLayout(current_input, i+1, 2)
+            self.addItemToLayout(self.__value_inputs[i], i+1, 2)
     
 
     def __toggleOption(self):
@@ -68,4 +71,8 @@ class ScalingFactorTab(ImportExportTab.ImportExportTab):
         # To counter PyQt's caching and have the style updated
         self.__button.style().unpolish(self.__button)
         self.__button.style().polish(self.__button)
+
+    def _update_import(self):
+        for i, name in enumerate(self._getClass().getOptionsNames()):
+            self.__value_inputs[i].setText(str(self._getClass().getValueByName(name)))
         

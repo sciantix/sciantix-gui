@@ -35,10 +35,13 @@ class InitialConditionTab(ScrollableIETab.ScrollableIETab):
         "__scroll",
         
         # From the InitialConditionTab class
+        "__value_inputs",
     ]
 
     def __init__(self, classes):
         super().__init__("Input Initial Condition", classes, box=True)
+
+        self.__value_inputs = []
 
         names = self._getClass().getOptionsNames()
 
@@ -132,11 +135,15 @@ class InitialConditionTab(ScrollableIETab.ScrollableIETab):
             for k in range(amount):
                 name = QtWidgets.QLabel(displayed_names[i])
                 layout.addWidget(name, gap, k+1)
-                current_input = QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i])))
-                current_input.textChanged.connect(
+                self.__value_inputs.append(QtWidgets.QLineEdit(str(self._getClass().getValueByName(names[i]))))
+                self.__value_inputs[i].textChanged.connect(
                     (lambda name:
                         lambda text: self._getClass().trySetValueByName(name, text)
                     )(names[i])
                 )
-                layout.addWidget(current_input, gap+1, k+1)
+                layout.addWidget(self.__value_inputs[i], gap+1, k+1)
                 i += 1
+
+    def _update_import(self):
+        for i, name in enumerate(self._getClass().getOptionsNames()):
+            self.__value_inputs[i].setText(str(self._getClass().getValueByName(name)))
