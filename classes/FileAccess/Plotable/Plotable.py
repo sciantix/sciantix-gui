@@ -32,6 +32,9 @@ class Plotable(FileAccess.FileAccess):
     def __init__(self):
         super().__init__()
 
+        # False for linear, True for logarithmic
+        self.__axis_type = { "x": False, "y": False }
+
 
     def __getArrayByName(self, name: str):
         """
@@ -54,6 +57,16 @@ class Plotable(FileAccess.FileAccess):
 
         ax.set_title(f"{y_name} in function of {x_name}")
 
+        if self.__axis_type["x"]:
+            ax.set_xscale("log")
+        else:
+            ax.set_xscale("linear")
+
+        if self.__axis_type["y"]:
+            ax.set_yscale("log")
+        else:
+            ax.set_yscale("linear")
+
         if len(x_unit) != 0:
             ax.set_xlabel(f"{x_name} in {x_unit}")
         else:
@@ -65,6 +78,22 @@ class Plotable(FileAccess.FileAccess):
             ax.set_ylabel(y_name)
 
         return fig
+
+    def setXAxisType(self, new_type: str):
+        """
+        set the axis scale : 
+            new_type = `lin`, for a linear scale
+            new_type = `log`, for a logarithmic scale
+        """
+        self.__axis_type["x"] = new_type == "log"
+
+    def setYAxisType(self, new_type: str):
+        """
+        set the axis scale : 
+            new_type = `lin`, for a linear scale
+            new_type = `log`, for a logarithmic scale
+        """
+        self.__axis_type["y"] = new_type == "log"
 
     def makePlot(self, x_name: str, y_name: str, plot_name: str = "plot", x_unit: str = "", y_unit: str = ""):
         fig = self.__makePlot(x_name, y_name, x_unit, y_unit)

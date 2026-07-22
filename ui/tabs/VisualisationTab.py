@@ -43,6 +43,7 @@ class VisualisationTab(Tab.Tab):
     def __init__(self, output):
         super().__init__("Visualize", None)
 
+        # It's the Tab, not the class
         self.__output = output
 
         self.__x_name = self.__output._getClass().getLineNames()[0]
@@ -54,11 +55,27 @@ class VisualisationTab(Tab.Tab):
         x_input.currentTextChanged.connect(self.__setXName)
         self.addItemToLayout(x_input, 0, 1)
 
+        x_axis = QtWidgets.QComboBox()
+        x_axis.addItems([
+            "linear Axis",
+            "logaritmic Axis",
+        ])
+        x_axis.currentTextChanged.connect(self.__setXAxis)
+        self.addItemToLayout(x_axis, 0, 2)
+
         self.addItemToLayout(QtWidgets.QLabel("y value"), 1, 0)
         y_input = QtWidgets.QComboBox()
         y_input.addItems(self.__output._getClass().getLineNames())
         y_input.currentTextChanged.connect(self.__setYName)
         self.addItemToLayout(y_input, 1, 1)
+
+        y_axis = QtWidgets.QComboBox()
+        y_axis.addItems([
+            "linear Axis",
+            "logaritmic Axis",
+        ])
+        y_axis.currentTextChanged.connect(self.__setYAxis)
+        self.addItemToLayout(y_axis, 1, 2)
 
         button = QtWidgets.QPushButton("Export")
         button.clicked.connect(self.__export)
@@ -77,6 +94,14 @@ class VisualisationTab(Tab.Tab):
 
     def __setYName(self, new_y_name: str):
         self.__y_name = new_y_name
+        self.__makePlot()
+
+    def __setXAxis(self, new_x_axis: str):
+        self.__output._getClass().setXAxisType(new_x_axis[:3])
+        self.__makePlot()
+
+    def __setYAxis(self, new_y_axis: str):
+        self.__output._getClass().setYAxisType(new_y_axis[:3])
         self.__makePlot()
 
     def __makePlot(self):

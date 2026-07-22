@@ -41,6 +41,7 @@ class OutputFile(InputFile.InputFile, MultiLines.MultiLines, FileAccess.Printabl
         # From the Readable interface
         "__read_template"
         # From the Plotable interface
+        "__axis_type",
     
         # From the OutputFile class
         "__column_names",
